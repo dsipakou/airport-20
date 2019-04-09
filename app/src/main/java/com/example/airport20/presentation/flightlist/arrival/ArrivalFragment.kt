@@ -1,4 +1,4 @@
-package com.example.airport20
+package com.example.airport20.presentation.flightlist.arrival
 
 import android.content.Context
 import android.os.Bundle
@@ -9,9 +9,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation.findNavController
+import com.example.airport20.presentation.flightlist.MyArrivalRecyclerViewAdapter
+import com.example.airport20.R
 
 import com.example.airport20.dummy.DummyContent
 import com.example.airport20.dummy.DummyContent.DummyItem
+import com.example.airport20.presentation.flightlist.ClickListener
+import com.example.airport20.presentation.flightlist.arrival.ArrivalFragmentDirections.actionArrivalFragmentToDetailsFragment
+import kotlinx.android.synthetic.main.fragment_arrival_list.*
 
 /**
  * A fragment representing a list of Items.
@@ -24,6 +30,10 @@ class ArrivalFragment : Fragment() {
     private var columnCount = 1
 
     private var listener: OnListFragmentInteractionListener? = null
+
+    private val clickListener: ClickListener = this::onNoteClicked
+
+    private val recyclerViewAdapter = MyArrivalRecyclerViewAdapter(clickListener)
 
     fun setOnListFragmentInteractionListener(callback: OnListFragmentInteractionListener) {
         listener = callback
@@ -42,18 +52,13 @@ class ArrivalFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_arrival_list, container, false)
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = MyArrivalRecyclerViewAdapter(DummyContent.ITEMS, listener)
-            }
-        }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        arrivalList.adapter = recyclerViewAdapter
     }
 
     override fun onAttach(context: Context) {
@@ -84,6 +89,13 @@ class ArrivalFragment : Fragment() {
     interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onListFragmentInteraction(item: DummyItem?)
+    }
+
+    private fun onNoteClicked(item: DummyItem) {
+        val navDirections = actionArrivalFragmentToDetailsFragment()
+        view?.let {
+            findNavController(it).navigate(navDirections)
+        }
     }
 
     companion object {
