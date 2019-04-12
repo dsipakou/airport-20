@@ -9,15 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.example.airport20.R
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [DetailsFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [DetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
+
 class DetailsFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
