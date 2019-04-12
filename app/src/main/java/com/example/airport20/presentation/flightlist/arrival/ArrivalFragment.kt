@@ -2,18 +2,15 @@ package com.example.airport20.presentation.flightlist.arrival
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
 import com.example.airport20.presentation.flightlist.MyArrivalRecyclerViewAdapter
 import com.example.airport20.R
 
-import com.example.airport20.dummy.DummyContent
 import com.example.airport20.dummy.DummyContent.DummyItem
 import com.example.airport20.presentation.flightlist.ClickListener
 import com.example.airport20.presentation.flightlist.arrival.ArrivalFragmentDirections.actionArrivalFragmentToDetailsFragment
