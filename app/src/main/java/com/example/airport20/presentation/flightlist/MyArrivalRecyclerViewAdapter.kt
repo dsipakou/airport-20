@@ -9,16 +9,9 @@ import com.example.airport20.R
 import com.example.airport20.dummy.DummyContent
 
 
-import com.example.airport20.presentation.flightlist.arrival.ArrivalFragment.OnListFragmentInteractionListener
 import com.example.airport20.dummy.DummyContent.DummyItem
 
 import kotlinx.android.synthetic.main.fragment_arrival.view.*
-
-/**
- * [RecyclerView.Adapter] that can display a [DummyItem] and makes a call to the
- * specified [OnListFragmentInteractionListener].
- * TODO: Replace the implementation with code for your data type.
- */
 
 typealias ClickListener = (DummyItem) -> Unit
 
@@ -40,7 +33,7 @@ class MyArrivalRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = flightList[position]
-        holder.mIdView.text = item.id
+        holder.mIdView.text = item.id.toString()
         holder.mContentView.text = item.content
     }
 

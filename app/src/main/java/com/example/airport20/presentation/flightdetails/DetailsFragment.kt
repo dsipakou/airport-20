@@ -7,13 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.navArgs
 import com.example.airport20.R
+import kotlinx.android.synthetic.main.fragment_details.*
 
 
 class DetailsFragment : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     private lateinit var viewModel: DetailsViewModel
+
+    private val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +34,7 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
-        //viewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
+        codeTextView.text = args.flightId.toString()
     }
 
     // TODO: Rename method, update argument and hook method into UI event

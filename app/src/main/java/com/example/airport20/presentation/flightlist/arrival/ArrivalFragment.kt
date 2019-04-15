@@ -1,6 +1,5 @@
 package com.example.airport20.presentation.flightlist.arrival
 
-import android.content.Context
 import android.os.Bundle
 
 import android.view.LayoutInflater
@@ -16,11 +15,7 @@ import com.example.airport20.presentation.flightlist.ClickListener
 import com.example.airport20.presentation.flightlist.arrival.ArrivalFragmentDirections.actionArrivalFragmentToDetailsFragment
 import kotlinx.android.synthetic.main.fragment_arrival_list.*
 
-/**
- * A fragment representing a list of Items.
- * Activities containing this fragment MUST implement the
- * [ArrivalFragment.OnListFragmentInteractionListener] interface.
- */
+
 class ArrivalFragment : Fragment() {
 
     // TODO: Customize parameters
@@ -50,9 +45,10 @@ class ArrivalFragment : Fragment() {
     }
 
     private fun onFlightClicked(item: DummyItem) {
-        val navDirections = actionArrivalFragmentToDetailsFragment()
+        val flightDetails = actionArrivalFragmentToDetailsFragment()
+        flightDetails.flightId = item.id
         view?.let {
-            findNavController(it).navigate(navDirections)
+            findNavController(it).navigate(flightDetails)
         }
     }
 }
