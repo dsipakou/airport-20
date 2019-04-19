@@ -13,8 +13,8 @@ import com.example.airport20.R
 import com.example.airport20.domain.Arrival
 import com.example.airport20.domain.FlightType
 
-import com.example.airport20.dummy.DummyContent.DummyItem
 import com.example.airport20.presentation.flightlist.arrival.ArrivalFragmentDirections.actionArrivalFragmentToDetailsFragment
+import com.example.airport20.presentation.flighttabs.TabsFragmentDirections.actionTabsFragment2ToDetailsFragment
 import kotlinx.android.synthetic.main.fragment_arrival_list.*
 
 
@@ -54,7 +54,7 @@ class ArrivalFragment : Fragment() {
     }
 
     private fun onFlightClicked(item: Arrival) {
-        val flightDetails = actionArrivalFragmentToDetailsFragment()
+        val flightDetails = actionTabsFragment2ToDetailsFragment()
         flightDetails.flightId = item.id
         flightDetails.flightType = FlightType.ARRIVAL.type
         view?.let {

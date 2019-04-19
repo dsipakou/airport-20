@@ -3,7 +3,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/navigation"
-            app:startDestination="@id/arrivalFragment">
+            app:startDestination="@id/tabsFragment2">
 
     <fragment android:id="@+id/arrivalFragment"
               android:name="com.example.airport20.presentation.flightlist.arrival.ArrivalFragment"
@@ -26,5 +26,14 @@
                 android:name="flightType"
                 app:argType="integer"
                 android:defaultValue="-1"/>
+        <action android:id="@+id/action_detailsFragment_to_arrivalFragment"
+                app:destination="@id/arrivalFragment"/>
+    </fragment>
+    <fragment android:id="@+id/tabsFragment2"
+              android:name="com.example.airport20.presentation.flighttabs.TabsFragment"
+              android:label="fragment_tabs"
+              tools:layout="@layout/fragment_tabs">
+        <action android:id="@+id/action_tabsFragment2_to_detailsFragment"
+                app:destination="@id/detailsFragment"/>
     </fragment>
 </navigation>
