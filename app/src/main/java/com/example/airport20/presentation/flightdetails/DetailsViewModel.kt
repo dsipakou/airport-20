@@ -4,15 +4,17 @@ package com.example.airport20.presentation.flightdetails
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.airport20.dummy.DummyContent
+import com.example.airport20.domain.Flight
+import com.example.airport20.domain.FlightManager.getFlight
+import com.example.airport20.domain.FlightType
 
 class DetailsViewModel : ViewModel() {
-    private val flight = MutableLiveData<DummyContent.DummyItem>()
+    private val flight = MutableLiveData<Flight>()
 
-    val observableFlight: LiveData<DummyContent.DummyItem>
+    val observableFlight: LiveData<Flight>
         get() = flight
 
-    fun getFlight(id: Int) {
-        flight.value = DummyContent.ITEMS[0]
+    fun setFlight(id: Int, type: FlightType) {
+        flight.value = getFlight(id, type)
     }
 }
