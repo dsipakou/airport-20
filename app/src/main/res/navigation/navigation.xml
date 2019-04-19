@@ -22,5 +22,9 @@
                 android:name="flightId"
                 app:argType="integer"
                 android:defaultValue="0"/>
+        <argument
+                android:name="flightType"
+                app:argType="integer"
+                android:defaultValue="-1"/>
     </fragment>
 </navigation>
