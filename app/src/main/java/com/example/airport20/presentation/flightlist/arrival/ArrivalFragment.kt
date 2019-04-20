@@ -13,15 +13,11 @@ import com.example.airport20.R
 import com.example.airport20.domain.Arrival
 import com.example.airport20.domain.FlightType
 
-import com.example.airport20.presentation.flightlist.arrival.ArrivalFragmentDirections.actionArrivalFragmentToDetailsFragment
 import com.example.airport20.presentation.flighttabs.TabsFragmentDirections.actionTabsFragment2ToDetailsFragment
 import kotlinx.android.synthetic.main.fragment_arrival_list.*
 
 
 class ArrivalFragment : Fragment() {
-
-    // TODO: Customize parameters
-    private var columnCount = 1
 
     private val clickListener: ClickListener = this::onFlightClicked
 
@@ -29,11 +25,6 @@ class ArrivalFragment : Fragment() {
         MyArrivalRecyclerViewAdapter(clickListener)
 
     private lateinit var viewModel: ArrivalViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
