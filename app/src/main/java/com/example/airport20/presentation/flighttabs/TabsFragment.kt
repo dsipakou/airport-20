@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager
 
 import com.example.airport20.R
 import com.example.airport20.presentation.flightlist.arrival.ArrivalFragment
+import com.example.airport20.presentation.flightlist.departure.DepartureFragment
 import com.google.android.material.tabs.TabLayout
 
 
@@ -23,6 +24,7 @@ class TabsFragment : Fragment() {
         val viewPager = view.findViewById<ViewPager>(R.id.viewPager)
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
         val tabsAdapter = ViewPagerAdapter(childFragmentManager)
+        tabsAdapter.addFragment(DepartureFragment(), "Departure")
         tabsAdapter.addFragment(ArrivalFragment(), "Arrival")
         viewPager.adapter = tabsAdapter
         tabLayout.setupWithViewPager(viewPager)

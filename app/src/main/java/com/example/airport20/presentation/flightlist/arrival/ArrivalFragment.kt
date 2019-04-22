@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.fragment_arrival_list.*
 
 class ArrivalFragment : Fragment() {
 
-    private val clickListener: ClickListener = this::onFlightClicked
+    private val clickListener: ArrivalClickListener = this::onFlightClicked
 
     private val recyclerViewAdapter =
         MyArrivalRecyclerViewAdapter(clickListener)
@@ -30,8 +30,7 @@ class ArrivalFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_arrival_list, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_arrival_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

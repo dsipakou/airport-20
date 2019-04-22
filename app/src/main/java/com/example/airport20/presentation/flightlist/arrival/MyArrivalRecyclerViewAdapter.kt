@@ -4,22 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil.calculateDiff
 import androidx.recyclerview.widget.RecyclerView
 import com.example.airport20.R
 import com.example.airport20.domain.Arrival
-import com.example.airport20.domain.FlightManager
-import com.example.airport20.dummy.DummyContent
 
-
-import com.example.airport20.dummy.DummyContent.DummyItem
 
 import kotlinx.android.synthetic.main.fragment_arrival.view.*
 
-typealias ClickListener = (Arrival) -> Unit
+typealias ArrivalClickListener = (Arrival) -> Unit
 
 class MyArrivalRecyclerViewAdapter(
-    private val clickListener: ClickListener
+    private val clickListener: ArrivalClickListener
 ) : RecyclerView.Adapter<MyArrivalRecyclerViewAdapter.ViewHolder>() {
 
     private var flightList: List<Arrival> = emptyList<Arrival>()
@@ -47,8 +42,8 @@ class MyArrivalRecyclerViewAdapter(
     override fun getItemCount(): Int = flightList.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_number
-        val mContentView: TextView = mView.content
+        val mIdView: TextView = mView.arrival_item_number
+        val mContentView: TextView = mView.arrival_content
 
         override fun toString(): String {
             return super.toString() + " '" + mContentView.text + "'"
