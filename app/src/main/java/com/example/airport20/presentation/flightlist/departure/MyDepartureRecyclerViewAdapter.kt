@@ -28,8 +28,10 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = flightList[position]
-        holder.mIdView.text = item.id.toString()
         holder.mContentView.text = item.city
+        holder.mCityView.text = item.city
+        holder.mCodeView.text = item.code
+        holder.mCompanyView.text = item.company
     }
 
     fun updateList(flightList: List<Departure>) {
@@ -39,7 +41,9 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
     override fun getItemCount(): Int = flightList.size
 
     inner class ViewHolder(val mView: View): RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.departure_item_number
+        val mCityView: TextView = mView.departure_city
+        val mCodeView: TextView = mView.departure_code
+        val mCompanyView: TextView = mView.departure_company
         val mContentView: TextView = mView.departure_content
 
         override fun toString(): String {
