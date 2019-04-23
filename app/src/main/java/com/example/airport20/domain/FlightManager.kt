@@ -66,5 +66,122 @@ object FlightManager {
                 Status.ENROUTE
             )
         )
+        addDeparture(
+            Departure(
+                4,
+                "Belavia",
+                "FRA123",
+                "Gate E",
+                "14-35",
+                "14-37",
+                "Desk E",
+                "Frankfurt",
+                Status.ENROUTE
+            )
+        )
+        addDeparture(
+            Departure(
+                5,
+                "Lufthansa",
+                "MSQ123",
+                "Gate R",
+                "14-15",
+                "14-30",
+                "Desk R",
+                "Minsk",
+                Status.ENROUTE
+            )
+        )
+        addDeparture(
+            Departure(
+                6,
+                "Lufthansa",
+                "MSQ123",
+                "Gate R",
+                "14-15",
+                "14-30",
+                "Desk R",
+                "Minsk",
+                Status.ENROUTE
+            )
+        )
+        addDeparture(
+            Departure(
+                7,
+                "Lufthansa",
+                "MSQ123",
+                "Gate R",
+                "14-15",
+                "14-30",
+                "Desk R",
+                "Minsk",
+                Status.ENROUTE
+            )
+        )
+        addDeparture(
+            Departure(
+                3,
+                "Lufthansa",
+                "MSQ123",
+                "Gate R",
+                "14-15",
+                "14-30",
+                "Desk R",
+                "Minsk",
+                Status.ENROUTE
+            )
+        )
+        addDeparture(
+            Departure(
+                3,
+                "Lufthansa",
+                "MSQ123",
+                "Gate R",
+                "14-15",
+                "14-30",
+                "Desk R",
+                "Minsk",
+                Status.ENROUTE
+            )
+        )
+        addDeparture(
+            Departure(
+                3,
+                "Lufthansa",
+                "MSQ123",
+                "Gate R",
+                "14-15",
+                "14-30",
+                "Desk R",
+                "Minsk",
+                Status.ENROUTE
+            )
+        )
+        addDeparture(
+            Departure(
+                3,
+                "Lufthansa",
+                "MSQ123",
+                "Gate R",
+                "14-15",
+                "14-30",
+                "Desk R",
+                "Minsk",
+                Status.ENROUTE
+            )
+        )
+        addDeparture(
+            Departure(
+                3,
+                "Lufthansa",
+                "MSQ123",
+                "Gate R",
+                "14-15",
+                "14-30",
+                "Desk R",
+                "Minsk",
+                Status.ENROUTE
+            )
+        )
     }
 }

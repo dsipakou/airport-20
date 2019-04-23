@@ -15,6 +15,8 @@ import com.example.airport20.domain.Departure
 import com.example.airport20.domain.FlightType
 import com.example.airport20.presentation.flighttabs.TabsFragmentDirections.actionTabsFragment2ToDetailsFragment
 import kotlinx.android.synthetic.main.fragment_departure_list.*
+import androidx.recyclerview.widget.DividerItemDecoration
+import android.graphics.drawable.ClipDrawable.HORIZONTAL
 
 
 class DepartureFragment : Fragment() {
@@ -41,6 +43,8 @@ class DepartureFragment : Fragment() {
             departures?.let { recyclerViewAdapter.updateList(departures) } })
 
         departureList.adapter = recyclerViewAdapter
+        val decoration = DividerItemDecoration(context, HORIZONTAL)
+        departureList.addItemDecoration(decoration)
     }
 
     private fun onFlightClicked(item: Departure) {

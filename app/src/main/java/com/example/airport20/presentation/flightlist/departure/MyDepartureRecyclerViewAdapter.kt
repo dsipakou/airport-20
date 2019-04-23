@@ -28,10 +28,12 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = flightList[position]
-        holder.mContentView.text = item.city
         holder.mCityView.text = item.city
         holder.mCodeView.text = item.code
         holder.mCompanyView.text = item.company
+        holder.mExpectedTimeView.text = item.expectedTime
+        holder.mActualTimeView.text = item.actualTime
+        holder.mStatusView.text = item.status.toString()
     }
 
     fun updateList(flightList: List<Departure>) {
@@ -44,10 +46,12 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
         val mCityView: TextView = mView.departure_city
         val mCodeView: TextView = mView.departure_code
         val mCompanyView: TextView = mView.departure_company
-        val mContentView: TextView = mView.departure_content
+        val mExpectedTimeView: TextView = mView.departure_expected_time
+        val mActualTimeView: TextView = mView.departure_actual_time
+        val mStatusView: TextView = mView.departure_status
 
         override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
+            return super.toString() + " '" + mCityView.text + "'"
         }
     }
 }
