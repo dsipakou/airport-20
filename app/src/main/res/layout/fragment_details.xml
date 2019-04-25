@@ -11,23 +11,12 @@
             android:layout_width="0dp"
             android:layout_height="300dp"
             tools:src="@tools:sample/backgrounds/scenic[0]"
-            android:id="@+id/imageView3"
+            android:id="@+id/coverImageView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
     />
-    <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/cityTextView"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/codeTextView"
-            tools:text="Minsk (MSQ)"/>
+
     <ImageView
             android:src="@drawable/ic_menu_send"
             android:layout_width="wrap_content"
@@ -43,7 +32,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/codeTextView"
             android:layout_marginTop="7dp"
-            app:layout_constraintTop_toBottomOf="@+id/cityTextView"
+            app:layout_constraintTop_toBottomOf="@+id/coverImageView"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
@@ -150,4 +139,23 @@
             android:layout_marginStart="16dp"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBaseline_toBaselineOf="@+id/expTimeTextView"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cityTextView"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:textColor="@color/design_default_color_primary_dark"
+            app:fontFamily="@font/roboto"
+            android:shadowColor="@color/colorPrimary"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="5"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Frankfurt"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

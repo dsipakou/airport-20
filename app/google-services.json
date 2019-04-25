@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "882401149165",
+    "firebase_url": "https://msq-timetable.firebaseio.com",
+    "project_id": "msq-timetable",
+    "storage_bucket": "msq-timetable.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882401149165:android:7203d3684ad10f4a",
+        "android_client_info": {
+          "package_name": "by.airport.airport_timetable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882401149165-3ghue98045e49fkfe4080cfdv1i5aijh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "by.airport.airport_timetable",
+            "certificate_hash": "f2172b88b2cbd93aeb92a1a460e3662db7f8d465"
+          }
+        },
+        {
+          "client_id": "882401149165-psv7l641c1b6qk39c2q6daa00946ejhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFkgFUbXVej3WvhjM4YlBVDx79YBY9N1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882401149165-psv7l641c1b6qk39c2q6daa00946ejhr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882401149165:android:4be0e232996e09d3",
+        "android_client_info": {
+          "package_name": "com.example.airport20"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882401149165-psv7l641c1b6qk39c2q6daa00946ejhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFkgFUbXVej3WvhjM4YlBVDx79YBY9N1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882401149165-psv7l641c1b6qk39c2q6daa00946ejhr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

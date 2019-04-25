@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'androidx.navigation.safeargs'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -46,4 +48,6 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment:$navigationVersion"
     implementation "android.arch.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "android.arch.navigation:navigation-ui-ktx:$navigationVersion"
+    implementation "com.google.firebase:firebase-firestore:$firebaseVersion"
+    implementation 'com.google.firebase:firebase-core:16.0.8'
 }
