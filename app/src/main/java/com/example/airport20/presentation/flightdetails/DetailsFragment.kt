@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Tasks
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_details.*
 
 
@@ -27,20 +28,7 @@ class DetailsFragment : Fragment() {
     private val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val db = FirebaseFirestore.getInstance()
-        val citiesRef = db.collection("cities").document("minsk")
-        citiesRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    currentCity = document.toObject(City::class.java)
-                    Log.d(TAG, "DocumentSnapshot data: ${currentCity?.en}")
-                } else {
-                    Log.d(TAG, "No such document")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }
+
         super.onCreate(savedInstanceState)
     }
 
@@ -53,21 +41,6 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val db = FirebaseFirestore.getInstance()
-        Log.i("INFO", "--- Start getting city ---")
-        val citiesRef = db.collection("cities").document("minsk")
-        citiesRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    currentCity = document.toObject(City::class.java)
-                    Log.d(TAG, "DocumentSnapshot data: ${document.data}")
-                } else {
-                    Log.d(TAG, "No such document")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }
 
         viewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
         viewModel.setFlight(args.flightId, FlightType.fromInt(args.flightType)!!)
@@ -79,7 +52,10 @@ class DetailsFragment : Fragment() {
     fun render(flight: Flight) {
         codeTextView.text = flight.code
         cityTextView.text = flight.city
-        gateTextView.text = "hheeeeeeeooollo"
+        if (!flight.imageUrl.isEmpty()) {
+            Picasso.get().load(flight.imageUrl).into(coverImageView)
+        }
+        gateTextView.text = flight.gate
     }
 
 //    override fun onResume() {
@@ -89,9 +65,5 @@ class DetailsFragment : Fragment() {
 
     private fun renderNoteNotFound() {
         codeTextView.text = "heeeelllllooo"
-    }
-
-    companion object {
-        var currentCity: City? = null
     }
 }

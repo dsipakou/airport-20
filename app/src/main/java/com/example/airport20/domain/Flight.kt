@@ -8,6 +8,7 @@ interface Flight {
     val expectedTime: String
     val actualTime: String
     val registrationDesk: String
-    val city: String
+    var city: String
     val status: Status
+    var imageUrl: String
 }

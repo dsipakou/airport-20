@@ -8,6 +8,7 @@ data class Departure (
     override val expectedTime: String,
     override val actualTime: String,
     override val registrationDesk: String,
-    override val city: String,
-    override val status: Status
+    override var city: String,
+    override val status: Status,
+    override var imageUrl: String = ""
 ) : Flight

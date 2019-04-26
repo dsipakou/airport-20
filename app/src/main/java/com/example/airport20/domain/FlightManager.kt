@@ -56,78 +56,78 @@ object FlightManager {
         addDeparture(
             Departure(
                 3,
-                "CompDep",
-                "codeDep",
-                "Gate D",
-                "14-15",
+                "BELAVIA",
+                "B2891",
+                "B6",
+                "12:15",
                 "14-30",
-                "Desk D",
-                "Berlin",
-                Status.ENROUTE
+                "25 26 27 28 29 30 31 32 33 34",
+                "BERLIN (SCHOENEFELD)",
+                Status.AIRBORNE
             )
         )
         addDeparture(
             Departure(
                 4,
-                "Belavia",
-                "FRA123",
-                "Gate E",
-                "14-35",
+                "BELAVIA",
+                "B2861",
+                "B4",
+                "12:20",
                 "14-37",
-                "Desk E",
-                "Frankfurt",
-                Status.ENROUTE
+                "25 26 27 28 29 30 31 32 33 34",
+                "PRAGUE (VACLAV HAVEL)",
+                Status.AIRBORNE
             )
         )
         addDeparture(
             Departure(
                 5,
-                "Lufthansa",
-                "MSQ123",
-                "Gate R",
-                "14-15",
+                "TURKISH AIRLINES",
+                "TK284",
+                "B5",
+                "16:25",
                 "14-30",
-                "Desk R",
-                "Minsk",
-                Status.ENROUTE
+                "35 36 37 38",
+                "ISTANBUL NEW AIRPORT",
+                Status.AIRBORNE
             )
         )
         addDeparture(
             Departure(
                 6,
-                "Lufthansa",
-                "MSQ123",
-                "Gate R",
-                "14-15",
+                "UTAIR",
+                "UT836",
+                "F12",
+                "12:30",
                 "14-30",
-                "Desk R",
-                "Minsk",
-                Status.ENROUTE
+                "25 26 27 28 29 30 31 32 33 34",
+                "MOSCOW (VNUKOVO)",
+                Status.CHECKIN
             )
         )
         addDeparture(
             Departure(
                 7,
-                "Lufthansa",
-                "MSQ123",
-                "Gate R",
-                "14-15",
+                "BELAVIA",
+                "B2829",
+                "B3",
+                "17:20",
                 "14-30",
-                "Desk R",
-                "Minsk",
-                Status.ENROUTE
+                "25 26 27 28 29 30 31 32 33 34",
+                "KIEV (ZHULYANY)",
+                Status.BOARDING_FINISHED
             )
         )
         addDeparture(
             Departure(
-                3,
-                "Lufthansa",
-                "MSQ123",
-                "Gate R",
-                "14-15",
+                8,
+                "LUFTHANSA GERMAN AIRLINES",
+                "LH1487",
+                "B9",
+                "14:00",
                 "14-30",
-                "Desk R",
-                "Minsk",
+                "3 4",
+                "FRANKFURT",
                 Status.ENROUTE
             )
         )

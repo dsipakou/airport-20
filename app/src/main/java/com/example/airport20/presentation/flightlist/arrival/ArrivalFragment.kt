@@ -38,9 +38,11 @@ class ArrivalFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(ArrivalViewModel::class.java)
         viewModel.observalbeArrivalList.observe(this, Observer { arrivals ->
-            arrivals?.let { recyclerViewAdapter.updateList(arrivals) } })
+            arrivals?.let {
+                recyclerViewAdapter.updateList(arrivals)
+                arrivalList.adapter = recyclerViewAdapter
+            } })
 
-        arrivalList.adapter = recyclerViewAdapter
     }
 
     private fun onFlightClicked(item: Arrival) {
