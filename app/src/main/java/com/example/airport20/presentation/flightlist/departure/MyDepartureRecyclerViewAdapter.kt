@@ -38,6 +38,7 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
 
     fun updateList(flightList: List<Departure>) {
         this.flightList = flightList
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = flightList.size

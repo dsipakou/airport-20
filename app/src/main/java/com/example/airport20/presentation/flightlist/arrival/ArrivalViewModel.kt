@@ -14,7 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class ArrivalViewModel: ViewModel() {
     private val arrivals = MutableLiveData<List<Arrival>>()
 
-    val observalbeArrivalList: LiveData<List<Arrival>>
+    val observableArrivalList: LiveData<List<Arrival>>
         get() = arrivals
 
     init {
@@ -27,7 +27,7 @@ class ArrivalViewModel: ViewModel() {
         val db = FirebaseFirestore.getInstance()
         for ((index, value) in mArrivals.withIndex()) {
             val city = sanitizeString(value.city).toLowerCase()
-            Log.d("FireBase Arrival List", "Current city is: ${city}")
+            Log.d("FireBase Arrival List", "Current city is: $city")
             val citiesRef = db.collection("cities").document(city)
             citiesRef.get()
                 .addOnSuccessListener { document ->

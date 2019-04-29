@@ -37,6 +37,7 @@ class MyArrivalRecyclerViewAdapter(
 
     fun updateList(flightList: List<Arrival>) {
         this.flightList = flightList
+        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = flightList.size

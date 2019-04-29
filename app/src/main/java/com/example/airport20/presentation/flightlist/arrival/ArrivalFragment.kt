@@ -21,8 +21,7 @@ class ArrivalFragment : Fragment() {
 
     private val clickListener: ArrivalClickListener = this::onFlightClicked
 
-    private val recyclerViewAdapter =
-        MyArrivalRecyclerViewAdapter(clickListener)
+    lateinit var recyclerViewAdapter: MyArrivalRecyclerViewAdapter
 
     private lateinit var viewModel: ArrivalViewModel
 
@@ -35,14 +34,13 @@ class ArrivalFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recyclerViewAdapter = MyArrivalRecyclerViewAdapter(clickListener)
 
         viewModel = ViewModelProviders.of(this).get(ArrivalViewModel::class.java)
-        viewModel.observalbeArrivalList.observe(this, Observer { arrivals ->
-            arrivals?.let {
-                recyclerViewAdapter.updateList(arrivals)
-                arrivalList.adapter = recyclerViewAdapter
-            } })
-
+        viewModel.observableArrivalList.observe(this, Observer { arrivals ->
+            arrivals?.let { recyclerViewAdapter.updateList(arrivals) }
+        })
+        arrivalList.adapter = recyclerViewAdapter
     }
 
     private fun onFlightClicked(item: Arrival) {
