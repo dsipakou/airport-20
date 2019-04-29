@@ -31,8 +31,12 @@ class MyArrivalRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = flightList[position]
-        holder.mIdView.text = item.id.toString()
-        holder.mContentView.text = item.city
+        holder.mCityView.text = item.city
+        holder.mCodeView.text = item.code
+        holder.mCompanyView.text = item.company
+        holder.mExpectedTimeView.text = item.expectedTime
+        holder.mActualTimeView.text = item.actualTime
+        holder.mStatusView.text = item.status.toString()
     }
 
     fun updateList(flightList: List<Arrival>) {
@@ -43,11 +47,15 @@ class MyArrivalRecyclerViewAdapter(
     override fun getItemCount(): Int = flightList.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.arrival_item_number
-        val mContentView: TextView = mView.arrival_content
+        val mCityView: TextView = mView.arrival_city
+        val mCodeView: TextView = mView.arrival_code
+        val mCompanyView: TextView = mView.arrival_company
+        val mExpectedTimeView: TextView = mView.arrival_expected_time
+        val mActualTimeView: TextView = mView.arrival_actual_time
+        val mStatusView: TextView = mView.arrival_status
 
         override fun toString(): String {
-            return super.toString() + " '" + mContentView.text + "'"
+            return super.toString() + " '" + mCityView.text + "'"
         }
     }
 }
