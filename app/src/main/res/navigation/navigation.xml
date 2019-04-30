@@ -5,14 +5,6 @@
             android:id="@+id/navigation"
             app:startDestination="@id/tabsFragment2">
 
-    <fragment android:id="@+id/arrivalFragment"
-              android:name="com.example.airport20.presentation.flightlist.arrival.ArrivalFragment"
-              android:label="fragment_arrival_list"
-              tools:layout="@layout/fragment_arrival_list">
-
-        <action android:id="@+id/action_arrivalFragment_to_detailsFragment"
-                app:destination="@id/detailsFragment"/>
-    </fragment>
     <fragment android:id="@+id/detailsFragment"
               android:name="com.example.airport20.presentation.flightdetails.DetailsFragment"
               android:label="fragment_details"
@@ -26,14 +18,16 @@
                 android:name="flightType"
                 app:argType="integer"
                 android:defaultValue="-1"/>
-        <action android:id="@+id/action_detailsFragment_to_arrivalFragment"
-                app:destination="@id/arrivalFragment"/>
     </fragment>
     <fragment android:id="@+id/tabsFragment2"
               android:name="com.example.airport20.presentation.flighttabs.TabsFragment"
               android:label="fragment_tabs"
               tools:layout="@layout/fragment_tabs">
         <action android:id="@+id/action_tabsFragment2_to_detailsFragment"
-                app:destination="@id/detailsFragment"/>
+                app:destination="@id/detailsFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
 </navigation>
