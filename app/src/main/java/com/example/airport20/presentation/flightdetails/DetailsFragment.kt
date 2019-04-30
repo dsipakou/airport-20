@@ -56,6 +56,8 @@ class DetailsFragment : Fragment() {
             Picasso.get().load(flight.imageUrl).into(coverImageView)
         }
         gateTextView.text = flight.gate
+        expTimeTextView.text = flight.expectedTime
+        actTimeTextView.text = flight.actualTime
     }
 
 //    override fun onResume() {
@@ -64,6 +66,6 @@ class DetailsFragment : Fragment() {
 //    }
 
     private fun renderNoteNotFound() {
-        codeTextView.text = "heeeelllllooo"
+        cityTextView.text = "Not found"
     }
 }

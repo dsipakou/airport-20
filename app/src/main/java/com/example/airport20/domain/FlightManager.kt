@@ -133,14 +133,14 @@ object FlightManager {
         )
         addDeparture(
             Departure(
-                3,
+                9,
                 "Lufthansa",
                 "MSQ123",
                 "Gate R",
                 "14-15",
                 "14-30",
                 "Desk R",
-                "Minsk",
+                "ABU-DHABI",
                 Status.ENROUTE
             )
         )

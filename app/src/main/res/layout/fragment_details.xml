@@ -9,7 +9,7 @@
 
     <ImageView
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
             tools:src="@tools:sample/backgrounds/scenic[0]"
             android:id="@+id/coverImageView"
             app:layout_constraintTop_toTopOf="parent"
@@ -25,10 +25,9 @@
             android:layout_marginTop="7dp"
             app:layout_constraintTop_toBottomOf="@+id/coverImageView"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             tools:text="B3657"
-    />
+            android:textSize="30sp"/>
     <ImageView
             android:src="@mipmap/ic_launcher"
             android:layout_width="wrap_content"
@@ -49,16 +48,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/gateTextView"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/aircompanyLogoImageView"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toTopOf="@+id/statusTextView"
-            tools:text="Gate 4"/>
+            tools:text="Gate 4"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,31 +78,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/expTimeHeaderTextView"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/statusTextView"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toStartOf="@+id/actTimeHeaderTextView"
             android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintBottom_toTopOf="@+id/expTimeTextView"/>
+            app:layout_constraintBottom_toTopOf="@+id/expTimeTextView"
+            android:textSize="24sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/statusTextView"/>
     <TextView
-            android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/expTimeTextView"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/expTimeHeaderTextView"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toStartOf="@+id/actTimeTextView"
             android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            app:layout_constraintHorizontal_bias="0.5"
-    />
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="12:45"/>
     <TextView
             android:text="Actual"
             android:layout_width="wrap_content"
@@ -111,43 +107,51 @@
             android:id="@+id/actTimeHeaderTextView"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             app:layout_constraintStart_toEndOf="@+id/expTimeHeaderTextView"
-            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintBaseline_toBaselineOf="@+id/expTimeHeaderTextView"/>
+            app:layout_constraintBaseline_toBaselineOf="@+id/expTimeHeaderTextView"
+            android:textSize="24sp"/>
     <TextView
-            android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/actTimeTextView"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             app:layout_constraintStart_toEndOf="@+id/expTimeTextView"
-            android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintBaseline_toBaselineOf="@+id/expTimeTextView"/>
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:text="12:50"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/actTimeHeaderTextView"/>
     <TextView
             android:text="TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/cityTextView"
-            android:textSize="36sp"
+            android:textSize="48sp"
             android:textStyle="bold"
             android:textColor="@color/design_default_color_primary_dark"
             app:fontFamily="@font/roboto"
             android:shadowColor="@color/colorPrimary"
-            android:shadowDx="3"
-            android:shadowDy="3"
+            android:shadowDx="4"
+            android:shadowDy="4"
             android:shadowRadius="5"
             android:layout_marginTop="40dp"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Frankfurt"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="40dp"
             android:layout_marginStart="40dp"
     />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/airportTextView"
+            app:layout_constraintStart_toStartOf="@+id/cityTextView"
+            app:layout_constraintTop_toBottomOf="@+id/cityTextView"
+            android:layout_marginTop="32dp"
+            tools:text="Fraport"
+            android:textSize="24sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
