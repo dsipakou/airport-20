@@ -3,27 +3,35 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:showIn="navigation_view">
 
+    <item android:title="@string/now">
+        <menu>
+            <item android:id="@+id/now_timetable"
+                  android:icon="@drawable/ic_menu_camera"
+                  android:title="@string/now"/>
+        </menu>
+    </item>
+
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/nav_camera"
+                android:id="@+id/today_timetable"
                 android:icon="@drawable/ic_menu_camera"
-                android:title="Import"/>
+                android:title="@string/today"/>
         <item
-                android:id="@+id/nav_gallery"
+                android:id="@+id/yesterday_timetable"
                 android:icon="@drawable/ic_menu_gallery"
-                android:title="Gallery"/>
+                android:title="@string/yesterday"/>
         <item
-                android:id="@+id/nav_slideshow"
+                android:id="@+id/tomorrow_timetable"
                 android:icon="@drawable/ic_menu_slideshow"
-                android:title="Slideshow"/>
+                android:title="@string/tomorrow"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/tools">
         <menu>
             <item
                     android:id="@+id/nav_manage"
                     android:icon="@drawable/ic_menu_manage"
-                    android:title="Tools"/>
+                    android:title="@string/settings"/>
         </menu>
     </item>
 

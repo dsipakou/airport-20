@@ -12,6 +12,7 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -61,13 +62,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
-            R.id.nav_gallery -> {
+            R.id.now_timetable -> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.today_timetable -> {
+                // Handle the camera action
+            }
+            R.id.yesterday_timetable -> {
+
+            }
+            R.id.tomorrow_timetable -> {
 
             }
             R.id.nav_manage -> {
