@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="languages">
+    <array name="lang_values">
         <item>RU</item>
         <item>EN</item>
     </array>
-    <array name="lang_values">
+    <array name="lang_labels">
         <item>Russian</item>
         <item>English</item>
     </array>

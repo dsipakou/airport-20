@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-                                      xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.preference.PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
             android:title="Localization">
         <ListPreference
-                android:key="list"
-                android:title="Language"
-                android:entries="@array/lang_values"
-                android:entryValues="@array/languages"
+                android:key="@string/pref_key_language"
+                android:title="@string/language_pref"
+                android:entries="@array/lang_labels"
+                android:entryValues="@array/lang_values"
                 android:dialogTitle="Choose UI language"
                 android:icon="@drawable/ic_baseline_language"/>
     </PreferenceCategory>
