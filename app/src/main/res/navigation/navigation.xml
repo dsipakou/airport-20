@@ -33,5 +33,5 @@
     <fragment android:id="@+id/settingsFragment"
               android:name="com.example.airport20.presentation.settings.SettingsFragment"
               android:label="SettingsFragment"
-              android:layout="@layout/fragment_settings"/>
+              android:layout="@xml/preferences"/>
 </navigation>
