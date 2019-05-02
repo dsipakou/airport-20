@@ -29,7 +29,7 @@
     <item android:title="@string/tools">
         <menu>
             <item
-                    android:id="@+id/nav_manage"
+                    android:id="@+id/settingsFragment"
                     android:icon="@drawable/ic_menu_manage"
                     android:title="@string/settings"/>
         </menu>
