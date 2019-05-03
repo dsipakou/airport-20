@@ -5,11 +5,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
+import com.example.airport20.MainActivity
 
 import com.example.airport20.R
+import com.example.airport20.utils.LocalHelper
 
 
 class SettingsFragment : PreferenceFragmentCompat() {
+
+    private lateinit var onChangeLanguage: MainActivity
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
@@ -20,5 +24,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
             true
         }
+//        onChangeLanguage = activity as MainActivity
+//        onChangeLanguage.setLanguage("ru")
     }
+
+
 }
