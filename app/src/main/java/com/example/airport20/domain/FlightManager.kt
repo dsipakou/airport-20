@@ -1,7 +1,5 @@
 package com.example.airport20.domain
 
-import android.content.res.Resources
-
 object FlightManager {
     private val arrivalFlights: MutableList<Arrival> = ArrayList()
     private val departureFlights: MutableList<Departure> = ArrayList()
@@ -37,6 +35,7 @@ object FlightManager {
                 "11-00",
                 "Desk A",
                 "Minsk",
+                "minsk",
                 Status.AIRBORNE
             )
         )
@@ -50,6 +49,7 @@ object FlightManager {
                 "13-00",
                 "Desk B",
                 "Frankfurt",
+                "frankfurt",
                 Status.DELAYED
             )
         )
@@ -63,6 +63,7 @@ object FlightManager {
                 "14-30",
                 "25 26 27 28 29 30 31 32 33 34",
                 "BERLIN (SCHOENEFELD)",
+                "berlinschoenefeld",
                 Status.AIRBORNE
             )
         )
@@ -76,6 +77,7 @@ object FlightManager {
                 "14-37",
                 "25 26 27 28 29 30 31 32 33 34",
                 "PRAGUE (VACLAV HAVEL)",
+                "praguevaclavhavel",
                 Status.AIRBORNE
             )
         )
@@ -89,6 +91,7 @@ object FlightManager {
                 "14-30",
                 "35 36 37 38",
                 "ISTANBUL NEW AIRPORT",
+                "instanbulnewairport",
                 Status.AIRBORNE
             )
         )
@@ -102,6 +105,7 @@ object FlightManager {
                 "14-30",
                 "25 26 27 28 29 30 31 32 33 34",
                 "MOSCOW (VNUKOVO)",
+                "moscowvnukovo",
                 Status.CHECKIN
             )
         )
@@ -115,6 +119,7 @@ object FlightManager {
                 "14-30",
                 "25 26 27 28 29 30 31 32 33 34",
                 "KIEV (ZHULYANY)",
+                "kievzhulyany",
                 Status.BOARDING_FINISHED
             )
         )
@@ -128,6 +133,7 @@ object FlightManager {
                 "14-30",
                 "3 4",
                 "FRANKFURT",
+                "frankfurt",
                 Status.ENROUTE
             )
         )
@@ -141,6 +147,7 @@ object FlightManager {
                 "14-30",
                 "Desk R",
                 "ABU-DHABI",
+                "abudhabi",
                 Status.ENROUTE
             )
         )
@@ -154,6 +161,7 @@ object FlightManager {
                 "14-30",
                 "Desk R",
                 "Minsk",
+                "minsk",
                 Status.ENROUTE
             )
         )
@@ -167,6 +175,7 @@ object FlightManager {
                 "14-30",
                 "Desk R",
                 "Minsk",
+                "minsk",
                 Status.ENROUTE
             )
         )
@@ -180,6 +189,7 @@ object FlightManager {
                 "14-30",
                 "Desk R",
                 "Minsk",
+                "minsk",
                 Status.ENROUTE
             )
         )

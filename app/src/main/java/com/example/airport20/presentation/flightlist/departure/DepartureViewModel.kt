@@ -9,6 +9,7 @@ import com.example.airport20.domain.Departure
 import com.example.airport20.domain.FlightManager
 import com.example.airport20.utils.sanitizeString
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
 class DepartureViewModel: ViewModel() {
     private val departures = MutableLiveData<List<Departure>>()
@@ -24,14 +25,16 @@ class DepartureViewModel: ViewModel() {
         var mDepartures: List<Departure> = FlightManager.getDepartures()
         val db = FirebaseFirestore.getInstance()
         for ((index, value) in mDepartures.withIndex()) {
-            val city = sanitizeString(value.city).toLowerCase()
-            Log.d("FireBase Arrival List", "Current city is: $city")
-            val citiesRef = db.collection("cities").document(city)
+            val citiesRef = db.collection("cities").document(value.cityCode)
             citiesRef.get()
                 .addOnSuccessListener { document ->
                     if (document != null) {
                         currentCity = document.toObject(City::class.java)
-                        mDepartures[index].city = currentCity?.en?.get("city") ?: value.city
+                        if (Locale.getDefault().toString() == "ru") {
+                            mDepartures[index].city = currentCity?.ru?.get("city") ?: value.city
+                        } else {
+                            mDepartures[index].city = currentCity?.en?.get("city") ?: value.city
+                        }
                         mDepartures[index].imageUrl = currentCity?.imageUrl ?: value.imageUrl
                         departures.postValue(mDepartures)
                         Log.d("FireBase Arrival List", "DocumentSnapshot data: ${currentCity?.en}")

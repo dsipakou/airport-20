@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="lang_values">
-        <item>RU</item>
-        <item>EN</item>
+        <item>ru</item>
+        <item>en</item>
     </array>
     <array name="lang_labels">
         <item>Russian</item>

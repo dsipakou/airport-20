@@ -20,12 +20,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val pref = findPreference(getString(R.string.pref_key_language))
         pref.setOnPreferenceChangeListener { preference, newValue ->
             if (preference is ListPreference) {
-                Log.i("Preferences", newValue.toString())
+                onChangeLanguage = activity as MainActivity
+                onChangeLanguage.setLanguage(newValue.toString())
             }
             true
         }
-//        onChangeLanguage = activity as MainActivity
-//        onChangeLanguage.setLanguage("ru")
     }
 
 

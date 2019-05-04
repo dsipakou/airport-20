@@ -9,7 +9,8 @@ import java.util.*
 class LocalHelper {
     fun onAttach(context: Context): Context {
         val language: String = Locale.getDefault().language
-        val prefs = context.getSharedPreferences("settings", MODE_PRIVATE) val lang = prefs.getString("msq_lang", "")
+        val prefs = context.getSharedPreferences("settings", MODE_PRIVATE)
+        val lang = prefs.getString("msq_lang", "")
         if (lang != null && lang.isNotEmpty()) {
             return setLocal(context, lang)
         }
@@ -32,6 +33,9 @@ class LocalHelper {
         Locale.setDefault(local)
         configuration.setLocale(local)
 
+        val prefs = context.getSharedPreferences("settings", MODE_PRIVATE).edit()
+        prefs.putString("msq_lang", language)
+        prefs.commit()
         return context.createConfigurationContext(configuration)
     }
 }
