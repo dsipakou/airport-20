@@ -1,5 +1,7 @@
 package com.example.airport20.domain
 
+import com.example.airport20.utils.ParseTimetable
+
 object FlightManager {
     private val arrivalFlights: MutableList<Arrival> = ArrayList()
     private val departureFlights: MutableList<Departure> = ArrayList()
@@ -25,6 +27,7 @@ object FlightManager {
     }
 
     init {
+        //ParseTimetable().getArrivals()
         addArrival(
             Arrival(
                 1,

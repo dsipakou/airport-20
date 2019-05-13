@@ -14,7 +14,6 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.airport20.utils.LocalHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
