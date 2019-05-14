@@ -1,6 +1,7 @@
 package com.example.airport20.utils
 
 import com.example.airport20.domain.Arrival
+import com.example.airport20.domain.Departure
 import com.example.airport20.domain.FlightManager
 import com.example.airport20.domain.Status
 import kotlinx.coroutines.Dispatchers
@@ -10,11 +11,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class ParseTimetable {
-    private val arrivals: MutableList<Arrival> = ArrayList()
-
     suspend fun getArrivals() = withContext(Dispatchers.IO) {
         val document = Jsoup.connect(ARRIVAL_URL).get()
-        val tr = document.select("div#content-bottom tr.yesterday")
+        val tr = document.select("div#content-bottom tr.today")
         tr.forEach {
             val tds = it.select("td")
             FlightManager.addArrival(
@@ -28,7 +27,29 @@ class ParseTimetable {
                     "",
                     tds[4].text(),
                     sanitizeString(tds[4].text()),
-                    Status.valueOf(tds[6].text()),
+                    Status.fromString(tds[6].text()),
+                    "")
+            )
+        }
+    }
+
+    suspend fun getDepartures() = withContext(Dispatchers.IO) {
+        val document = Jsoup.connect(DEPARTURE_URL).get()
+        val tr = document.select("div#content-bottom tr.today")
+        tr.forEach {
+            val tds = it.select("td")
+            FlightManager.addDeparture(
+                Departure(
+                    UUID.randomUUID().toString(),
+                    tds[0].text(),
+                    tds[2].text(),
+                    tds[5].text(),
+                    tds[1].text(),
+                    "",
+                    tds[4].text(),
+                    tds[3].text(),
+                    sanitizeString(tds[3].text()),
+                    Status.fromString(tds[6].text()),
                     "")
             )
         }

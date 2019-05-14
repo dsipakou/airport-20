@@ -7,8 +7,10 @@ import androidx.lifecycle.ViewModel
 import com.example.airport20.domain.City
 import com.example.airport20.domain.Departure
 import com.example.airport20.domain.FlightManager
+import com.example.airport20.utils.ParseTimetable
 import com.example.airport20.utils.sanitizeString
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 class DepartureViewModel: ViewModel() {
@@ -22,6 +24,9 @@ class DepartureViewModel: ViewModel() {
     }
 
     fun load() {
+        runBlocking {
+            ParseTimetable().getDepartures()
+        }
         var mDepartures: List<Departure> = FlightManager.getDepartures()
         val db = FirebaseFirestore.getInstance()
         for ((index, value) in mDepartures.withIndex()) {

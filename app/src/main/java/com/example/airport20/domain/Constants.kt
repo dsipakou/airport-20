@@ -1,5 +1,7 @@
 package com.example.airport20.domain
 
+import android.util.Log
+
 enum class Status {
     AIRBORNE,
     ARRIVED,
@@ -10,7 +12,21 @@ enum class Status {
     LANDED,
     LEAVING,
     CHECKIN,
-    ENROUTE
+    CHICKINCLOSED,
+    ENROUTE,
+    UNKNOWN;
+
+    companion object {
+        fun fromString(type: String) : Status {
+            try {
+                return valueOf(type)
+            }
+            catch (e: Exception) {
+                Log.e("Status get", e.toString())
+            }
+            return UNKNOWN
+        }
+    }
 }
 
 enum class FlightType(val type: Int) {

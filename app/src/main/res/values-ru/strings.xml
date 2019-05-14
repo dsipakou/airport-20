@@ -15,6 +15,8 @@
     <string name="tomorrow">Завтра</string>
     <string name="tools">Tools</string>
     <string name="settings">Настройки</string>
+    <string name="departure">Вылеты</string>
+    <string name="arrival">Прилёты</string>
 
     <string name="pref_key_language">Preference key language</string>
     <string name="language_pref">Язык</string>

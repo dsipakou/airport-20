@@ -24,8 +24,8 @@ class TabsFragment : Fragment() {
         val viewPager = view.findViewById<ViewPager>(R.id.viewPager)
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
         val tabsAdapter = ViewPagerAdapter(childFragmentManager)
-        tabsAdapter.addFragment(DepartureFragment(), "Departure")
-        tabsAdapter.addFragment(ArrivalFragment(), "Arrival")
+        tabsAdapter.addFragment(DepartureFragment(), getString(R.string.departure))
+        tabsAdapter.addFragment(ArrivalFragment(), getString(R.string.arrival))
         viewPager.adapter = tabsAdapter
         tabLayout.setupWithViewPager(viewPager)
 
