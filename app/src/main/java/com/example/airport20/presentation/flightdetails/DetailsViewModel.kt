@@ -19,7 +19,7 @@ class DetailsViewModel : ViewModel() {
     val observableFlight: LiveData<Flight>
         get() = flight
 
-    fun setFlight(id: Int, type: FlightType) {
+    fun setFlight(id: String, type: FlightType) {
         var mFlight: Flight = getFlight(id, type)
         val db = FirebaseFirestore.getInstance()
         val citiesRef = db.collection("cities").document(mFlight.cityCode)
