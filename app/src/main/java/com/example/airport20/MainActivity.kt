@@ -1,7 +1,9 @@
 package com.example.airport20
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 
 import android.view.Menu
 import android.view.MenuItem
@@ -11,7 +13,9 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.example.airport20.presentation.flightlist.arrival.ArrivalViewModel
 import com.example.airport20.utils.LocalHelper
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -22,6 +26,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setupNavigation()
+//        navigationView.setNavigationItemSelectedListener {
+//            Log.i("Inside navigation", "Listener is working")
+////            when(it.itemId) {
+////                R.id.now_timetable -> {
+////                    Log.i("drawer menu click", "now_timetable")
+////                }
+////            }
+//            it.isChecked = true
+//            drawer_layout.closeDrawers()
+//            true
+//        }
     }
 
     override fun attachBaseContext(newBase: Context) {
@@ -31,6 +46,7 @@ class MainActivity : AppCompatActivity() {
     fun setLanguage(language: String) {
         LocalHelper().setLocal(this, language)
         this.recreate()
+        ArrivalViewModel().load()
     }
 
     override fun onBackPressed() {
@@ -60,26 +76,19 @@ class MainActivity : AppCompatActivity() {
 //    override fun onNavigationItemSelected(item: MenuItem): Boolean {
 //        // Handle navigation view item clicks here.
 //        when (item.itemId) {
-////            R.id.now_timetable -> {
-////
-////            }
-////            R.id.today_timetable -> {
-////                // Handle the camera action
-////            }
-////            R.id.yesterday_timetable -> {
-////
-////            }
-////            R.id.tomorrow_timetable -> {
-////
-////            }
-//            R.id.nav_manage -> {
-//                drawer_layout.closeDrawers()
-//                findNavController(R.id.myNavHostFragment).navigate(actionTabsFragment2ToSettingsFragment())
-//                return true
+//            R.id.now_timetable -> {
+//
+//            }
+//            R.id.today_timetable -> {
+//                // Handle the camera action
+//            }
+//            R.id.yesterday_timetable -> {
+//
+//            }
+//            R.id.tomorrow_timetable -> {
+//
 //            }
 //        }
-//
-//        drawer_layout.closeDrawer(GravityCompat.START)
 //        return true
 //    }
 
@@ -93,14 +102,28 @@ class MainActivity : AppCompatActivity() {
         // Update action bar to reflect navigation
         setupActionBarWithNavController(this, navController, drawer_layout)
 
-        // Handle nav drawer item clicks
-        nav_view.setNavigationItemSelectedListener { menuItem ->
-            menuItem.isChecked = true
-            drawer_layout.closeDrawers()
-            true
-        }
+//        // Handle nav drawer item clicks
+//        navigationView.setNavigationItemSelectedListener {
+//            Log.i("Inside navigation", "Listener is working")
+//            when(it.itemId) {
+//                R.id.now_timetable -> {
+//                    Log.i("drawer menu click", "now_timetable")
+//                }
+//            }
+//            it.isChecked = true
+//            drawer_layout.closeDrawers()
+//            true
+//        }
+//        navigationView.setNavigationItemSelectedListener {
+//            drawer_layout.closeDrawer(GravityCompat.START)
+//            if (it.isChecked) {
+//                return@setNavigationItemSelectedListener false
+//            } else {
+//                return@setNavigationItemSelectedListener true
+//            }
+//        }
 
         // Tie nav graph to items in nav drawer
-        setupWithNavController(nav_view, navController)
+        setupWithNavController(navigationView, navController)
     }
 }

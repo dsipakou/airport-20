@@ -17,12 +17,7 @@ class LocalHelper {
         return setLocal(context, language)
     }
 
-    fun onAttach(context: Context, defaultLanguage: String): Context {
-        return setLocal(context, defaultLanguage)
-    }
-
     fun setLocal(context: Context, language: String): Context {
-
         return upgradeResource(context, language)
     }
 
