@@ -8,16 +8,17 @@ import androidx.lifecycle.viewModelScope
 import com.example.airport20.domain.Arrival
 import com.example.airport20.domain.City
 import com.example.airport20.domain.FlightManager
+import com.example.airport20.utils.FlowState
+import com.example.airport20.utils.FlowState.Companion.loading
 import com.example.airport20.utils.ParseTimetable
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
 
 
 class ArrivalViewModel: ViewModel() {
     private val arrivals = MutableLiveData<List<Arrival>>()
+    private val flowState = MutableLiveData<FlowState<MutableList<Arrival>>>()
 
     val observableArrivalList: LiveData<List<Arrival>>
         get() = arrivals
@@ -28,6 +29,7 @@ class ArrivalViewModel: ViewModel() {
 
     fun load() {
         viewModelScope.launch {
+            flowState.value = loading()
             ParseTimetable().getArrivals()
 
             var mArrivals: List<Arrival> = FlightManager.getArrivals()
