@@ -44,9 +44,13 @@ class MyArrivalRecyclerViewAdapter(
         notifyDataSetChanged()
     }
 
+    fun clearList() {
+        this.flightList = emptyList<Arrival>()
+    }
+
     override fun getItemCount(): Int = flightList.size
 
-    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
+    inner class ViewHolder(var mView: View) : RecyclerView.ViewHolder(mView) {
         val mCityView: TextView = mView.arrival_city
         val mCodeView: TextView = mView.arrival_code
         val mCompanyView: TextView = mView.arrival_company

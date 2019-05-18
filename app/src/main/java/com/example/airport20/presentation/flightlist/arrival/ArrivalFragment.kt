@@ -14,6 +14,8 @@ import com.example.airport20.domain.Arrival
 import com.example.airport20.domain.FlightType
 
 import com.example.airport20.presentation.flighttabs.TabsFragmentDirections.actionTabsFragment2ToDetailsFragment
+import com.example.airport20.utils.FlowState
+import com.example.airport20.utils.FlowStatus
 import kotlinx.android.synthetic.main.fragment_arrival_list.*
 
 
@@ -41,6 +43,8 @@ class ArrivalFragment : Fragment() {
             arrivals?.let { recyclerViewAdapter.updateList(arrivals) }
         })
         arrivalList.adapter = recyclerViewAdapter
+        addListener()
+        addEvents()
     }
 
     private fun onFlightClicked(item: Arrival) {
@@ -49,6 +53,26 @@ class ArrivalFragment : Fragment() {
         flightDetails.flightType = FlightType.ARRIVAL.type
         view?.let {
             findNavController(it).navigate(flightDetails)
+        }
+    }
+
+    private fun addListener() {
+        swipeRefreshArrivalLayout.setOnRefreshListener {
+            recyclerViewAdapter.clearList()
+            recyclerViewAdapter.notifyDataSetChanged()
+            viewModel.refresh()
+        }
+    }
+
+    private fun addEvents() {
+        viewModel.getMainFlow().observe(this, Observer { handleWithMainFlow(it) })
+    }
+
+    private fun handleWithMainFlow(flowState: FlowState<MutableList<Arrival>>?){
+        when(flowState?.status){
+            FlowStatus.LOADING -> swipeRefreshArrivalLayout.isRefreshing = true
+            FlowStatus.SUCCESS -> swipeRefreshArrivalLayout.isRefreshing = false
+            else -> {}
         }
     }
 }

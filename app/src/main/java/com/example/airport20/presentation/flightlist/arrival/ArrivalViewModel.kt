@@ -10,8 +10,10 @@ import com.example.airport20.domain.City
 import com.example.airport20.domain.FlightManager
 import com.example.airport20.utils.FlowState
 import com.example.airport20.utils.FlowState.Companion.loading
+import com.example.airport20.utils.FlowState.Companion.success
 import com.example.airport20.utils.ParseTimetable
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -19,6 +21,7 @@ import java.util.*
 class ArrivalViewModel: ViewModel() {
     private val arrivals = MutableLiveData<List<Arrival>>()
     private val flowState = MutableLiveData<FlowState<MutableList<Arrival>>>()
+    var loading = false
 
     val observableArrivalList: LiveData<List<Arrival>>
         get() = arrivals
@@ -28,11 +31,14 @@ class ArrivalViewModel: ViewModel() {
     }
 
     fun load() {
+        if (loading) return
+        loading = true
+        flowState.value = loading()
         viewModelScope.launch {
             flowState.value = loading()
             ParseTimetable().getArrivals()
 
-            var mArrivals: List<Arrival> = FlightManager.getArrivals()
+            val mArrivals: List<Arrival> = FlightManager.getArrivals()
             val db = FirebaseFirestore.getInstance()
             for ((index, value) in mArrivals.withIndex()) {
                 if (value.cityCode != "") {
@@ -60,8 +66,18 @@ class ArrivalViewModel: ViewModel() {
             }
 
             arrivals.value = mArrivals
+            flowState.value = success()
+            loading = false
         }
     }
+
+    fun refresh() {
+        if (loading) viewModelScope.coroutineContext.cancelChildren()
+        loading = false
+        load()
+    }
+
+    fun getMainFlow(): LiveData<FlowState<MutableList<Arrival>>> = flowState
 
     companion object {
         var currentCity: City? = null
