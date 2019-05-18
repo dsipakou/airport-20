@@ -17,6 +17,8 @@ import com.example.airport20.presentation.flighttabs.TabsFragmentDirections.acti
 import kotlinx.android.synthetic.main.fragment_departure_list.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import android.graphics.drawable.ClipDrawable.HORIZONTAL
+import com.example.airport20.utils.FlowState
+import com.example.airport20.utils.FlowStatus
 
 
 class DepartureFragment : Fragment() {
@@ -45,6 +47,8 @@ class DepartureFragment : Fragment() {
         departureList.adapter = recyclerViewAdapter
         val decoration = DividerItemDecoration(context, HORIZONTAL)
         departureList.addItemDecoration(decoration)
+        addListener()
+        addEvents()
     }
 
     private fun onFlightClicked(item: Departure) {
@@ -53,6 +57,27 @@ class DepartureFragment : Fragment() {
         flightDetails.flightType = FlightType.DEPARTURE.type
         view?.let {
             findNavController(it).navigate(flightDetails)
+        }
+    }
+
+
+    private fun addListener() {
+        swipeRefreshDepartureLayout.setOnRefreshListener {
+            recyclerViewAdapter.clearList()
+            recyclerViewAdapter.notifyDataSetChanged()
+            viewModel.refresh()
+        }
+    }
+
+    private fun addEvents() {
+        viewModel.getMainFlow().observe(this, Observer { handleWithMainFlow(it) })
+    }
+
+    private fun handleWithMainFlow(flowState: FlowState<MutableList<Departure>>?){
+        when(flowState?.status){
+            FlowStatus.LOADING -> swipeRefreshDepartureLayout.isRefreshing = true
+            FlowStatus.SUCCESS -> swipeRefreshDepartureLayout.isRefreshing = false
+            else -> {}
         }
     }
 }

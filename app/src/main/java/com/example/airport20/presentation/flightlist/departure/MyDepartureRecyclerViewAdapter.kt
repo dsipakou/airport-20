@@ -41,6 +41,11 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
         notifyDataSetChanged()
     }
 
+
+    fun clearList() {
+        this.flightList = emptyList<Departure>()
+    }
+
     override fun getItemCount(): Int = flightList.size
 
     inner class ViewHolder(val mView: View): RecyclerView.ViewHolder(mView) {

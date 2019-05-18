@@ -9,13 +9,13 @@ import com.example.airport20.utils.ParseTimetable
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
 import androidx.lifecycle.viewModelScope
+import com.example.airport20.utils.FlowState
 import java.util.*
 
 class DepartureViewModel: ViewModel(), LifecycleObserver {
     private val departures = MutableLiveData<List<Departure>>()
-
-    private val viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val flowState = MutableLiveData<FlowState<MutableList<Departure>>>()
+    var loading = false
 
     val observableDepartureList: LiveData<List<Departure>>
         get() = departures
@@ -26,6 +26,9 @@ class DepartureViewModel: ViewModel(), LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun load() {
+        if (loading) return
+        loading = true
+        flowState.value = FlowState.loading()
         viewModelScope.launch {
             ParseTimetable().getDepartures()
 
@@ -55,8 +58,18 @@ class DepartureViewModel: ViewModel(), LifecycleObserver {
             }
 
             departures.value = mDepartures
+            flowState.value = FlowState.success()
+            loading = false
         }
     }
+
+    fun refresh() {
+        if (loading) viewModelScope.coroutineContext.cancelChildren()
+        loading = false
+        load()
+    }
+
+    fun getMainFlow(): LiveData<FlowState<MutableList<Departure>>> = flowState
 
     companion object {
         var currentCity: City? = null
