@@ -38,7 +38,7 @@ class ParseTimetable {
     }
 
     suspend fun getDepartures() = withContext(Dispatchers.IO) {
-        async {
+        launch {
             val document = Jsoup.connect(DEPARTURE_URL).get()
             val tr = document.select("div#content-bottom tr.today")
             tr.forEach {

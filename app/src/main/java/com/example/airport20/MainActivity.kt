@@ -47,8 +47,8 @@ class MainActivity : AppCompatActivity() {
     fun setLanguage(language: String) {
         LocalHelper().setLocal(this, language)
         this.recreate()
-        ArrivalViewModel().load()
-        DepartureViewModel().load()
+        ArrivalViewModel().refresh()
+        DepartureViewModel().refresh()
     }
 
     override fun onBackPressed() {
