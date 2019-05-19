@@ -14,6 +14,7 @@ import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.airport20.presentation.flightlist.arrival.ArrivalViewModel
+import com.example.airport20.presentation.flightlist.departure.DepartureViewModel
 import com.example.airport20.utils.LocalHelper
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         LocalHelper().setLocal(this, language)
         this.recreate()
         ArrivalViewModel().load()
+        DepartureViewModel().load()
     }
 
     override fun onBackPressed() {
