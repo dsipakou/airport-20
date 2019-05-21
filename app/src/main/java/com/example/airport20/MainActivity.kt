@@ -82,6 +82,10 @@ class MainActivity : AppCompatActivity() {
 //        return true
 //    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         return navigateUp(findNavController(this, R.id.myNavHostFragment), drawer_layout)
     }
