@@ -22,7 +22,7 @@ import com.example.airport20.utils.FlowState
 import com.example.airport20.utils.FlowStatus
 
 
-class DepartureFragment : Fragment(), MainActivity.OnHeadlineSelectedListener {
+class DepartureFragment : Fragment(), MainActivity.OnFragmentRecyclerRefresh {
 
     private val clickListener: DepartureClickListener = this::onFlightClicked
 
@@ -38,7 +38,7 @@ class DepartureFragment : Fragment(), MainActivity.OnHeadlineSelectedListener {
         savedInstanceState: Bundle?
     ): View? {
         mainActivity = activity as MainActivity
-        mainActivity.setOnHeadlineSelectedListener(this)
+        mainActivity.setOnDepartureRefresh(this)
         return inflater.inflate(R.layout.fragment_departure_list, container, false)
     }
 
@@ -57,6 +57,8 @@ class DepartureFragment : Fragment(), MainActivity.OnHeadlineSelectedListener {
     }
 
     fun refresh() {
+        recyclerViewAdapter.clearList()
+        recyclerViewAdapter.notifyDataSetChanged()
         viewModel.refresh()
     }
 
@@ -72,9 +74,7 @@ class DepartureFragment : Fragment(), MainActivity.OnHeadlineSelectedListener {
 
     private fun addListener() {
         swipeRefreshDepartureLayout.setOnRefreshListener {
-            recyclerViewAdapter.clearList()
-            recyclerViewAdapter.notifyDataSetChanged()
-            viewModel.refresh()
+            refresh()
         }
     }
 

@@ -20,7 +20,7 @@ import com.example.airport20.MainActivity
 import com.example.airport20.R
 
 
-class ArrivalFragment : Fragment(), MainActivity.OnHeadlineSelectedListener {
+class ArrivalFragment : Fragment(), MainActivity.OnFragmentRecyclerRefresh {
 
     private val clickListener: ArrivalClickListener = this::onFlightClicked
 
@@ -35,7 +35,7 @@ class ArrivalFragment : Fragment(), MainActivity.OnHeadlineSelectedListener {
         savedInstanceState: Bundle?
     ): View? {
         mainActivity = activity as MainActivity
-        mainActivity.setOnHeadlineSelectedListener(this)
+        mainActivity.setOnArrivalRefresh(this)
         return inflater.inflate(R.layout.fragment_arrival_list, container, false)
     }
 
@@ -53,6 +53,8 @@ class ArrivalFragment : Fragment(), MainActivity.OnHeadlineSelectedListener {
     }
 
     fun refresh() {
+        recyclerViewAdapter.clearList()
+        recyclerViewAdapter.notifyDataSetChanged()
         viewModel.refresh()
     }
 
@@ -67,9 +69,7 @@ class ArrivalFragment : Fragment(), MainActivity.OnHeadlineSelectedListener {
 
     private fun addListener() {
         swipeRefreshArrivalLayout.setOnRefreshListener {
-            recyclerViewAdapter.clearList()
-            recyclerViewAdapter.notifyDataSetChanged()
-            viewModel.refresh()
+            refresh()
         }
     }
 

@@ -11,20 +11,28 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.example.airport20.presentation.flightlist.arrival.ArrivalFragment
 import com.example.airport20.utils.LocalHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity() {
-    internal lateinit var callback: OnHeadlineSelectedListener
+    internal lateinit var arrivalRefresh: OnFragmentRecyclerRefresh
+    internal lateinit var departureRefresh: OnFragmentRecyclerRefresh
 
-    fun setOnHeadlineSelectedListener(callback: OnHeadlineSelectedListener) {
-        this.callback = callback
+    fun setOnArrivalRefresh(arrival: OnFragmentRecyclerRefresh) {
+        this.arrivalRefresh = arrival
     }
 
-    fun getOnHeadlineSelectedListener(): OnHeadlineSelectedListener {
-        return callback
+    fun setOnDepartureRefresh(departure: OnFragmentRecyclerRefresh) {
+        this.departureRefresh = departure
+    }
+
+    fun getOnArrivalRefresh(): OnFragmentRecyclerRefresh {
+        return arrivalRefresh
+    }
+
+    fun getOnDepartureRefresh(): OnFragmentRecyclerRefresh {
+        return departureRefresh
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,9 +65,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refresh() {
-//        val arrivalFragment = supportFragmentManager.findFragmentByTag(ArrivalFragment.TAG) as ArrivalFragment?
-//        arrivalFragment?.refresh()
-        getOnHeadlineSelectedListener().onFragmentRefresh()
+        getOnArrivalRefresh().onFragmentRefresh()
+        getOnDepartureRefresh().onFragmentRefresh()
     }
 
     override fun onBackPressed() {
@@ -138,7 +145,7 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(navigationView, navController)
     }
 
-    interface OnHeadlineSelectedListener {
+    interface OnFragmentRecyclerRefresh {
         fun onFragmentRefresh()
     }
 }
