@@ -1,9 +1,7 @@
 package com.example.airport20
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 
 import android.view.Menu
 import android.view.MenuItem
@@ -13,17 +11,25 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.example.airport20.presentation.flightlist.arrival.ArrivalViewModel
-import com.example.airport20.presentation.flightlist.departure.DepartureViewModel
+import com.example.airport20.presentation.flightlist.arrival.ArrivalFragment
 import com.example.airport20.utils.LocalHelper
-import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity() {
+    internal lateinit var callback: OnHeadlineSelectedListener
+
+    fun setOnHeadlineSelectedListener(callback: OnHeadlineSelectedListener) {
+        this.callback = callback
+    }
+
+    fun getOnHeadlineSelectedListener(): OnHeadlineSelectedListener {
+        return callback
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setupNavigation()
@@ -51,8 +57,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refresh() {
-        ArrivalViewModel().refresh()
-        DepartureViewModel().refresh()
+//        val arrivalFragment = supportFragmentManager.findFragmentByTag(ArrivalFragment.TAG) as ArrivalFragment?
+//        arrivalFragment?.refresh()
+        getOnHeadlineSelectedListener().onFragmentRefresh()
     }
 
     override fun onBackPressed() {
@@ -82,8 +89,18 @@ class MainActivity : AppCompatActivity() {
 //        return true
 //    }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        return super.onCreateOptionsMenu(menu)
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.refresh, menu)
+        return true
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_refresh -> refresh()
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -119,5 +136,9 @@ class MainActivity : AppCompatActivity() {
 
         // Tie nav graph to items in nav drawer
         setupWithNavController(navigationView, navController)
+    }
+
+    interface OnHeadlineSelectedListener {
+        fun onFragmentRefresh()
     }
 }

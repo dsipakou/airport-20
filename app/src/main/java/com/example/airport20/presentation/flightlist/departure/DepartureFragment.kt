@@ -17,13 +17,16 @@ import com.example.airport20.presentation.flighttabs.TabsFragmentDirections.acti
 import kotlinx.android.synthetic.main.fragment_departure_list.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import android.graphics.drawable.ClipDrawable.HORIZONTAL
+import com.example.airport20.MainActivity
 import com.example.airport20.utils.FlowState
 import com.example.airport20.utils.FlowStatus
 
 
-class DepartureFragment : Fragment() {
+class DepartureFragment : Fragment(), MainActivity.OnHeadlineSelectedListener {
 
     private val clickListener: DepartureClickListener = this::onFlightClicked
+
+    private lateinit var mainActivity: MainActivity
 
     private val recyclerViewAdapter =
         MyDepartureRecyclerViewAdapter(clickListener)
@@ -34,6 +37,8 @@ class DepartureFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mainActivity = activity as MainActivity
+        mainActivity.setOnHeadlineSelectedListener(this)
         return inflater.inflate(R.layout.fragment_departure_list, container, false)
     }
 
@@ -49,6 +54,10 @@ class DepartureFragment : Fragment() {
         departureList.addItemDecoration(decoration)
         addListener()
         addEvents()
+    }
+
+    fun refresh() {
+        viewModel.refresh()
     }
 
     private fun onFlightClicked(item: Departure) {
@@ -79,5 +88,14 @@ class DepartureFragment : Fragment() {
             FlowStatus.SUCCESS -> swipeRefreshDepartureLayout.isRefreshing = false
             else -> {}
         }
+    }
+
+    override fun onStop() {
+        viewModel.getMainFlow().removeObservers(this)
+        super.onStop()
+    }
+
+    override fun onFragmentRefresh() {
+        refresh()
     }
 }

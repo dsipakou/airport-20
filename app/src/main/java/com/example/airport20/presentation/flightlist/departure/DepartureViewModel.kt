@@ -24,9 +24,9 @@ class DepartureViewModel: ViewModel(), LifecycleObserver {
         load()
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun load() {
         if (loading) return
+        departures.value = emptyList()
         loading = true
         flowState.value = FlowState.loading()
         viewModelScope.launch {

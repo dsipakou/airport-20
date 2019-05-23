@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
-import com.example.airport20.R
 import com.example.airport20.domain.Arrival
 import com.example.airport20.domain.FlightType
 
@@ -17,20 +16,26 @@ import com.example.airport20.presentation.flighttabs.TabsFragmentDirections.acti
 import com.example.airport20.utils.FlowState
 import com.example.airport20.utils.FlowStatus
 import kotlinx.android.synthetic.main.fragment_arrival_list.*
+import com.example.airport20.MainActivity
+import com.example.airport20.R
 
 
-class ArrivalFragment : Fragment() {
+class ArrivalFragment : Fragment(), MainActivity.OnHeadlineSelectedListener {
 
     private val clickListener: ArrivalClickListener = this::onFlightClicked
 
+    private lateinit var mainActivity: MainActivity
+
     lateinit var recyclerViewAdapter: MyArrivalRecyclerViewAdapter
 
-    private lateinit var viewModel: ArrivalViewModel
+    lateinit var viewModel: ArrivalViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mainActivity = activity as MainActivity
+        mainActivity.setOnHeadlineSelectedListener(this)
         return inflater.inflate(R.layout.fragment_arrival_list, container, false)
     }
 
@@ -45,6 +50,10 @@ class ArrivalFragment : Fragment() {
         arrivalList.adapter = recyclerViewAdapter
         addListener()
         addEvents()
+    }
+
+    fun refresh() {
+        viewModel.refresh()
     }
 
     private fun onFlightClicked(item: Arrival) {
@@ -74,5 +83,14 @@ class ArrivalFragment : Fragment() {
             FlowStatus.SUCCESS -> swipeRefreshArrivalLayout.isRefreshing = false
             else -> {}
         }
+    }
+
+    override fun onStop() {
+        viewModel.getMainFlow().removeObservers(this)
+        super.onStop()
+    }
+
+    override fun onFragmentRefresh() {
+        refresh()
     }
 }
