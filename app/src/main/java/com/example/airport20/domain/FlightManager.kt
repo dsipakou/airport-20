@@ -5,10 +5,17 @@ import kotlin.collections.ArrayList
 object FlightManager {
     private val arrivalFlights: MutableList<Arrival> = ArrayList()
     private val departureFlights: MutableList<Departure> = ArrayList()
+    private var period: TimeRange = TimeRange.NOW
 
     fun getArrivals(): List<Arrival> = arrivalFlights
 
     fun getDepartures(): List<Departure> = departureFlights
+
+    fun getPeriod(): TimeRange = period
+
+    fun setPeriod(time: TimeRange) {
+        period = time
+    }
 
     fun addArrival(flight: Arrival) {
         arrivalFlights.add(flight)

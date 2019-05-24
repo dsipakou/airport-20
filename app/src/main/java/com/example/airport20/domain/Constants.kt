@@ -38,3 +38,10 @@ enum class FlightType(val type: Int) {
         fun fromInt(type: Int) = map[type]
     }
 }
+
+enum class TimeRange(val time: String) {
+    NOW(""),
+    YESTERDAY("yesterday"),
+    TODAY("today"),
+    TOMORROW("tomorrow")
+}
