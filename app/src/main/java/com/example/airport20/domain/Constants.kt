@@ -12,19 +12,27 @@ enum class Status {
     LANDED,
     LEAVING,
     CHECKIN,
-    CHICKINCLOSED,
+    CHECKINCLOSED,
     ENROUTE,
-    UNKNOWN;
+    UNKNOWN,
+    EMPTY;
 
     companion object {
         fun fromString(type: String) : Status {
             try {
-                return valueOf(type)
+                when (type) {
+                    "" -> return EMPTY
+                    "EN ROUTE" -> return ENROUTE
+                    "CHECK-IN" -> return CHECKIN
+                    "BOARDING FINISHED" -> return BOARDING_FINISHED
+                    "CHECK-IN CLOSED" -> return CHECKINCLOSED
+                    else -> return valueOf(type)
+                }
             }
             catch (e: Exception) {
                 Log.e("Status get", e.toString())
+                return UNKNOWN
             }
-            return UNKNOWN
         }
     }
 }

@@ -18,18 +18,37 @@ class ParseTimetable {
             tr.forEach {
                 val tds = it.select("td")
                 if (tds.size > 0) {
+                    val actualTime: String
+                    val status: Status
+                    val regex = Regex("([A-Z- ]+)\\s+(expected|departure)[a-z ]+(\\d+:\\d+)")
+                    val res = regex.find(tds[6].text())
+                    if (res != null) {
+                        actualTime = res.groups[3]!!.value
+                        status = Status.fromString(res.groups[1]!!.value)
+                    }
+                    else {
+                        actualTime = tds[2].text()
+                        status = Status.fromString(tds[6].text())
+                    }
+                    val id = UUID.randomUUID().toString()
+                    val company = tds[0].text()
+                    val code = tds[3].text()
+                    val gate = tds[5].text()
+                    val expectedTime = tds[1].text()
+                    val city = tds[4].text()
+                    val cityCode = sanitizeString(tds[4].text())
                     FlightManager.addArrival(
                         Arrival(
-                            UUID.randomUUID().toString(),
-                            tds[0].text(),
-                            tds[3].text(),
-                            tds[5].text(),
-                            tds[1].text(),
-                            tds[2].text(),
+                            id,
+                            company,
+                            code,
+                            gate,
+                            expectedTime,
+                            actualTime,
                             "",
-                            tds[4].text(),
-                            sanitizeString(tds[4].text()),
-                            Status.fromString(tds[6].text()),
+                            city,
+                            cityCode,
+                            status,
                             "")
                     )
                 }
@@ -47,18 +66,38 @@ class ParseTimetable {
             tr.forEach {
                 val tds = it.select("td")
                 if (tds.size > 0) {
+                    val actualTime: String
+                    val status: Status
+                    val regex = Regex("([A-Z- ]+)\\s+(expected|departure)[a-z ]+(\\d+:\\d+)")
+                    val res = regex.find(tds[6].text())
+                    if (res != null) {
+                        actualTime = res.groups[3]!!.value
+                        status = Status.fromString(res.groups[1]!!.value)
+                    }
+                    else {
+                        actualTime = ""
+                        status = Status.fromString(tds[6].text())
+                    }
+                    val id = UUID.randomUUID().toString()
+                    val company = tds[0].text()
+                    val code = tds[2].text()
+                    val gate = tds[5].text()
+                    val expectedTime = tds[1].text()
+                    val registrationDesk = tds[4].text()
+                    val city = tds[3].text()
+                    val cityCode = sanitizeString(tds[3].text())
                     FlightManager.addDeparture(
                         Departure(
-                            UUID.randomUUID().toString(),
-                            tds[0].text(),
-                            tds[2].text(),
-                            tds[5].text(),
-                            tds[1].text(),
-                            "",
-                            tds[4].text(),
-                            tds[3].text(),
-                            sanitizeString(tds[3].text()),
-                            Status.fromString(tds[6].text()),
+                            id,
+                            company,
+                            code,
+                            gate,
+                            expectedTime,
+                            actualTime,
+                            registrationDesk,
+                            city,
+                            cityCode,
+                            status,
                             ""
                         )
                     )
