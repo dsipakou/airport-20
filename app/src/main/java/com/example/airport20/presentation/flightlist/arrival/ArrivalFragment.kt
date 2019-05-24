@@ -18,6 +18,7 @@ import com.example.airport20.utils.FlowStatus
 import kotlinx.android.synthetic.main.fragment_arrival_list.*
 import com.example.airport20.MainActivity
 import com.example.airport20.R
+import com.example.airport20.domain.FlightManager
 
 
 class ArrivalFragment : Fragment(), MainActivity.OnFragmentRecyclerRefresh {
@@ -55,6 +56,7 @@ class ArrivalFragment : Fragment(), MainActivity.OnFragmentRecyclerRefresh {
     fun refresh() {
         recyclerViewAdapter.clearList()
         recyclerViewAdapter.notifyDataSetChanged()
+        FlightManager.clearArrivals()
         viewModel.refresh()
     }
 

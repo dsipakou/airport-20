@@ -28,7 +28,14 @@
             android:layout_marginStart="10dp"
             app:layout_constraintTop_toTopOf="parent"
             android:textAppearance="@android:style/TextAppearance.Material.Headline"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/arrival_expected_time"/>
 
     <TextView
             android:id="@+id/arrival_code"

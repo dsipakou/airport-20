@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_departure_list.*
 import androidx.recyclerview.widget.DividerItemDecoration
 import android.graphics.drawable.ClipDrawable.HORIZONTAL
 import com.example.airport20.MainActivity
+import com.example.airport20.domain.FlightManager
 import com.example.airport20.utils.FlowState
 import com.example.airport20.utils.FlowStatus
 
@@ -59,6 +60,7 @@ class DepartureFragment : Fragment(), MainActivity.OnFragmentRecyclerRefresh {
     fun refresh() {
         recyclerViewAdapter.clearList()
         recyclerViewAdapter.notifyDataSetChanged()
+        FlightManager.clearDepartures()
         viewModel.refresh()
     }
 

@@ -2,6 +2,7 @@ package com.example.airport20
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,8 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.example.airport20.domain.FlightManager
+import com.example.airport20.domain.TimeRange
 import com.example.airport20.utils.LocalHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -41,17 +44,29 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         setupNavigation()
-//        navigationView.setNavigationItemSelectedListener {
-//            Log.i("Inside navigation", "Listener is working")
-////            when(it.itemId) {
-////                R.id.now_timetable -> {
-////                    Log.i("drawer menu click", "now_timetable")
-////                }
-////            }
-//            it.isChecked = true
-//            drawer_layout.closeDrawers()
-//            true
-//        }
+        navigationView.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.now_timetable -> {
+                    FlightManager.setPeriod(TimeRange.NOW)
+                    refresh()
+                }
+                R.id.yesterday_timetable -> {
+                    FlightManager.setPeriod(TimeRange.YESTERDAY)
+                    refresh()
+                }
+                R.id.today_timetable -> {
+                    FlightManager.setPeriod(TimeRange.TODAY)
+                    refresh()
+                }
+                R.id.tomorrow_timetable -> {
+                    FlightManager.setPeriod(TimeRange.TOMORROW)
+                    refresh()
+                }
+            }
+            it.isChecked = true
+            drawer_layout.closeDrawers()
+            true
+        }
     }
 
     override fun attachBaseContext(newBase: Context) {

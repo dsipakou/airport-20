@@ -9,7 +9,15 @@ object FlightManager {
 
     fun getArrivals(): List<Arrival> = arrivalFlights
 
+    fun clearArrivals() {
+        arrivalFlights.clear()
+    }
+
     fun getDepartures(): List<Departure> = departureFlights
+
+    fun clearDepartures() {
+        departureFlights.clear()
+    }
 
     fun getPeriod(): TimeRange = period
 
