@@ -2,37 +2,32 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:tools="http://schemas.android.com/tools"
       tools:showIn="navigation_view">
-
-    <item android:title="@string/now">
-        <menu>
-            <item android:id="@+id/now_timetable"
-                  android:icon="@drawable/ic_menu_camera"
-                  android:title="@string/now"/>
-        </menu>
-    </item>
-
     <group android:checkableBehavior="single">
-        <item
-                android:id="@+id/today_timetable"
-                android:icon="@drawable/ic_menu_camera"
-                android:title="@string/today"/>
-        <item
-                android:id="@+id/yesterday_timetable"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="@string/yesterday"/>
-        <item
-                android:id="@+id/tomorrow_timetable"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="@string/tomorrow"/>
-    </group>
 
-    <item android:title="@string/tools">
-        <menu>
-            <item
-                    android:id="@+id/settingsFragment"
-                    android:icon="@drawable/ic_menu_manage"
-                    android:title="@string/settings"/>
-        </menu>
-    </item>
+        <item android:title="@string/now">
+            <menu>
+                <item android:id="@+id/now_timetable"
+                      android:icon="@drawable/ic_menu_camera"
+                      android:title="@string/now"/>
+            </menu>
+        </item>
+        <item android:id="@+id/today_timetable"
+              android:icon="@drawable/ic_menu_camera"
+              android:title="@string/today"/>
+        <item android:id="@+id/yesterday_timetable"
+              android:icon="@drawable/ic_menu_gallery"
+              android:title="@string/yesterday"/>
+        <item android:id="@+id/tomorrow_timetable"
+              android:icon="@drawable/ic_menu_slideshow"
+              android:title="@string/tomorrow"/>
+
+        <item android:title="@string/tools">
+            <menu>
+                <item android:id="@+id/settingsFragment"
+                      android:icon="@drawable/ic_menu_manage"
+                      android:title="@string/settings"/>
+            </menu>
+        </item>
+    </group>
 
 </menu>

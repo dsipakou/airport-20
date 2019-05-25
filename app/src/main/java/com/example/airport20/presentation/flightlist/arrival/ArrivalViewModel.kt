@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import java.util.*
 
 
-class ArrivalViewModel: ViewModel() {
+class ArrivalViewModel : ViewModel() {
     private val arrivals = MutableLiveData<List<Arrival>>()
     private val flowState = MutableLiveData<FlowState<MutableList<Arrival>>>()
     var loading = false
@@ -40,31 +40,38 @@ class ArrivalViewModel: ViewModel() {
 
             val mArrivals: List<Arrival> = FlightManager.getArrivals()
             val db = FirebaseFirestore.getInstance()
-            for ((index, value) in mArrivals.withIndex()) {
-                if (value.cityCode != "") {
-                    val citiesRef = db.collection("cities").document(value.cityCode)
-                    citiesRef.get()
-                        .addOnSuccessListener { document ->
-                            if (document != null) {
-                                currentCity = document.toObject(City::class.java)
-                                if (Locale.getDefault().toString() == "ru") {
-                                    mArrivals[index].city = currentCity?.ru?.get("city") ?: value.city
+            try {
+                for ((index, value) in mArrivals.withIndex()) {
+                    if (value.cityCode != "") {
+                        val citiesRef = db.collection("cities").document(value.cityCode)
+                        citiesRef.get()
+                            .addOnSuccessListener { document ->
+                                if (document != null) {
+                                    try {
+                                        currentCity = document.toObject(City::class.java)
+                                        if (Locale.getDefault().toString() == "ru") {
+                                            mArrivals[index].city = currentCity?.ru?.get("city") ?: value.city
+                                        } else {
+                                            mArrivals[index].city = currentCity?.en?.get("city") ?: value.city
+                                        }
+                                        mArrivals[index].imageUrl = currentCity?.imageUrl ?: value.imageUrl
+                                        arrivals.postValue(mArrivals)
+                                        Log.d("FireBase Arrival List", "DocumentSnapshot data: ${currentCity?.en}")
+                                    } catch (e: Exception) {
+                                        Log.e("FireBase Arrival List", e.toString())
+                                    }
                                 } else {
-                                    mArrivals[index].city = currentCity?.en?.get("city") ?: value.city
+                                    Log.d("FireBase Arrival List", "No such document")
                                 }
-                                mArrivals[index].imageUrl = currentCity?.imageUrl ?: value.imageUrl
-                                arrivals.postValue(mArrivals)
-                                Log.d("FireBase Arrival List", "DocumentSnapshot data: ${currentCity?.en}")
-                            } else {
-                                Log.d("FireBase Arrival List", "No such document")
                             }
-                        }
-                        .addOnFailureListener { exception ->
-                            Log.d("FireBase Arrival List", "get failed with ", exception)
-                        }
+                            .addOnFailureListener { exception ->
+                                Log.d("FireBase Arrival List", "get failed with ", exception)
+                            }
+                    }
                 }
+            } catch (e: Exception) {
+                Log.e("FireBase Arrival List", e.toString())
             }
-
             arrivals.value = mArrivals
             flowState.value = success()
             loading = false
