@@ -28,7 +28,6 @@ class TabsFragment : Fragment() {
         tabsAdapter.addFragment(ArrivalFragment(), getString(R.string.arrival))
         viewPager.adapter = tabsAdapter
         tabLayout.setupWithViewPager(viewPager)
-
         return view
     }
 }

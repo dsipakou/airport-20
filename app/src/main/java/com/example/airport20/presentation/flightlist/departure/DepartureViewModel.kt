@@ -30,7 +30,6 @@ class DepartureViewModel : ViewModel(), LifecycleObserver {
         loading = true
         flowState.value = FlowState.loading()
         viewModelScope.launch {
-            flowState.value = FlowState.loading()
             ParseTimetable().getDepartures()
 
             var mDepartures: List<Departure> = FlightManager.getDepartures()

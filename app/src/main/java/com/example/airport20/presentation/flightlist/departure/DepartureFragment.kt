@@ -58,10 +58,12 @@ class DepartureFragment : Fragment(), MainActivity.OnFragmentRecyclerRefresh {
     }
 
     fun refresh() {
-        recyclerViewAdapter.clearList()
-        recyclerViewAdapter.notifyDataSetChanged()
-        FlightManager.clearDepartures()
-        viewModel.refresh()
+        if (viewModel.getMainFlow().value?.status != FlowStatus.LOADING) {
+            recyclerViewAdapter.clearList()
+            recyclerViewAdapter.notifyDataSetChanged()
+            FlightManager.clearDepartures()
+            viewModel.refresh()
+        }
     }
 
     private fun onFlightClicked(item: Departure) {

@@ -35,7 +35,6 @@ class ArrivalViewModel : ViewModel() {
         loading = true
         flowState.value = loading()
         viewModelScope.launch {
-            flowState.value = loading()
             ParseTimetable().getArrivals()
 
             val mArrivals: List<Arrival> = FlightManager.getArrivals()
