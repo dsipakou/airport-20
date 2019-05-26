@@ -1,6 +1,5 @@
 package com.example.airport20.presentation.flighttabs
 
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +11,6 @@ import com.example.airport20.R
 import com.example.airport20.presentation.flightlist.arrival.ArrivalFragment
 import com.example.airport20.presentation.flightlist.departure.DepartureFragment
 import com.google.android.material.tabs.TabLayout
-
 
 class TabsFragment : Fragment() {
 

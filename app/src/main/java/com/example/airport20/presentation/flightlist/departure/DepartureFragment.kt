@@ -1,6 +1,5 @@
 package com.example.airport20.presentation.flightlist.departure
 
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,7 +20,6 @@ import com.example.airport20.MainActivity
 import com.example.airport20.domain.FlightManager
 import com.example.airport20.utils.FlowState
 import com.example.airport20.utils.FlowStatus
-
 
 class DepartureFragment : Fragment(), MainActivity.OnFragmentRecyclerRefresh {
 

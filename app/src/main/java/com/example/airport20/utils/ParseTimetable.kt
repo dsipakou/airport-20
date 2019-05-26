@@ -2,7 +2,6 @@ package com.example.airport20.utils
 
 import com.example.airport20.domain.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup

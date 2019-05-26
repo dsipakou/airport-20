@@ -1,15 +1,11 @@
 package com.example.airport20.presentation.settings
 
-
 import android.os.Bundle
-import android.util.Log
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.airport20.MainActivity
 
 import com.example.airport20.R
-import com.example.airport20.utils.LocalHelper
-
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
