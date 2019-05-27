@@ -6,6 +6,7 @@ import android.util.Log
 
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation.findNavController
@@ -43,23 +44,28 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        val actionBar: ActionBar? = supportActionBar
         setupNavigation()
         navigationView.setNavigationItemSelectedListener {
             when(it.itemId) {
                 R.id.now_timetable -> {
                     FlightManager.setPeriod(TimeRange.NOW)
+                    actionBar?.setTitle(R.string.now)
                     refresh()
                 }
                 R.id.yesterday_timetable -> {
                     FlightManager.setPeriod(TimeRange.YESTERDAY)
+                    actionBar?.setTitle(R.string.yesterday)
                     refresh()
                 }
                 R.id.today_timetable -> {
                     FlightManager.setPeriod(TimeRange.TODAY)
+                    actionBar?.setTitle(R.string.today)
                     refresh()
                 }
                 R.id.tomorrow_timetable -> {
                     FlightManager.setPeriod(TimeRange.TOMORROW)
+                    actionBar?.setTitle(R.string.tomorrow)
                     refresh()
                 }
             }
