@@ -103,25 +103,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-//        // Handle navigation view item clicks here.
-//        when (item.itemId) {
-//            R.id.now_timetable -> {
-//
-//            }
-//            R.id.today_timetable -> {
-//                // Handle the camera action
-//            }
-//            R.id.yesterday_timetable -> {
-//
-//            }
-//            R.id.tomorrow_timetable -> {
-//
-//            }
-//        }
-//        return true
-//    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.refresh, menu)
         return true
