@@ -2,19 +2,20 @@ package com.example.airport20
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.airport20.domain.FlightManager
 import com.example.airport20.domain.TimeRange
+import com.example.airport20.presentation.flighttabs.TabsFragmentDirections.actionTabsFragment2ToSettingsFragment
 import com.example.airport20.utils.LocalHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 class MainActivity : AppCompatActivity() {
     internal lateinit var arrivalRefresh: OnFragmentRecyclerRefresh
     internal lateinit var departureRefresh: OnFragmentRecyclerRefresh
+    internal lateinit var navController: NavController
 
     fun setOnArrivalRefresh(arrival: OnFragmentRecyclerRefresh) {
         this.arrivalRefresh = arrival
@@ -67,6 +69,9 @@ class MainActivity : AppCompatActivity() {
                     FlightManager.setPeriod(TimeRange.TOMORROW)
                     actionBar?.setTitle(R.string.tomorrow)
                     refresh()
+                }
+                R.id.settingsFragment -> {
+                    navController.navigate(actionTabsFragment2ToSettingsFragment())
                 }
             }
             it.isChecked = true
@@ -122,7 +127,6 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_refresh -> refresh()
@@ -136,7 +140,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        val navController = findNavController(this, R.id.myNavHostFragment)
+        navController = findNavController(this, R.id.myNavHostFragment)
 
         // Update action bar to reflect navigation
         setupActionBarWithNavController(this, navController, drawer_layout)
