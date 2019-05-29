@@ -6,7 +6,8 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Настройки</string>
+    <string name="refresh_button">Обновить</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="now">Сейчас</string>
