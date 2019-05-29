@@ -1,6 +1,7 @@
 package com.example.airport20.presentation.settings
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.preference.ListPreference
 import androidx.preference.PreferenceFragmentCompat
 import com.example.airport20.MainActivity
@@ -21,7 +22,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
             true
         }
+        setHasOptionsMenu(true)
     }
 
-
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.getItem(0).isVisible = false
+    }
 }
