@@ -1,6 +1,7 @@
 package com.example.airport20
 
 import android.content.Context
+import android.drm.DrmStore
 import android.os.Bundle
 
 import android.view.Menu
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     internal lateinit var arrivalRefresh: OnFragmentRecyclerRefresh
     internal lateinit var departureRefresh: OnFragmentRecyclerRefresh
     internal lateinit var navController: NavController
+    internal lateinit var actionBar: ActionBar
 
     fun setOnArrivalRefresh(arrival: OnFragmentRecyclerRefresh) {
         this.arrivalRefresh = arrival
@@ -46,28 +48,28 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        val actionBar: ActionBar? = supportActionBar
+        actionBar = supportActionBar!!
         setupNavigation()
         navigationView.setNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.now_timetable -> {
                     FlightManager.setPeriod(TimeRange.NOW)
-                    actionBar?.setTitle(R.string.now)
+                    setActivityBarTitle()
                     refresh()
                 }
                 R.id.yesterday_timetable -> {
                     FlightManager.setPeriod(TimeRange.YESTERDAY)
-                    actionBar?.setTitle(R.string.yesterday)
+                    setActivityBarTitle()
                     refresh()
                 }
                 R.id.today_timetable -> {
                     FlightManager.setPeriod(TimeRange.TODAY)
-                    actionBar?.setTitle(R.string.today)
+                    setActivityBarTitle()
                     refresh()
                 }
                 R.id.tomorrow_timetable -> {
                     FlightManager.setPeriod(TimeRange.TOMORROW)
-                    actionBar?.setTitle(R.string.tomorrow)
+                    setActivityBarTitle()
                     refresh()
                 }
                 R.id.settingsFragment -> {
@@ -88,6 +90,19 @@ class MainActivity : AppCompatActivity() {
         LocalHelper().setLocal(this, language)
         this.recreate()
         refresh()
+    }
+
+    fun setActivityBarTitle() {
+        when (FlightManager.getPeriod()) {
+            TimeRange.NOW -> setActivityBarTitle(R.string.now)
+            TimeRange.TOMORROW -> setActivityBarTitle(R.string.tomorrow)
+            TimeRange.YESTERDAY -> setActivityBarTitle(R.string.yesterday)
+            TimeRange.TODAY -> setActivityBarTitle(R.string.today)
+        }
+    }
+
+    fun setActivityBarTitle(title: Int) {
+        actionBar.setTitle(title)
     }
 
     private fun refresh() {

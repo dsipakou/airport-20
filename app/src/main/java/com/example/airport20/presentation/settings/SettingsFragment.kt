@@ -7,6 +7,7 @@ import androidx.preference.PreferenceFragmentCompat
 import com.example.airport20.MainActivity
 
 import com.example.airport20.R
+import com.example.airport20.domain.FlightManager
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -23,6 +24,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
         setHasOptionsMenu(true)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val mainActivity: MainActivity = activity as MainActivity
+        mainActivity.setActivityBarTitle(R.string.settings)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
