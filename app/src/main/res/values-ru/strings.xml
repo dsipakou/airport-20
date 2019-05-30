@@ -8,6 +8,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Настройки</string>
     <string name="refresh_button">Обновить</string>
+    <string name="details">Детали</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="now">Сейчас</string>

@@ -1,9 +1,6 @@
 package com.example.airport20.presentation.flightdetails
 
-import android.content.ContentValues.TAG
-import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -14,13 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
 import com.example.airport20.R
 import com.example.airport20.domain.*
-import com.google.android.gms.tasks.Tasks
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.database.*
-import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_details.*
-
 
 class DetailsFragment : Fragment() {
 
