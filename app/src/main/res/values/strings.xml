@@ -19,6 +19,18 @@
     <string name="departure">Departure</string>
     <string name="arrival">Arrival</string>
 
+    <string name="airborne">Airborne</string>
+    <string name="arrived">Arrived</string>
+    <string name="canceled">Cancelled</string>
+    <string name="checkin">Check-in</string>
+    <string name="boarding">Boarding</string>
+    <string name="boarding_finished">Boarding finished</string>
+    <string name="landed">Landed</string>
+    <string name="leaving">Leaving</string>
+    <string name="delayed">Delayed</string>
+    <string name="enroute">En Route</string>
+    <string name="checkinclosed">Check-in closed</string>
+
     <string name="pref_key_language">Preference key language</string>
     <string name="language_pref">Language</string>
 </resources>

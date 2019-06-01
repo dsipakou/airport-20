@@ -20,6 +20,18 @@
     <string name="departure">Вылеты</string>
     <string name="arrival">Прилёты</string>
 
+    <string name="airborne">Вылетел</string>
+    <string name="arrived">Прибыл</string>
+    <string name="canceled">Отменён</string>
+    <string name="checkin">Регистрация</string>
+    <string name="boarding">Посадка</string>
+    <string name="landed">Совершил посадку</string>
+    <string name="leaving">Отправляется</string>
+    <string name="boarding_finished">Посадка закончена</string>
+    <string name="delayed">Задержан</string>
+    <string name="enroute">В пути</string>
+    <string name="checkinclosed">Регистрация закрыта</string>
+
     <string name="pref_key_language">Preference key language</string>
     <string name="language_pref">Язык</string>
 </resources>

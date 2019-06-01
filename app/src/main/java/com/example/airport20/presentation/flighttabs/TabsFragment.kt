@@ -9,7 +9,6 @@ import androidx.viewpager.widget.ViewPager
 import com.example.airport20.MainActivity
 
 import com.example.airport20.R
-import com.example.airport20.domain.FlightManager
 import com.example.airport20.presentation.flightlist.arrival.ArrivalFragment
 import com.example.airport20.presentation.flightlist.departure.DepartureFragment
 import com.google.android.material.tabs.TabLayout

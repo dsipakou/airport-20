@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.airport20.R
 import com.example.airport20.domain.Departure
+import com.example.airport20.domain.Status
 import kotlinx.android.synthetic.main.fragment_departure.view.*
 
 typealias DepartureClickListener = (Departure) -> Unit
@@ -28,12 +29,18 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = flightList[position]
+        val status = Status.fromString(item.status.toString())
         holder.mCityView.text = item.city
         holder.mCodeView.text = item.code
         holder.mCompanyView.text = item.company
         holder.mExpectedTimeView.text = item.expectedTime
         holder.mActualTimeView.text = item.actualTime
-        holder.mStatusView.text = item.status.toString()
+        if (status != Status.EMPTY && status != Status.UNKNOWN)
+        {
+            holder.mStatusView.text = holder.itemView.resources.getString(status.item)
+        } else {
+            holder.mStatusView.text = ""
+        }
     }
 
     fun updateList(flightList: List<Departure>) {

@@ -1,21 +1,22 @@
 package com.example.airport20.domain
 
 import android.util.Log
+import com.example.airport20.R
 
-enum class Status {
-    AIRBORNE,
-    ARRIVED,
-    CANCELED,
-    DELAYED,
-    BOARDING,
-    BOARDING_FINISHED,
-    LANDED,
-    LEAVING,
-    CHECKIN,
-    CHECKINCLOSED,
-    ENROUTE,
-    UNKNOWN,
-    EMPTY;
+enum class Status(val item: Int) {
+    AIRBORNE(R.string.airborne),
+    ARRIVED(R.string.arrived),
+    CANCELED(R.string.canceled),
+    DELAYED(R.string.delayed),
+    BOARDING(R.string.boarding),
+    BOARDING_FINISHED(R.string.boarding_finished),
+    LANDED(R.string.landed),
+    LEAVING(R.string.leaving),
+    CHECKIN(R.string.checkin),
+    CHECKINCLOSED(R.string.checkinclosed),
+    ENROUTE(R.string.enroute),
+    UNKNOWN(-1),
+    EMPTY(-1);
 
     companion object {
         fun fromString(type: String) : Status {
