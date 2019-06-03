@@ -19,6 +19,7 @@
     <string name="settings">Настройки</string>
     <string name="departure">Вылеты</string>
     <string name="arrival">Прилёты</string>
+    <string name="localization">Локализация</string>
 
     <string name="airborne">Вылетел</string>
     <string name="arrived">Прибыл</string>

@@ -18,6 +18,7 @@
     <string name="settings">Settings</string>
     <string name="departure">Departure</string>
     <string name="arrival">Arrival</string>
+    <string name="localization">Localization</string>
 
     <string name="airborne">Airborne</string>
     <string name="arrived">Arrived</string>
