@@ -14,7 +14,6 @@ import com.example.airport20.utils.FlowState.Companion.success
 import com.example.airport20.utils.ParseTimetable
 import com.example.airport20.utils.sanitizeString
 import com.google.firebase.firestore.FirebaseFirestore
-import io.opencensus.internal.StringUtil
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import java.util.*
@@ -38,11 +37,13 @@ class ArrivalViewModel : ViewModel() {
         flowState.value = loading()
         viewModelScope.launch {
             ParseTimetable().getArrivals()
-
+            flowState.value = loading()
             val mArrivals: List<Arrival> = FlightManager.getArrivals()
             val db = FirebaseFirestore.getInstance()
             try {
                 for ((index, value) in mArrivals.withIndex()) {
+                    val city = mArrivals[index].city
+                    mArrivals[index].city = ""
                     if (value.cityCode != "") {
                         val citiesRef = db.collection("cities").document(value.cityCode)
                         val airlineRef = db.collection("airlines").document(sanitizeString(value.company))
@@ -52,21 +53,27 @@ class ArrivalViewModel : ViewModel() {
                                     try {
                                         currentCity = document.toObject(City::class.java)
                                         if (Locale.getDefault().toString() == "ru") {
-                                            mArrivals[index].city = currentCity?.ru?.get("city") ?: value.city
+                                            mArrivals[index].city = currentCity?.ru?.get("city") ?: city
                                         } else {
-                                            mArrivals[index].city = currentCity?.en?.get("city") ?: value.city
+                                            mArrivals[index].city = currentCity?.en?.get("city") ?: city
                                         }
                                         mArrivals[index].imageUrl = currentCity?.imageUrl ?: value.imageUrl
                                         arrivals.postValue(mArrivals)
                                         Log.d("FireBase Arrival List", "DocumentSnapshot data: ${currentCity?.en}")
                                     } catch (e: Exception) {
+                                        mArrivals[index].city = city
+                                        arrivals.postValue(mArrivals)
                                         Log.e("FireBase Arrival List", e.toString())
                                     }
                                 } else {
+                                    mArrivals[index].city = city
+                                    arrivals.postValue(mArrivals)
                                     Log.d("FireBase Arrival List", "No such document")
                                 }
                             }
                             .addOnFailureListener { exception ->
+                                mArrivals[index].city = city
+                                arrivals.postValue(mArrivals)
                                 Log.d("FireBase Arrival List", "get failed with ", exception)
                             }
                         airlineRef.get()

@@ -39,8 +39,7 @@ class MyArrivalRecyclerViewAdapter(
         holder.mExpectedTimeView.text = item.expectedTime
         holder.mActualTimeView.text = item.actualTime
         holder.mStatusView.text = item.status.toString()
-        if (status != Status.EMPTY && status != Status.UNKNOWN)
-        {
+        if (status != Status.EMPTY && status != Status.UNKNOWN) {
             holder.mStatusView.text = holder.itemView.resources.getString(status.item)
         } else {
             holder.mStatusView.text = ""
