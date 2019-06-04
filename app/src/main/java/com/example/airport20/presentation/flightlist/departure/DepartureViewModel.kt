@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
 import androidx.lifecycle.viewModelScope
 import com.example.airport20.utils.FlowState
+import com.example.airport20.utils.sanitizeString
 import java.util.*
 
 class DepartureViewModel : ViewModel(), LifecycleObserver {
@@ -38,6 +39,7 @@ class DepartureViewModel : ViewModel(), LifecycleObserver {
                 for ((index, value) in mDepartures.withIndex()) {
                     if (value.cityCode != "") {
                         val citiesRef = db.collection("cities").document(value.cityCode)
+                        val airlineRef = db.collection("airlines").document(sanitizeString(value.company))
                         citiesRef.get()
                             .addOnSuccessListener { document ->
                                 if (document != null) {
@@ -60,6 +62,19 @@ class DepartureViewModel : ViewModel(), LifecycleObserver {
                             }
                             .addOnFailureListener { exception ->
                                 Log.d("FireBase Departure List", "get failed with ", exception)
+                            }
+                        airlineRef.get()
+                            .addOnSuccessListener { document ->
+                                if (document != null) {
+                                    try {
+                                        val name = document.get("name")
+                                        if (name != null) {
+                                            mDepartures[index].company = name.toString()
+                                        }
+                                    } catch (e: Exception) {
+                                        Log.e("FireBase Arrival List", "Can't get name for $document")
+                                    }
+                                }
                             }
                     }
                 }
