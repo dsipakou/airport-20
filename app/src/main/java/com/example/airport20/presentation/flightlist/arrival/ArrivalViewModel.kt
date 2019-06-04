@@ -12,7 +12,9 @@ import com.example.airport20.utils.FlowState
 import com.example.airport20.utils.FlowState.Companion.loading
 import com.example.airport20.utils.FlowState.Companion.success
 import com.example.airport20.utils.ParseTimetable
+import com.example.airport20.utils.sanitizeString
 import com.google.firebase.firestore.FirebaseFirestore
+import io.opencensus.internal.StringUtil
 import kotlinx.coroutines.cancelChildren
 import kotlinx.coroutines.launch
 import java.util.*
@@ -43,6 +45,7 @@ class ArrivalViewModel : ViewModel() {
                 for ((index, value) in mArrivals.withIndex()) {
                     if (value.cityCode != "") {
                         val citiesRef = db.collection("cities").document(value.cityCode)
+                        val airlineRef = db.collection("airlines").document(sanitizeString(value.company))
                         citiesRef.get()
                             .addOnSuccessListener { document ->
                                 if (document != null) {
@@ -65,6 +68,19 @@ class ArrivalViewModel : ViewModel() {
                             }
                             .addOnFailureListener { exception ->
                                 Log.d("FireBase Arrival List", "get failed with ", exception)
+                            }
+                        airlineRef.get()
+                            .addOnSuccessListener { document ->
+                                if (document != null) {
+                                    try {
+                                        val name = document.get("name")
+                                        if (name != null) {
+                                            mArrivals[index].company = name.toString()
+                                        }
+                                    } catch (e: Exception) {
+                                        Log.e("FireBase Arrival List", "Can't get name for $document")
+                                    }
+                                }
                             }
                     }
                 }
