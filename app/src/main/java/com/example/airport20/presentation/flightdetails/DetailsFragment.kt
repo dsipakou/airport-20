@@ -49,6 +49,9 @@ class DetailsFragment : Fragment() {
         if (!flight.imageUrl.isEmpty()) {
             Picasso.get().load(flight.imageUrl).into(coverImageView)
         }
+        if (!flight.companyUrl.isEmpty()) {
+            Picasso.get().load(flight.companyUrl).into(aircompanyLogoImageView)
+        }
         gateTextView.text = flight.gate
         expTimeTextView.text = flight.expectedTime
         actTimeTextView.text = flight.actualTime

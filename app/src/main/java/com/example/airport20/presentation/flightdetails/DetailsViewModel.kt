@@ -23,6 +23,7 @@ class DetailsViewModel : ViewModel() {
         var mFlight: Flight = getFlight(id, type)
         val db = FirebaseFirestore.getInstance()
         val citiesRef = db.collection("cities").document(mFlight.cityCode)
+        val airlineRef = db.collection("airlines").document(sanitizeString(mFlight.company))
         citiesRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
@@ -41,6 +42,20 @@ class DetailsViewModel : ViewModel() {
             }
             .addOnFailureListener { exception ->
                 Log.d("FireBase", "get failed with ", exception)
+            }
+        airlineRef.get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    try {
+                        val imageUrl = document.get("imageUrl")
+                        if (imageUrl != null) {
+                            mFlight.companyUrl = imageUrl.toString()
+                        }
+                        flight.postValue(mFlight)
+                    } catch (e: Exception) {
+                        Log.e("FireBase Arrival List", "Can't get name for $document")
+                    }
+                }
             }
         flight.value = mFlight
     }

@@ -24,8 +24,7 @@ class ParseTimetable {
                     if (res != null) {
                         actualTime = res.groups[3]!!.value
                         status = Status.fromString(res.groups[1]!!.value)
-                    }
-                    else {
+                    } else {
                         actualTime = tds[2].text()
                         status = Status.fromString(tds[6].text())
                     }
@@ -38,17 +37,19 @@ class ParseTimetable {
                     val cityCode = sanitizeString(tds[4].text())
                     FlightManager.addArrival(
                         Arrival(
-                            id,
-                            company,
-                            code,
-                            gate,
-                            expectedTime,
-                            actualTime,
-                            "",
-                            city,
-                            cityCode,
-                            status,
-                            "")
+                            id = id,
+                            company = company,
+                            companyUrl = "",
+                            code = code,
+                            gate = gate,
+                            expectedTime = expectedTime,
+                            actualTime = actualTime,
+                            registrationDesk = "",
+                            city = city,
+                            cityCode = cityCode,
+                            status = status,
+                            imageUrl = ""
+                        )
                     )
                 }
             }
@@ -72,8 +73,7 @@ class ParseTimetable {
                     if (res != null) {
                         actualTime = res.groups[3]!!.value
                         status = Status.fromString(res.groups[1]!!.value)
-                    }
-                    else {
+                    } else {
                         actualTime = ""
                         status = Status.fromString(tds[6].text())
                     }
@@ -87,17 +87,18 @@ class ParseTimetable {
                     val cityCode = sanitizeString(tds[3].text())
                     FlightManager.addDeparture(
                         Departure(
-                            id,
-                            company,
-                            code,
-                            gate,
-                            expectedTime,
-                            actualTime,
-                            registrationDesk,
-                            city,
-                            cityCode,
-                            status,
-                            ""
+                            id = id,
+                            company = company,
+                            companyUrl = "",
+                            code = code,
+                            gate = gate,
+                            expectedTime = expectedTime,
+                            actualTime = actualTime,
+                            registrationDesk = registrationDesk,
+                            city = city,
+                            cityCode = cityCode,
+                            status = status,
+                            imageUrl = ""
                         )
                     )
                 }
@@ -107,12 +108,12 @@ class ParseTimetable {
 
     private fun getUrl(type: FlightType): String {
         if (FlightManager.getPeriod() == TimeRange.NOW) {
-            when(type) {
+            when (type) {
                 FlightType.ARRIVAL -> return SHORT_ARRIVAL_URL
                 FlightType.DEPARTURE -> return SHORT_DEPARTURE_URL
             }
         } else {
-            when(type) {
+            when (type) {
                 FlightType.ARRIVAL -> return ARRIVAL_URL
                 FlightType.DEPARTURE -> return DEPARTURE_URL
             }

@@ -3,6 +3,7 @@ package com.example.airport20.domain
 data class Departure (
     override val id: String,
     override var company: String,
+    override var companyUrl: String,
     override val code: String,
     override val gate: String,
     override val expectedTime: String,

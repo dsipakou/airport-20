@@ -29,7 +29,6 @@
             tools:text="B3657"
             android:textSize="30sp"/>
     <ImageView
-            android:src="@mipmap/ic_launcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/aircompanyLogoImageView"
@@ -37,12 +36,14 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:maxHeight="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toTopOf="@+id/gateTextView"
-            app:layout_constraintVertical_chainStyle="spread"/>
+            app:layout_constraintVertical_chainStyle="spread"
+            tools:src="@mipmap/ic_launcher"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -154,4 +155,11 @@
             android:layout_marginTop="32dp"
             tools:text="Fraport"
             android:textSize="24sp"/>
+    <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteY="322dp"
+            tools:layout_editor_absoluteX="175dp"
+            android:id="@+id/textView2"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
