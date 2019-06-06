@@ -15,7 +15,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:cropToPadding="true"
             android:adjustViewBounds="true"/>
     <TextView
