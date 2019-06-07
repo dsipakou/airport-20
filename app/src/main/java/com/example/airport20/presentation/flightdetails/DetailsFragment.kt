@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -52,8 +54,14 @@ class DetailsFragment : Fragment() {
         if (!flight.companyUrl.isEmpty()) {
             Picasso.get().load(flight.companyUrl).into(aircompanyLogoImageView)
         }
+
         gateTextView.text = flight.gate
         expTimeTextView.text = flight.expectedTime
+        if (flight.actualTime.isEmpty()) {
+            actTimeHeaderTextView.visibility = GONE
+        } else {
+            actTimeHeaderTextView.visibility = VISIBLE
+        }
         actTimeTextView.text = flight.actualTime
     }
 
