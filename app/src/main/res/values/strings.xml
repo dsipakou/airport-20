@@ -34,4 +34,6 @@
 
     <string name="pref_key_language">Preference key language</string>
     <string name="language_pref">Language</string>
+    <string name="expected_label">Expected</string>
+    <string name="actual_label">Actual</string>
 </resources>

@@ -34,6 +34,11 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
         holder.mCodeView.text = item.code
         holder.mCompanyView.text = item.company
         holder.mExpectedTimeView.text = item.expectedTime
+        if (item.actualTime.isEmpty()) {
+            holder.mActualTimeTextView.visibility = View.GONE
+        } else {
+            holder.mActualTimeTextView.visibility = View.VISIBLE
+        }
         holder.mActualTimeView.text = item.actualTime
         if (status != Status.EMPTY && status != Status.UNKNOWN)
         {
@@ -61,6 +66,7 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
         val mCompanyView: TextView = mView.departure_company
         val mExpectedTimeView: TextView = mView.departure_expected_time
         val mActualTimeView: TextView = mView.departure_actual_time
+        val mActualTimeTextView: TextView = mView.departure_actual_time_label
         val mStatusView: TextView = mView.departure_status
 
         override fun toString(): String {

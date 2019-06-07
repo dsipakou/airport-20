@@ -2,6 +2,8 @@ package com.example.airport20.presentation.flightlist.arrival
 
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +39,11 @@ class MyArrivalRecyclerViewAdapter(
         holder.mCodeView.text = item.code
         holder.mCompanyView.text = item.company
         holder.mExpectedTimeView.text = item.expectedTime
+        if (item.actualTime.isEmpty()) {
+            holder.mActualTimeTextView.visibility = GONE
+        } else {
+            holder.mActualTimeTextView.visibility = VISIBLE
+        }
         holder.mActualTimeView.text = item.actualTime
         holder.mStatusView.text = item.status.toString()
         if (status != Status.EMPTY && status != Status.UNKNOWN) {
@@ -62,6 +69,7 @@ class MyArrivalRecyclerViewAdapter(
         val mCodeView: TextView = mView.arrival_code
         val mCompanyView: TextView = mView.arrival_company
         val mExpectedTimeView: TextView = mView.arrival_expected_time
+        val mActualTimeTextView: TextView = mView.arrival_actual_time_label
         val mActualTimeView: TextView = mView.arrival_actual_time
         val mStatusView: TextView = mView.arrival_status
 

@@ -35,4 +35,6 @@
 
     <string name="pref_key_language">Preference key language</string>
     <string name="language_pref">Язык</string>
+    <string name="expected_label">По расписанию</string>
+    <string name="actual_label">Ожидаемое</string>
 </resources>
