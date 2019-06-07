@@ -53,6 +53,24 @@ class DetailsFragment : Fragment() {
         }
         if (!flight.companyUrl.isEmpty()) {
             Picasso.get().load(flight.companyUrl).into(aircompanyLogoImageView)
+            aircompanyTextView.visibility = GONE
+            aircompanyLogoImageView.visibility = VISIBLE
+        } else {
+            aircompanyTextView.text = flight.company
+            aircompanyLogoImageView.visibility = GONE
+            aircompanyTextView.visibility = VISIBLE
+        }
+        if (flight.status != Status.EMPTY && flight.status != Status.UNKNOWN) {
+            statusTextView.visibility = VISIBLE
+            statusTextView.text = view!!.resources.getString(flight.status.item)
+        } else {
+            statusTextView.visibility = GONE
+        }
+        if (!flight.airport.isEmpty()) {
+            airportTextView.text = flight.airport
+            airportTextView.visibility = VISIBLE
+        } else {
+            airportTextView.visibility = GONE
         }
 
         gateTextView.text = flight.gate

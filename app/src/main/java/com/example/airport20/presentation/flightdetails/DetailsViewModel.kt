@@ -30,8 +30,10 @@ class DetailsViewModel : ViewModel() {
                     currentCity = document.toObject(City::class.java)
                     if (Locale.getDefault().toString() == "ru") {
                         mFlight.city = currentCity?.ru?.get("city") ?: mFlight.city
+                        mFlight.airport = currentCity?.ru?.get("airport") ?: ""
                     } else {
                         mFlight.city = currentCity?.en?.get("city") ?: mFlight.city
+                        mFlight.airport = currentCity?.en?.get("airport") ?: ""
                     }
                     mFlight.imageUrl = currentCity?.imageUrl ?: mFlight.imageUrl
                     flight.postValue(mFlight)

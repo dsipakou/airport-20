@@ -4,6 +4,7 @@ data class Arrival(
     override val id: String,
     override var company: String,
     override var companyUrl: String,
+    override var airport: String,
     override val code: String,
     override val gate: String,
     override val expectedTime: String,

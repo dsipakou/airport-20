@@ -4,6 +4,7 @@ interface Flight {
     val id: String
     var company: String
     var companyUrl: String
+    var airport: String
     val code: String
     val gate: String
     val expectedTime: String
