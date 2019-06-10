@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
 import androidx.lifecycle.viewModelScope
 import com.example.airport20.utils.FlowState
+import com.example.airport20.utils.FlowStatus
 import com.example.airport20.utils.sanitizeString
 import java.util.*
 
@@ -46,38 +47,51 @@ class DepartureViewModel : ViewModel(), LifecycleObserver {
                             .addOnSuccessListener { document ->
                                 if (document != null) {
                                     try {
-                                        currentCity = document.toObject(City::class.java)
-                                        if (Locale.getDefault().toString() == "ru") {
-                                            mDepartures[index].city = currentCity?.ru?.get("city") ?: city
-                                        } else {
-                                            mDepartures[index].city = currentCity?.en?.get("city") ?: city
+                                        if (mDepartures.isNotEmpty() && mDepartures.size > index) {
+                                            currentCity = document.toObject(City::class.java)
+                                            if (Locale.getDefault().toString() == "ru") {
+                                                mDepartures[index].city = currentCity?.ru?.get("city") ?: city
+                                            } else {
+                                                mDepartures[index].city = currentCity?.en?.get("city") ?: city
+                                            }
+                                            mDepartures[index].imageUrl = currentCity?.imageUrl ?: value.imageUrl
+                                            departures.postValue(mDepartures)
+                                            Log.d(
+                                                "FireBase Departure List",
+                                                "DocumentSnapshot data: ${currentCity?.en}"
+                                            )
                                         }
-                                        mDepartures[index].imageUrl = currentCity?.imageUrl ?: value.imageUrl
-                                        departures.postValue(mDepartures)
-                                        Log.d("FireBase Departure List", "DocumentSnapshot data: ${currentCity?.en}")
                                     } catch (e: Exception) {
-                                        mDepartures[index].city = city
-                                        departures.postValue(mDepartures)
-                                        Log.e("FireBase Departure List", e.toString())
+                                        if (mDepartures.isNotEmpty() && mDepartures.size > index) {
+                                            mDepartures[index].city = city
+                                            departures.postValue(mDepartures)
+                                            Log.e("FireBase Departure List", e.toString())
+                                        }
                                     }
                                 } else {
-                                    mDepartures[index].city = city
-                                    Log.d("FireBase Departure List", "No such document")
+                                    if (mDepartures.isNotEmpty() && mDepartures.size > index) {
+                                        mDepartures[index].city = city
+                                        Log.d("FireBase Departure List", "No such document")
+                                    }
                                 }
                             }
                             .addOnFailureListener { exception ->
-                                mDepartures[index].city = city
-                                Log.d("FireBase Departure List", "get failed with ", exception)
+                                if (mDepartures.isNotEmpty() && mDepartures.size > index) {
+                                    mDepartures[index].city = city
+                                    Log.d("FireBase Departure List", "get failed with ", exception)
+                                }
                             }
                         airlineRef.get()
                             .addOnSuccessListener { document ->
                                 if (document != null) {
                                     try {
-                                        val name = document.get("name")
-                                        if (name != null) {
-                                            mDepartures[index].company = name.toString()
+                                        if (mDepartures.isNotEmpty() && mDepartures.size > index) {
+                                            val name = document.get("name")
+                                            if (name != null) {
+                                                mDepartures[index].company = name.toString()
+                                            }
+                                            departures.postValue(mDepartures)
                                         }
-                                        departures.postValue(mDepartures)
                                     } catch (e: Exception) {
                                         departures.postValue(mDepartures)
                                         Log.e("FireBase Arrival List", "Can't get name for $document")

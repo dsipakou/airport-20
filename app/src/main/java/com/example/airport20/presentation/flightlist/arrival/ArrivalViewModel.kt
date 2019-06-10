@@ -11,6 +11,7 @@ import com.example.airport20.domain.FlightManager
 import com.example.airport20.utils.FlowState
 import com.example.airport20.utils.FlowState.Companion.loading
 import com.example.airport20.utils.FlowState.Companion.success
+import com.example.airport20.utils.FlowStatus
 import com.example.airport20.utils.ParseTimetable
 import com.example.airport20.utils.sanitizeString
 import com.google.firebase.firestore.FirebaseFirestore
@@ -51,38 +52,48 @@ class ArrivalViewModel : ViewModel() {
                             .addOnSuccessListener { document ->
                                 if (document != null) {
                                     try {
-                                        currentCity = document.toObject(City::class.java)
-                                        if (Locale.getDefault().toString() == "ru") {
-                                            mArrivals[index].city = currentCity?.ru?.get("city") ?: city
-                                        } else {
-                                            mArrivals[index].city = currentCity?.en?.get("city") ?: city
+                                        if (mArrivals.isNotEmpty() && mArrivals.size > index) {
+                                            currentCity = document.toObject(City::class.java)
+                                            if (Locale.getDefault().toString() == "ru") {
+                                                mArrivals[index].city = currentCity?.ru?.get("city") ?: city
+                                            } else {
+                                                mArrivals[index].city = currentCity?.en?.get("city") ?: city
+                                            }
+                                            mArrivals[index].imageUrl = currentCity?.imageUrl ?: value.imageUrl
+                                            arrivals.postValue(mArrivals)
+                                            Log.d("FireBase Arrival List", "DocumentSnapshot data: ${currentCity?.en}")
                                         }
-                                        mArrivals[index].imageUrl = currentCity?.imageUrl ?: value.imageUrl
-                                        arrivals.postValue(mArrivals)
-                                        Log.d("FireBase Arrival List", "DocumentSnapshot data: ${currentCity?.en}")
                                     } catch (e: Exception) {
-                                        mArrivals[index].city = city
-                                        arrivals.postValue(mArrivals)
-                                        Log.e("FireBase Arrival List", e.toString())
+                                        if (mArrivals.isNotEmpty() && mArrivals.size > index) {
+                                            mArrivals[index].city = city
+                                            arrivals.postValue(mArrivals)
+                                            Log.e("FireBase Arrival List", e.toString())
+                                        }
                                     }
                                 } else {
-                                    mArrivals[index].city = city
-                                    arrivals.postValue(mArrivals)
-                                    Log.d("FireBase Arrival List", "No such document")
+                                    if (mArrivals.isNotEmpty() && mArrivals.size > index) {
+                                        mArrivals[index].city = city
+                                        arrivals.postValue(mArrivals)
+                                        Log.d("FireBase Arrival List", "No such document")
+                                    }
                                 }
                             }
                             .addOnFailureListener { exception ->
-                                mArrivals[index].city = city
-                                arrivals.postValue(mArrivals)
-                                Log.d("FireBase Arrival List", "get failed with ", exception)
+                                if (mArrivals.isNotEmpty() && mArrivals.size > index) {
+                                    mArrivals[index].city = city
+                                    arrivals.postValue(mArrivals)
+                                    Log.d("FireBase Arrival List", "get failed with ", exception)
+                                }
                             }
                         airlineRef.get()
                             .addOnSuccessListener { document ->
                                 if (document != null) {
                                     try {
-                                        val name = document.get("name")
-                                        if (name != null) {
-                                            mArrivals[index].company = name.toString()
+                                        if (mArrivals.isNotEmpty() && mArrivals.size > index) {
+                                            val name = document.get("name")
+                                            if (name != null) {
+                                                mArrivals[index].company = name.toString()
+                                            }
                                         }
                                     } catch (e: Exception) {
                                         Log.e("FireBase Arrival List", "Can't get name for $document")
