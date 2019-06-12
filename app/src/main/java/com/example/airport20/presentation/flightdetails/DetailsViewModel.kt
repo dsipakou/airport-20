@@ -23,7 +23,7 @@ class DetailsViewModel : ViewModel() {
         var mFlight: Flight = getFlight(id, type)
         val db = FirebaseFirestore.getInstance()
         val citiesRef = db.collection("cities").document(mFlight.cityCode)
-        val airlineRef = db.collection("airlines").document(sanitizeString(mFlight.company))
+        val airlineRef = db.collection("airlines").document(sanitizeString(mFlight.companyCode))
         citiesRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {

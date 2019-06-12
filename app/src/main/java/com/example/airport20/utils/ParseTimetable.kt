@@ -41,6 +41,7 @@ class ParseTimetable {
                             Arrival(
                                 id = id,
                                 company = company,
+                                companyCode = company,
                                 companyUrl = "",
                                 airport = "",
                                 code = code,
@@ -95,6 +96,7 @@ class ParseTimetable {
                         Departure(
                             id = id,
                             company = company,
+                            companyCode = company,
                             companyUrl = "",
                             airport = "",
                             code = code,

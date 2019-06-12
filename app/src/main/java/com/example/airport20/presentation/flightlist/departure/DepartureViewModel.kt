@@ -42,7 +42,7 @@ class DepartureViewModel : ViewModel(), LifecycleObserver {
                     mDepartures[index].city = ""
                     if (value.cityCode != "") {
                         val citiesRef = db.collection("cities").document(value.cityCode)
-                        val airlineRef = db.collection("airlines").document(sanitizeString(value.company))
+                        val airlineRef = db.collection("airlines").document(sanitizeString(value.companyCode))
                         citiesRef.get()
                             .addOnSuccessListener { document ->
                                 if (document != null) {
