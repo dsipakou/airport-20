@@ -68,49 +68,53 @@ class ParseTimetable {
         launch {
             val url = getUrl(FlightType.DEPARTURE)
             val period = getPeriod()
-            val document = Jsoup.connect(url).get()
-            val tr = document.select("div#content-bottom tr$period")
-            tr.forEach {
-                val tds = it.select("td")
-                if (tds.size > 0) {
-                    val actualTime: String
-                    val status: Status
-                    val regex = Regex("([A-Z- ]+)\\s+(expected|departure)[a-z ]+(\\d+:\\d+)")
-                    val res = regex.find(tds[6].text())
-                    if (res != null) {
-                        actualTime = res.groups[3]!!.value
-                        status = Status.fromString(res.groups[1]!!.value)
-                    } else {
-                        actualTime = ""
-                        status = Status.fromString(tds[6].text())
-                    }
-                    val id = UUID.randomUUID().toString()
-                    val company = tds[0].text()
-                    val code = tds[2].text()
-                    val gate = tds[5].text()
-                    val expectedTime = tds[1].text()
-                    val registrationDesk = tds[4].text()
-                    val city = tds[3].text()
-                    val cityCode = sanitizeString(tds[3].text())
-                    FlightManager.addDeparture(
-                        Departure(
-                            id = id,
-                            company = company,
-                            companyCode = company,
-                            companyUrl = "",
-                            airport = "",
-                            code = code,
-                            gate = gate,
-                            expectedTime = expectedTime,
-                            actualTime = actualTime,
-                            registrationDesk = registrationDesk,
-                            city = city,
-                            cityCode = cityCode,
-                            status = status,
-                            imageUrl = ""
+            try {
+                val document = Jsoup.connect(url).get()
+                val tr = document.select("div#content-bottom tr$period")
+                tr.forEach {
+                    val tds = it.select("td")
+                    if (tds.size > 0) {
+                        val actualTime: String
+                        val status: Status
+                        val regex = Regex("([A-Z- ]+)\\s+(expected|departure)[a-z ]+(\\d+:\\d+)")
+                        val res = regex.find(tds[6].text())
+                        if (res != null) {
+                            actualTime = res.groups[3]!!.value
+                            status = Status.fromString(res.groups[1]!!.value)
+                        } else {
+                            actualTime = ""
+                            status = Status.fromString(tds[6].text())
+                        }
+                        val id = UUID.randomUUID().toString()
+                        val company = tds[0].text()
+                        val code = tds[2].text()
+                        val gate = tds[5].text()
+                        val expectedTime = tds[1].text()
+                        val registrationDesk = tds[4].text()
+                        val city = tds[3].text()
+                        val cityCode = sanitizeString(tds[3].text())
+                        FlightManager.addDeparture(
+                            Departure(
+                                id = id,
+                                company = company,
+                                companyCode = company,
+                                companyUrl = "",
+                                airport = "",
+                                code = code,
+                                gate = gate,
+                                expectedTime = expectedTime,
+                                actualTime = actualTime,
+                                registrationDesk = registrationDesk,
+                                city = city,
+                                cityCode = cityCode,
+                                status = status,
+                                imageUrl = ""
+                            )
                         )
-                    )
+                    }
                 }
+            } catch (e: Exception) {
+                Log.e("Parse timetable", "Can't get data from airport.by")
             }
         }
     }
