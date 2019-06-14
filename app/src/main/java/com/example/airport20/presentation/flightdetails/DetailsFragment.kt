@@ -72,7 +72,11 @@ class DetailsFragment : Fragment() {
         } else {
             airportTextView.visibility = GONE
         }
-
+        if (flight is Arrival) {
+            gateLabelTextView.text = resources.getString(R.string.gate)
+        } else {
+            gateLabelTextView.text = resources.getString(R.string.boarding_gate)
+        }
         gateTextView.text = flight.gate
         expTimeTextView.text = flight.expectedTime
         if (flight.actualTime.isEmpty()) {
