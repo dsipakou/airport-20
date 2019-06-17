@@ -8,12 +8,15 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
+import com.example.airport20.MainActivity
 import com.example.airport20.R
 import com.example.airport20.domain.*
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_details.*
 
 class DetailsFragment : Fragment() {
@@ -37,7 +40,8 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val mainActivity = activity as MainActivity
+        mainActivity.setDrawerEnabled(false)
         viewModel = ViewModelProviders.of(this).get(DetailsViewModel::class.java)
         viewModel.setFlight(args.flightId, FlightType.fromInt(args.flightType)!!)
         viewModel.observableFlight.observe(this, Observer { flight ->

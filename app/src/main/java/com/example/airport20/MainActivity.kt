@@ -16,11 +16,16 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.airport20.domain.FlightManager
 import com.example.airport20.domain.TimeRange
 import com.example.airport20.presentation.flighttabs.TabsFragmentDirections.actionTabsFragment2ToSettingsFragment
+import com.example.airport20.utils.DrawerLocker
 import com.example.airport20.utils.LocalHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import android.R.id.toggle
+import androidx.drawerlayout.widget.DrawerLayout
 
-class MainActivity : AppCompatActivity() {
+
+
+class MainActivity : AppCompatActivity(), DrawerLocker {
     internal lateinit var arrivalRefresh: OnFragmentRecyclerRefresh
     internal lateinit var departureRefresh: OnFragmentRecyclerRefresh
     internal lateinit var navController: NavController
@@ -163,6 +168,14 @@ class MainActivity : AppCompatActivity() {
 
         // Tie nav graph to items in nav drawer
         setupWithNavController(navigationView, navController)
+    }
+
+    override fun setDrawerEnabled(enabled: Boolean) {
+        val lockMode = if (enabled)
+            DrawerLayout.LOCK_MODE_UNLOCKED
+        else
+            DrawerLayout.LOCK_MODE_LOCKED_CLOSED
+        drawer_layout.setDrawerLockMode(lockMode)
     }
 
     interface OnFragmentRecyclerRefresh {

@@ -34,5 +34,6 @@ class TabsFragment : Fragment() {
         super.onResume()
         val mainActivity: MainActivity = activity as MainActivity
         mainActivity.setActivityBarTitle()
+        mainActivity.setDrawerEnabled(true)
     }
 }
