@@ -20,10 +20,7 @@ import com.example.airport20.utils.DrawerLocker
 import com.example.airport20.utils.LocalHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import android.R.id.toggle
 import androidx.drawerlayout.widget.DrawerLayout
-
-
 
 class MainActivity : AppCompatActivity(), DrawerLocker {
     internal lateinit var arrivalRefresh: OnFragmentRecyclerRefresh
