@@ -7,6 +7,8 @@ object FlightManager {
     private val departureFlights: MutableList<Departure> = ArrayList()
     private var period: TimeRange = TimeRange.NOW
 
+    init {}
+
     fun getArrivals(): List<Arrival> = arrivalFlights
 
     fun clearArrivals() {
@@ -40,6 +42,4 @@ object FlightManager {
         }
         return flight!!
     }
-
-    init {}
 }
