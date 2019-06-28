@@ -7,8 +7,8 @@ import org.junit.Test
 class UtilsUnitTest {
     @Test
     fun string_utils_isCorrect() {
-        val inputString = "Hello -world"
+        val inputString = "Hello -3 world"
         val outputString = sanitizeString(inputString)
-        assertEquals(outputString, "helloworld")
+        assertEquals(outputString, "hello3world")
     }
 }
