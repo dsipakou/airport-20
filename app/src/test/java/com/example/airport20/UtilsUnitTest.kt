@@ -9,6 +9,6 @@ class UtilsUnitTest {
     fun string_utils_isCorrect() {
         val inputString = "Hello -3 world"
         val outputString = sanitizeString(inputString)
-        assertEquals(outputString, "hello3world")
+        assertEquals("hello3world", outputString)
     }
 }
