@@ -6,6 +6,6 @@ fun parseTime(time: String): AirportTime {
     val re = Regex("(?:(\\d+.\\d+) )?(\\d+:\\d+)\$")
     val formatter = re.find(time)
     val airportTime: AirportTime
-    airportTime = AirportTime(formatter!!.groups[1]?.value, formatter.groups[2]!!.value)
+    airportTime = AirportTime(formatter?.groups?.get(1)?.value, formatter?.groups?.get(2)?.value)
     return airportTime
 }

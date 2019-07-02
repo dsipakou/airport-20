@@ -28,4 +28,12 @@ class UtilsUnitTest {
         assertEquals(null, outputString.date)
         assertEquals("03:15", outputString.time)
     }
+
+    @Test
+    fun date_utils_emptyString() {
+        val inputString = ""
+        val outputString = parseTime(inputString)
+        assertEquals(null, outputString.date)
+        assertEquals(null, outputString.time)
+    }
 }
