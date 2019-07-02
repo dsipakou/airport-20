@@ -6,10 +6,6 @@ fun parseTime(time: String): AirportTime {
     val re = Regex("(?:(\\d+.\\d+) )?(\\d+:\\d+)\$")
     val formatter = re.find(time)
     val airportTime: AirportTime
-    if (formatter?.groups?.size!! > 2) {
-        airportTime = AirportTime(formatter.groups[1].toString(), formatter.groups[2].toString())
-    } else {
-        airportTime = AirportTime("", formatter.groups[1].toString())
-    }
+    airportTime = AirportTime(formatter!!.groups[1]?.value, formatter.groups[2]!!.value)
     return airportTime
 }

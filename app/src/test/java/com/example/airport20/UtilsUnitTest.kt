@@ -25,7 +25,7 @@ class UtilsUnitTest {
     fun date_utils_timeOnly() {
         val inputString = "03:15"
         val outputString = parseTime(inputString)
-        assertEquals("", outputString.date)
+        assertEquals(null, outputString.date)
         assertEquals("03:15", outputString.time)
     }
 }

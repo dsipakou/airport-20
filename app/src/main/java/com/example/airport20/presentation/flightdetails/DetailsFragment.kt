@@ -82,13 +82,13 @@ class DetailsFragment : Fragment() {
             gateLabelTextView.text = resources.getString(R.string.boarding_gate)
         }
         gateTextView.text = flight.gate
-        expTimeTextView.text = flight.expectedTime
-        if (flight.actualTime.isEmpty()) {
+        expTimeTextView.text = flight.expectedTime.time
+        if (flight.actualTime.time == null || flight.actualTime.time!!.isEmpty()) {
             actTimeHeaderTextView.visibility = GONE
         } else {
             actTimeHeaderTextView.visibility = VISIBLE
         }
-        actTimeTextView.text = flight.actualTime
+        actTimeTextView.text = flight.actualTime.time
     }
 
 //    override fun onResume() {

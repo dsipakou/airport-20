@@ -18,6 +18,6 @@ interface Flight {
 }
 
 data class AirportTime(
-    val date: String,
-    val time: String
+    val date: String?,
+    val time: String?
 )

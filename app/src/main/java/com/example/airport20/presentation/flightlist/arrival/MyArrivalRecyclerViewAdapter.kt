@@ -38,13 +38,13 @@ class MyArrivalRecyclerViewAdapter(
         holder.mCityView.text = item.city
         holder.mCodeView.text = item.code
         holder.mCompanyView.text = item.company
-        holder.mExpectedTimeView.text = item.expectedTime
-        if (item.actualTime.isEmpty()) {
+        holder.mExpectedTimeView.text = item.expectedTime.time
+        if (item.actualTime.time == null || item.actualTime.time!!.isEmpty()) {
             holder.mActualTimeTextView.visibility = GONE
         } else {
             holder.mActualTimeTextView.visibility = VISIBLE
         }
-        holder.mActualTimeView.text = item.actualTime
+        holder.mActualTimeView.text = item.actualTime.time
         holder.mStatusView.text = item.status.toString()
         if (status != Status.EMPTY && status != Status.UNKNOWN) {
             holder.mStatusView.text = holder.itemView.resources.getString(status.item)

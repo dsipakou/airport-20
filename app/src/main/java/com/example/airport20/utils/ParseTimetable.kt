@@ -19,22 +19,22 @@ class ParseTimetable {
                 tr.forEach {
                     val tds = it.select("td")
                     if (tds.size > 0) {
-                        val actualTime: String
+                        val actualTime: AirportTime
                         val status: Status
                         val regex = Regex("([A-Z- ]+)\\s+(expected|departure)[a-z ]+(\\d+:\\d+)")
                         val res = regex.find(tds[6].text())
                         if (res != null) {
-                            actualTime = res.groups[3]!!.value
+                            actualTime = parseTime(res.groups[3]!!.value)
                             status = Status.fromString(res.groups[1]!!.value)
                         } else {
-                            actualTime = tds[2].text()
+                            actualTime = parseTime(tds[2].text())
                             status = Status.fromString(tds[6].text())
                         }
                         val id = UUID.randomUUID().toString()
                         val company = tds[0].text()
                         val code = tds[3].text()
                         val gate = tds[5].text()
-                        val expectedTime = tds[1].text()
+                        val expectedTime = parseTime(tds[1].text())
                         val city = tds[4].text()
                         val cityCode = sanitizeString(tds[4].text())
                         FlightManager.addArrival(
@@ -74,22 +74,22 @@ class ParseTimetable {
                 tr.forEach {
                     val tds = it.select("td")
                     if (tds.size > 0) {
-                        val actualTime: String
+                        val actualTime: AirportTime
                         val status: Status
                         val regex = Regex("([A-Z- ]+)\\s+(expected|departure)[a-z ]+(\\d+:\\d+)")
                         val res = regex.find(tds[6].text())
                         if (res != null) {
-                            actualTime = res.groups[3]!!.value
+                            actualTime = parseTime(res.groups[3]!!.value)
                             status = Status.fromString(res.groups[1]!!.value)
                         } else {
-                            actualTime = ""
+                            actualTime = AirportTime(null, null)
                             status = Status.fromString(tds[6].text())
                         }
                         val id = UUID.randomUUID().toString()
                         val company = tds[0].text()
                         val code = tds[2].text()
                         val gate = tds[5].text()
-                        val expectedTime = tds[1].text()
+                        val expectedTime = parseTime(tds[1].text())
                         val registrationDesk = tds[4].text()
                         val city = tds[3].text()
                         val cityCode = sanitizeString(tds[3].text())
