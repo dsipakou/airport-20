@@ -8,11 +8,16 @@ interface Flight {
     var airport: String
     val code: String
     val gate: String
-    val expectedTime: String
-    val actualTime: String
+    val expectedTime: AirportTime
+    val actualTime: AirportTime
     val registrationDesk: String
     var city: String
     var cityCode: String
     val status: Status
     var imageUrl: String
 }
+
+data class AirportTime(
+    val date: String,
+    val time: String
+)
