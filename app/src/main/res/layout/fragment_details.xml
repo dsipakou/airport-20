@@ -92,9 +92,11 @@
             android:textStyle="bold"
             tools:text="12:45"
             app:layout_constraintEnd_toEndOf="@+id/expTimeHeaderTextView"
-            app:layout_constraintStart_toStartOf="@+id/expTimeHeaderTextView"
             android:layout_marginBottom="24dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/expDateTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginEnd="8dp"/>
     <TextView
             android:text="@string/actual_label"
             android:layout_width="wrap_content"
@@ -111,12 +113,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/actTimeTextView"
-            app:layout_constraintEnd_toEndOf="@+id/actTimeHeaderTextView"
             android:textSize="24sp"
             android:textStyle="bold"
             tools:text="12:50"
-            app:layout_constraintStart_toStartOf="@+id/actTimeHeaderTextView"
-            app:layout_constraintBaseline_toBaselineOf="@+id/expTimeTextView"/>
+            app:layout_constraintBaseline_toBaselineOf="@+id/expTimeTextView"
+            app:layout_constraintStart_toEndOf="@+id/actDateTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="@+id/actTimeHeaderTextView"/>
     <TextView
             android:text="TextView"
             android:layout_width="match_parent"
@@ -178,4 +181,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
             tools:text="@string/boarding_gate"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/expDateTextView"
+            app:layout_constraintEnd_toStartOf="@+id/expTimeTextView"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/expTimeTextView"
+            app:layout_constraintStart_toStartOf="@+id/expTimeHeaderTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            tools:text="(10.03)"
+            android:textSize="18sp"
+            android:textStyle="italic"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/actDateTextView"
+            app:layout_constraintBaseline_toBaselineOf="@+id/actTimeTextView"
+            app:layout_constraintEnd_toStartOf="@+id/actTimeTextView"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintStart_toStartOf="@+id/actTimeHeaderTextView"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:textSize="18sp"
+            tools:text="(11.03)"
+            android:textStyle="italic"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
