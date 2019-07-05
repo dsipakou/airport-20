@@ -39,12 +39,14 @@ class MyArrivalRecyclerViewAdapter(
         holder.mCodeView.text = item.code
         holder.mCompanyView.text = item.company
         holder.mExpectedTimeView.text = item.expectedTime.time
+        holder.mExpectedDateView.text = item.expectedTime.date
         if (item.actualTime.time == null || item.actualTime.time!!.isEmpty()) {
             holder.mActualTimeTextView.visibility = GONE
         } else {
             holder.mActualTimeTextView.visibility = VISIBLE
         }
         holder.mActualTimeView.text = item.actualTime.time
+        holder.mActualDateView.text = item.actualTime.date
         holder.mStatusView.text = item.status.toString()
         if (status != Status.EMPTY && status != Status.UNKNOWN) {
             holder.mStatusView.text = holder.itemView.resources.getString(status.item)
@@ -69,8 +71,10 @@ class MyArrivalRecyclerViewAdapter(
         val mCodeView: TextView = mView.arrival_code
         val mCompanyView: TextView = mView.arrival_company
         val mExpectedTimeView: TextView = mView.arrival_expected_time
+        val mExpectedDateView: TextView = mView.arrival_expected_date
         val mActualTimeTextView: TextView = mView.arrival_actual_time_label
         val mActualTimeView: TextView = mView.arrival_actual_time
+        val mActualDateView: TextView = mView.arrivate_actual_date
         val mStatusView: TextView = mView.arrival_status
 
         override fun toString(): String {

@@ -34,12 +34,14 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
         holder.mCodeView.text = item.code
         holder.mCompanyView.text = item.company
         holder.mExpectedTimeView.text = item.expectedTime.time
+        holder.mExpectedDateView.text = item.expectedTime.date
         if (item.actualTime.time == null || item.actualTime.time!!.isEmpty()) {
             holder.mActualTimeTextView.visibility = View.GONE
         } else {
             holder.mActualTimeTextView.visibility = View.VISIBLE
         }
         holder.mActualTimeView.text = item.actualTime.time
+        holder.mActualDateView.text = item.actualTime.date
         if (status != Status.EMPTY && status != Status.UNKNOWN)
         {
             holder.mStatusView.text = holder.itemView.resources.getString(status.item)
@@ -65,7 +67,9 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
         val mCodeView: TextView = mView.departure_code
         val mCompanyView: TextView = mView.departure_company
         val mExpectedTimeView: TextView = mView.departure_expected_time
+        val mExpectedDateView: TextView = mView.departure_expected_date
         val mActualTimeView: TextView = mView.departure_actual_time
+        val mActualDateView: TextView = mView.departure_actual_date
         val mActualTimeTextView: TextView = mView.departure_actual_time_label
         val mStatusView: TextView = mView.departure_status
 
