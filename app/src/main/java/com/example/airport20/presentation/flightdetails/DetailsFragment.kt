@@ -83,12 +83,14 @@ class DetailsFragment : Fragment() {
         }
         gateTextView.text = flight.gate
         expTimeTextView.text = flight.expectedTime.time
+        expDateTextView.text = if (flight.expectedTime.date.isNullOrBlank()) "" else "(${flight.expectedTime.date})"
         if (flight.actualTime.time == null || flight.actualTime.time!!.isEmpty()) {
             actTimeHeaderTextView.visibility = GONE
         } else {
             actTimeHeaderTextView.visibility = VISIBLE
         }
         actTimeTextView.text = flight.actualTime.time
+        actDateTextView.text = if (flight.actualTime.date.isNullOrBlank()) "" else "(${flight.actualTime.date})"
     }
 
 //    override fun onResume() {
