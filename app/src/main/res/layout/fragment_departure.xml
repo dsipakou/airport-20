@@ -96,11 +96,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/departure_expected_date"
-            tools:text="10.03"
+            tools:text="(10.03)"
             app:layout_constraintEnd_toStartOf="@+id/departure_expected_time"
             android:layout_marginEnd="8dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/departure_expected_time"
-            android:textSize="16sp"/>
+            android:textSize="18sp"
+            android:textStyle="italic"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -108,7 +109,8 @@
             app:layout_constraintEnd_toStartOf="@+id/departure_actual_time"
             android:layout_marginEnd="8dp"
             app:layout_constraintBaseline_toBaselineOf="@+id/departure_actual_time"
-            tools:text="11.03"
-            android:textSize="12sp"/>
+            tools:text="(11.03)"
+            android:textSize="14sp"
+            android:textStyle="italic"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

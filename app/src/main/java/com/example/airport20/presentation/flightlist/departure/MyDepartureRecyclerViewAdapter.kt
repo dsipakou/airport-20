@@ -34,16 +34,15 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
         holder.mCodeView.text = item.code
         holder.mCompanyView.text = item.company
         holder.mExpectedTimeView.text = item.expectedTime.time
-        holder.mExpectedDateView.text = item.expectedTime.date
+        holder.mExpectedDateView.text = if (item.expectedTime.date.isNullOrBlank()) "" else "(${item.expectedTime.date})"
         if (item.actualTime.time == null || item.actualTime.time!!.isEmpty()) {
             holder.mActualTimeTextView.visibility = View.GONE
         } else {
             holder.mActualTimeTextView.visibility = View.VISIBLE
         }
         holder.mActualTimeView.text = item.actualTime.time
-        holder.mActualDateView.text = item.actualTime.date
-        if (status != Status.EMPTY && status != Status.UNKNOWN)
-        {
+        holder.mActualDateView.text = if (item.actualTime.date.isNullOrBlank()) "" else "(${item.actualTime.date})"
+        if (status != Status.EMPTY && status != Status.UNKNOWN) {
             holder.mStatusView.text = holder.itemView.resources.getString(status.item)
         } else {
             holder.mStatusView.text = ""
@@ -62,7 +61,7 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
 
     override fun getItemCount(): Int = flightList.size
 
-    inner class ViewHolder(val mView: View): RecyclerView.ViewHolder(mView) {
+    inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val mCityView: TextView = mView.departure_city
         val mCodeView: TextView = mView.departure_code
         val mCompanyView: TextView = mView.departure_company
