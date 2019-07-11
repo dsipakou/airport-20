@@ -81,6 +81,13 @@ class DetailsFragment : Fragment() {
         } else {
             gateLabelTextView.text = resources.getString(R.string.boarding_gate)
         }
+        if (!flight.gate.isEmpty()) {
+            gateLabelTextView.visibility = VISIBLE
+            gateTextView.text = flight.gate
+        } else {
+            gateLabelTextView.visibility = GONE
+            gateTextView.text = flight.gate
+        }
         gateTextView.text = flight.gate
         expTimeTextView.text = flight.expectedTime.time
         expDateTextView.text = if (flight.expectedTime.date.isNullOrBlank()) "" else "(${flight.expectedTime.date})"
