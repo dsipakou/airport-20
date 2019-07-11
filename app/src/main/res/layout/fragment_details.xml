@@ -29,8 +29,10 @@
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"/>
     <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:scaleType="fitStart"
+            android:cropToPadding="true"
             android:id="@+id/aircompanyLogoImageView"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="24dp"
@@ -159,8 +161,8 @@
             tools:text="Fraport"/>
     <TextView
             android:text=""
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
             android:id="@+id/aircompanyTextView"
             tools:text="BELAVIA"
             app:layout_constraintStart_toStartOf="parent"
