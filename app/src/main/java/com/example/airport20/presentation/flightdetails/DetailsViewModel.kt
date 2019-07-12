@@ -1,6 +1,5 @@
 package com.example.airport20.presentation.flightdetails
 
-
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
