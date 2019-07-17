@@ -36,4 +36,12 @@ class UtilsUnitTest {
         assertEquals(null, outputString.date)
         assertEquals(null, outputString.time)
     }
+
+    @Test
+    fun date_utils_randomString() {
+        val inputString = "asfsafasfsafasf"
+        val outputString = parseTime(inputString)
+        assertEquals(null, outputString.date)
+        assertEquals(null, outputString.time)
+    }
 }
