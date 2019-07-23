@@ -68,9 +68,9 @@
             app:fontFamily="@font/roboto"
             android:id="@+id/arrival_actual_time_label"
             style="@style/SubTitleText"
-            tools:layout_editor_absoluteY="44dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/arrivate_actual_date"/>
+            app:layout_constraintEnd_toStartOf="@+id/arrivate_actual_date"
+            app:layout_constraintBaseline_toBaselineOf="@+id/arrival_code"/>
     <TextView
             android:id="@+id/arrival_actual_time"
             android:layout_width="wrap_content"
