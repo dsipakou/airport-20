@@ -40,7 +40,7 @@ class MyArrivalRecyclerViewAdapter(
         holder.mCompanyView.text = item.company
         holder.mExpectedTimeView.text = item.expectedTime.time
         holder.mExpectedDateView.text = if (item.expectedTime.date.isNullOrBlank()) "" else "(${item.expectedTime.date})"
-        if (item.actualTime.time == null || item.actualTime.time!!.isEmpty()) {
+        if (item.actualTime.time == null || item.actualTime.time.isEmpty()) {
             holder.mActualTimeTextView.visibility = GONE
         } else {
             holder.mActualTimeTextView.visibility = VISIBLE
