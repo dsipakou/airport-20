@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBaseline_toBaselineOf="@+id/departure_code"
-            app:layout_constraintEnd_toStartOf="@+id/arrivate_actual_date"
+            app:layout_constraintEnd_toStartOf="@+id/departure_actual_date"
             app:fontFamily="@font/roboto"
             android:id="@+id/departure_actual_time_label"
             android:layout_marginEnd="8dp"
