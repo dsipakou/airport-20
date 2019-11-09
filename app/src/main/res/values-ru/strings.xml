@@ -11,6 +11,7 @@
     <string name="details">Детали</string>
     <string name="gate">Сектор</string>
     <string name="boarding_gate">Выход на посадку</string>
+    <string name="registration_desk">Стойка регистрации</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="now">Сейчас</string>

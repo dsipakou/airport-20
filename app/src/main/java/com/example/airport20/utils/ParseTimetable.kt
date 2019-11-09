@@ -37,24 +37,26 @@ class ParseTimetable {
                         val expectedTime = parseTime(tds[1].text())
                         val city = tds[4].text()
                         val cityCode = sanitizeString(tds[4].text())
-                        FlightManager.addArrival(
-                            Arrival(
-                                id = id,
-                                company = company,
-                                companyCode = company,
-                                companyUrl = "",
-                                airport = "",
-                                code = code,
-                                gate = gate,
-                                expectedTime = expectedTime,
-                                actualTime = actualTime,
-                                registrationDesk = "",
-                                city = city,
-                                cityCode = cityCode,
-                                status = status,
-                                imageUrl = ""
+                        if (cityCode.isNotEmpty()) {
+                            FlightManager.addArrival(
+                                Arrival(
+                                    id = id,
+                                    company = company,
+                                    companyCode = company,
+                                    companyUrl = "",
+                                    airport = "",
+                                    code = code,
+                                    gate = gate,
+                                    expectedTime = expectedTime,
+                                    actualTime = actualTime,
+                                    registrationDesk = "",
+                                    city = city,
+                                    cityCode = cityCode,
+                                    status = status,
+                                    imageUrl = ""
+                                )
                             )
-                        )
+                        }
                     }
                 }
             } catch (e: Exception) {
@@ -93,24 +95,26 @@ class ParseTimetable {
                         val registrationDesk = tds[4].text()
                         val city = tds[3].text()
                         val cityCode = sanitizeString(tds[3].text())
-                        FlightManager.addDeparture(
-                            Departure(
-                                id = id,
-                                company = company,
-                                companyCode = company,
-                                companyUrl = "",
-                                airport = "",
-                                code = code,
-                                gate = gate,
-                                expectedTime = expectedTime,
-                                actualTime = actualTime,
-                                registrationDesk = registrationDesk,
-                                city = city,
-                                cityCode = cityCode,
-                                status = status,
-                                imageUrl = ""
+                        if (cityCode.isNotEmpty()) {
+                            FlightManager.addDeparture(
+                                Departure(
+                                    id = id,
+                                    company = company,
+                                    companyCode = company,
+                                    companyUrl = "",
+                                    airport = "",
+                                    code = code,
+                                    gate = gate,
+                                    expectedTime = expectedTime,
+                                    actualTime = actualTime,
+                                    registrationDesk = registrationDesk,
+                                    city = city,
+                                    cityCode = cityCode,
+                                    status = status,
+                                    imageUrl = ""
+                                )
                             )
-                        )
+                        }
                     }
                 }
             } catch (e: Exception) {

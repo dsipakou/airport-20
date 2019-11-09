@@ -10,6 +10,7 @@
     <string name="details">Details</string>
     <string name="gate">Gate</string>
     <string name="boarding_gate">Boarding gate</string>
+    <string name="registration_desk">Registration desk</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="now">Now</string>

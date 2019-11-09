@@ -88,6 +88,14 @@ class DetailsFragment : Fragment() {
             gateLabelTextView.visibility = GONE
             gateTextView.text = flight.gate
         }
+        if (flight is Departure && flight.registrationDesk.isNotEmpty()) {
+            registrationDeskLabelTextView.visibility = VISIBLE
+            registrationDeskTextView.visibility = VISIBLE
+            registrationDeskTextView.text = flight.registrationDesk
+        } else {
+            registrationDeskLabelTextView.visibility = GONE
+            registrationDeskTextView.visibility = GONE
+        }
         gateTextView.text = flight.gate
         expTimeTextView.text = flight.expectedTime.time
         expDateTextView.text = if (flight.expectedTime.date.isNullOrBlank()) "" else "(${flight.expectedTime.date})"
