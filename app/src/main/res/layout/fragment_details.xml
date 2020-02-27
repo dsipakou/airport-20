@@ -48,15 +48,13 @@
             android:id="@+id/gateTextView"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/aircompanyLogoImageView"
             tools:text="Gate 4"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/actTimeHeaderTextView"/>
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/gateLabelTextView"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -177,14 +175,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/gateLabelTextView"
-            android:layout_marginBottom="8dp"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/gateTextView"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
-            tools:text="@string/boarding_gate"/>
+            tools:text="@string/boarding_gate"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/aircompanyLogoImageView"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/expTimeHeaderTextView"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -219,9 +219,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
             app:layout_constraintHorizontal_bias="0.498"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/codeTextView"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/registrationDeskTextView"
-            android:textSize="16sp"/>
+            app:layout_constraintBottom_toTopOf="@+id/gateLabelTextView"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -231,8 +233,8 @@
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="18dp"
-            app:layout_constraintBottom_toTopOf="@+id/gateLabelTextView"
-            android:textSize="24sp"
-            android:textStyle="bold"/>
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/registrationDeskLabelTextView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

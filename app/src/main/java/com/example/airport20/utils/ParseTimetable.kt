@@ -2,6 +2,10 @@ package com.example.airport20.utils
 
 import android.util.Log
 import com.example.airport20.domain.*
+import com.google.gson.Gson
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -14,8 +18,11 @@ class ParseTimetable {
             try {
                 val url = getUrl(FlightType.ARRIVAL)
                 val period = getPeriod()
+                val okHttpClient = OkHttpClient()
+                val parsedResponse = parseResponse(okHttpClient.newCall(createRequest(url)).execute())
+                val arrival = Gson().fromJson(parsedResponse, Arrival::class.java)
                 val document = Jsoup.connect(url).get()
-                val tr = document.select("div#content-bottom tr$period")
+                val tr = document.select("table#fl-arrival tbody tr$period")
                 tr.forEach {
                     val tds = it.select("td")
                     if (tds.size > 0) {
@@ -123,11 +130,22 @@ class ParseTimetable {
         }
     }
 
+    private fun createRequest(url: String): Request {
+        return Request.Builder()
+            .url(url)
+            .build()
+    }
+
+    private fun parseResponse(response: Response): String {
+        val body = response.body?.string() ?: ""
+        return body
+    }
+
     private fun getUrl(type: FlightType): String {
         if (FlightManager.getPeriod() == TimeRange.NOW) {
             when (type) {
-                FlightType.ARRIVAL -> return SHORT_ARRIVAL_URL
-                FlightType.DEPARTURE -> return SHORT_DEPARTURE_URL
+                FlightType.ARRIVAL -> return ARRIVAL_URL
+                FlightType.DEPARTURE -> return DEPARTURE_URL
             }
         } else {
             when (type) {
