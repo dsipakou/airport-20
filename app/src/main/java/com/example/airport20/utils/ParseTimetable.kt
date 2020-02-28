@@ -21,7 +21,7 @@ class ParseTimetable {
                     try {
                         val statusObject = JSONObject(entity.getString("status"))
                         val status = statusObject.getString("id")
-                        val actualTime: AirportTime = Dates.getAirportTime(entity.getString("plan"))
+                        val expectedTime: AirportTime = Dates.getAirportTime(entity.getString("plan"))
                         val id = UUID.randomUUID().toString()
                         val companyObject = JSONObject(entity.getString("airline"))
                         val company = companyObject.getString("title")
@@ -29,9 +29,9 @@ class ParseTimetable {
                         val gate = entity.getString("gate")
                         val cityObject = JSONObject(entity.getString("airport"))
                         val city = cityObject.getString("title")
-                        var expectedTime = AirportTime(null, null)
+                        var actualTime = AirportTime(null, null)
                         if (entity.getString("fact") != "null") {
-                            expectedTime = Dates.getAirportTime(entity.getString("fact"))
+                            actualTime = Dates.getAirportTime(entity.getString("fact"))
                         }
                         val cityCode = sanitizeString(city)
                         if (cityCode.isNotEmpty()) {
@@ -104,7 +104,7 @@ class ParseTimetable {
 
                         val statusObject = JSONObject(entity.getString("status"))
                         val status = statusObject.getString("id")
-                        val actualTime: AirportTime = Dates.getAirportTime(entity.getString("plan"))
+                        val expectedTime: AirportTime = Dates.getAirportTime(entity.getString("plan"))
                         val companyObject = JSONObject(entity.getString("airline"))
                         val company = companyObject.getString("title")
                         val code = entity.getString("flight")
@@ -112,9 +112,9 @@ class ParseTimetable {
                         val gate = gateObject.join(", ").replace("\"", "")
                         val cityObject = JSONObject(entity.getString("airport"))
                         val city = cityObject.getString("title")
-                        var expectedTime = AirportTime(null, null)
+                        var actualTime = AirportTime(null, null)
                         if (entity.getString("fact") != "null") {
-                            expectedTime = Dates.getAirportTime(entity.getString("fact"))
+                            actualTime = Dates.getAirportTime(entity.getString("fact"))
                         }
                         val registrationObject = entity.getJSONArray("numbers_reg")
                         val registrationDesk = registrationObject.join(", ").replace("\"", "")

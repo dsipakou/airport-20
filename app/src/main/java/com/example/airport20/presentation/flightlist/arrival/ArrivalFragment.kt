@@ -1,5 +1,6 @@
 package com.example.airport20.presentation.flightlist.arrival
 
+import android.graphics.drawable.ClipDrawable
 import android.os.Bundle
 
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.airport20.domain.Arrival
 import com.example.airport20.domain.FlightType
 
@@ -49,6 +51,8 @@ class ArrivalFragment : Fragment(), MainActivity.OnFragmentRecyclerRefresh {
             arrivals?.let { recyclerViewAdapter.updateList(arrivals) }
         })
         arrivalList.adapter = recyclerViewAdapter
+        val decoration = DividerItemDecoration(context, ClipDrawable.HORIZONTAL)
+        arrivalList.addItemDecoration(decoration)
         addListener()
         addEvents()
     }

@@ -5,8 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:id="@+id/swipeRefreshDepartureLayout"
->
+        android:id="@+id/swipeRefreshDepartureLayout">
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/departureList"
             android:name="com.example.airport20.DepartureFragment"

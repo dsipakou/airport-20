@@ -40,12 +40,11 @@
             android:id="@+id/departure_code"
             tools:text="AA6474"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/departure_city"
+            app:layout_constraintTop_toBottomOf="@+id/departure_company"
             app:fontFamily="@font/roboto"
-            android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             style="@style/SubTitleText"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="8dp"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -53,19 +52,16 @@
             android:id="@+id/departure_company"
             tools:text="British Airways"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
-            app:layout_constraintTop_toBottomOf="@+id/departure_code"
+            app:layout_constraintTop_toBottomOf="@+id/departure_city"
             app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
     />
     <TextView
             android:text="@string/actual_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBaseline_toBaselineOf="@+id/departure_code"
+            app:layout_constraintBaseline_toBaselineOf="@+id/departure_company"
             app:layout_constraintEnd_toStartOf="@+id/departure_actual_date"
             app:fontFamily="@font/roboto"
             android:id="@+id/departure_actual_time_label"
@@ -87,11 +83,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/departure_status"
             android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="Arrived"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/departure_actual_time"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

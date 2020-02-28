@@ -40,12 +40,13 @@
             android:id="@+id/arrival_code"
             tools:text="AA6474"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/arrival_city"
             app:fontFamily="@font/roboto"
-            android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             style="@style/SubTitleText"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/arrival_company"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
             android:layout_width="wrap_content"
@@ -53,14 +54,10 @@
             android:id="@+id/arrival_company"
             tools:text="British Airways"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
-            app:layout_constraintTop_toBottomOf="@+id/arrival_code"
             app:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="4dp"
-    />
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/arrival_city"/>
     <TextView
             android:text="@string/actual_label"
             android:layout_width="wrap_content"
@@ -70,7 +67,7 @@
             style="@style/SubTitleText"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/arrivate_actual_date"
-            app:layout_constraintBaseline_toBaselineOf="@+id/arrival_code"/>
+            app:layout_constraintBaseline_toBaselineOf="@+id/arrival_company"/>
     <TextView
             android:id="@+id/arrival_actual_time"
             android:layout_width="wrap_content"
@@ -89,8 +86,8 @@
             app:layout_constraintEnd_toEndOf="@+id/arrival_actual_time"
             tools:text="Arrived"
             android:fontFamily="@font/roboto"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/arrival_actual_time"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
