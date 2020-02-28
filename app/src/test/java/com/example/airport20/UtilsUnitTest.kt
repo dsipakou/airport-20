@@ -1,6 +1,6 @@
 package com.example.airport20
 
-import com.example.airport20.utils.parseTime
+import com.example.airport20.utils.Dates.parseTime
 import com.example.airport20.utils.sanitizeString
 import junit.framework.Assert.assertEquals
 import org.junit.Test
