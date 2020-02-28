@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.airport20.R
 import com.example.airport20.domain.Departure
 import com.example.airport20.domain.Status
+import com.example.airport20.utils.Dates
 import kotlinx.android.synthetic.main.fragment_departure.view.*
 
 typealias DepartureClickListener = (Departure) -> Unit
@@ -34,14 +35,15 @@ class MyDepartureRecyclerViewAdapter(private val clickListener: DepartureClickLi
         holder.mCodeView.text = item.code
         holder.mCompanyView.text = item.company
         holder.mExpectedTimeView.text = item.expectedTime.time
-        holder.mExpectedDateView.text = if (item.expectedTime.date.isNullOrBlank()) "" else "(${item.expectedTime.date})"
+        val date = Dates.getCurrentDate()
+        holder.mExpectedDateView.text = if (item.expectedTime.date.isNullOrBlank() || date == item.expectedTime.date) "" else "(${item.expectedTime.date})"
         if (item.actualTime.time == null || item.actualTime.time.isEmpty()) {
             holder.mActualTimeTextView.visibility = View.GONE
         } else {
             holder.mActualTimeTextView.visibility = View.VISIBLE
         }
         holder.mActualTimeView.text = item.actualTime.time
-        holder.mActualDateView.text = if (item.actualTime.date.isNullOrBlank()) "" else "(${item.actualTime.date})"
+        holder.mActualDateView.text = if (item.actualTime.date.isNullOrBlank() || date == item.actualTime.date) "" else "(${item.actualTime.date})"
         if (status != Status.EMPTY && status != Status.UNKNOWN) {
             holder.mStatusView.text = holder.itemView.resources.getString(status.item)
         } else {

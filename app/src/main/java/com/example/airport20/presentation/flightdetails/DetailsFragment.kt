@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.airport20.MainActivity
 import com.example.airport20.R
 import com.example.airport20.domain.*
+import com.example.airport20.utils.Dates
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_details.*
@@ -98,14 +99,15 @@ class DetailsFragment : Fragment() {
         }
         gateTextView.text = flight.gate
         expTimeTextView.text = flight.expectedTime.time
-        expDateTextView.text = if (flight.expectedTime.date.isNullOrBlank()) "" else "(${flight.expectedTime.date})"
+        val date = Dates.getCurrentDate()
+        expDateTextView.text = if (flight.expectedTime.date.isNullOrBlank() || date == flight.expectedTime.date) "" else "(${flight.expectedTime.date})"
         if (flight.actualTime.time == null || flight.actualTime.time!!.isEmpty()) {
             actTimeHeaderTextView.visibility = GONE
         } else {
             actTimeHeaderTextView.visibility = VISIBLE
         }
         actTimeTextView.text = flight.actualTime.time
-        actDateTextView.text = if (flight.actualTime.date.isNullOrBlank()) "" else "(${flight.actualTime.date})"
+        actDateTextView.text = if (flight.actualTime.date.isNullOrBlank() || date == flight.actualTime.date) "" else "(${flight.actualTime.date})"
     }
 
 //    override fun onResume() {

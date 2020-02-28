@@ -21,7 +21,7 @@ enum class Status(val item: Int) {
     companion object {
         fun fromString(type: String) : Status {
             try {
-                when (type) {
+                when (type.toUpperCase()) {
                     "" -> return EMPTY
                     "EN ROUTE" -> return ENROUTE
                     "CHECK-IN" -> return CHECKIN

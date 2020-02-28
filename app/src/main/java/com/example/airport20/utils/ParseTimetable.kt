@@ -17,34 +17,22 @@ class ParseTimetable {
     suspend fun getArrivals() = withContext(Dispatchers.IO) {
         launch {
             try {
-                fun setFlights(entity: JSONObject) {
+                fun setFlight(entity: JSONObject) {
                     try {
-//                    val status: Status
                         val statusObject = JSONObject(entity.getString("status"))
                         val status = statusObject.getString("id")
-                        val regex = Regex("([A-Z- ]+)\\s+(expected|departure)[a-z ]+(\\d+:\\d+)")
                         val actualTime: AirportTime = Dates.getAirportTime(entity.getString("plan"))
-//                    val res = regex.find(arrival.text())
-//                    if (res != null) {
-//                        actualTime = parseTime(res.groups[3]!!.value)
-//                        status = Status.fromString(res.groups[1]!!.value)
-//                    } else {
-//                        actualTime = parseTime(arrival[2].text())
-//                        status = Status.fromString(arrival[6].text())
-//                    }
                         val id = UUID.randomUUID().toString()
-//                    val id = JSONObject(entity.getString("flight_id"))
                         val companyObject = JSONObject(entity.getString("airline"))
                         val company = companyObject.getString("title")
                         val code = entity.getString("flight")
                         val gate = entity.getString("gate")
                         val cityObject = JSONObject(entity.getString("airport"))
                         val city = cityObject.getString("title")
-                        var expectedTime: AirportTime = AirportTime(null, null)
+                        var expectedTime = AirportTime(null, null)
                         if (entity.getString("fact") != "null") {
                             expectedTime = Dates.getAirportTime(entity.getString("fact"))
                         }
-//                    val expectedTime = parseTime(arrival[1].text())
                         val cityCode = sanitizeString(city)
                         if (cityCode.isNotEmpty()) {
                             FlightManager.addArrival(
@@ -71,37 +59,31 @@ class ParseTimetable {
                     }
                 }
                 val url = getUrl(FlightType.ARRIVAL)
-                val period = getPeriod()
                 val okHttpClient = OkHttpClient()
                 val parsedResponse = parseResponse(okHttpClient.newCall(createRequest(url)).execute())
                 val arrivals = JSONArray(parsedResponse)
-//                val document = Jsoup.connect(url).get()
-//                val tr = document.select("table#fl-arrival tbody tr$period")
                 for (i in 0 until arrivals.length()) {
-                    if (i > 85) {
-                        Log.i("Hello", "there")
-                    }
                     val entity = JSONObject(arrivals.get(i).toString())
                     val flightTime: Date = Dates.parseTime(entity.getString("plan"))
                     when (FlightManager.getPeriod()) {
                         TimeRange.NOW -> {
                             if (Date().addHours(-1) < flightTime && flightTime < Date().addHours(2)) {
-                                setFlights(entity)
+                                setFlight(entity)
                             }
                         }
                         TimeRange.YESTERDAY -> {
                             if (flightTime.isYesterday()) {
-                                setFlights(entity)
+                                setFlight(entity)
                             }
                         }
                         TimeRange.TODAY -> {
                             if (flightTime.isToday()) {
-                                setFlights(entity)
+                                setFlight(entity)
                             }
                         }
                         TimeRange.TOMORROW -> {
                             if (flightTime.isTomorrow()) {
-                                setFlights(entity)
+                                setFlight(entity)
                             }
                         }
                     }
@@ -115,33 +97,28 @@ class ParseTimetable {
 
     suspend fun getDepartures() = withContext(Dispatchers.IO) {
         launch {
-            val url = getUrl(FlightType.DEPARTURE)
-            val period = getPeriod()
             try {
-                val document = Jsoup.connect(url).get()
-                val tr = document.select("div#content-bottom tr$period")
-                tr.forEach {
-                    val tds = it.select("td")
-                    if (tds.size > 0) {
-                        val actualTime: AirportTime
-                        val status: Status
-                        val regex = Regex("([A-Z- ]+)\\s+(expected|departure)[a-z ]+(\\d+:\\d+)")
-                        val res = regex.find(tds[6].text())
-                        if (res != null) {
-                            actualTime = Dates.getAirportTime(res.groups[3]!!.value)
-                            status = Status.fromString(res.groups[1]!!.value)
-                        } else {
-                            actualTime = AirportTime(null, null)
-                            status = Status.fromString(tds[6].text())
-                        }
+                fun setFlight(entity: JSONObject) {
+                    try {
                         val id = UUID.randomUUID().toString()
-                        val company = tds[0].text()
-                        val code = tds[2].text()
-                        val gate = tds[5].text()
-                        val expectedTime = Dates.getAirportTime(tds[1].text())
-                        val registrationDesk = tds[4].text()
-                        val city = tds[3].text()
-                        val cityCode = sanitizeString(tds[3].text())
+
+                        val statusObject = JSONObject(entity.getString("status"))
+                        val status = statusObject.getString("id")
+                        val actualTime: AirportTime = Dates.getAirportTime(entity.getString("plan"))
+                        val companyObject = JSONObject(entity.getString("airline"))
+                        val company = companyObject.getString("title")
+                        val code = entity.getString("flight")
+                        val gateObject = entity.getJSONArray("numbers_gate")
+                        val gate = gateObject.join(", ").replace("\"", "")
+                        val cityObject = JSONObject(entity.getString("airport"))
+                        val city = cityObject.getString("title")
+                        var expectedTime = AirportTime(null, null)
+                        if (entity.getString("fact") != "null") {
+                            expectedTime = Dates.getAirportTime(entity.getString("fact"))
+                        }
+                        val registrationObject = entity.getJSONArray("numbers_reg")
+                        val registrationDesk = registrationObject.join(", ").replace("\"", "")
+                        val cityCode = sanitizeString(city)
                         if (cityCode.isNotEmpty()) {
                             FlightManager.addDeparture(
                                 Departure(
@@ -157,10 +134,42 @@ class ParseTimetable {
                                     registrationDesk = registrationDesk,
                                     city = city,
                                     cityCode = cityCode,
-                                    status = status,
+                                    status = Status.fromString(status),
                                     imageUrl = ""
                                 )
                             )
+                        }
+                    } catch (e: Exception) {
+                        Log.e("Parse flight", "Can't parse flight: " + e.stackTrace)
+                    }
+                }
+                val url = getUrl(FlightType.DEPARTURE)
+                val okHttpClient = OkHttpClient()
+                val parsedResponse = parseResponse(okHttpClient.newCall(createRequest(url)).execute())
+                val departures = JSONArray(parsedResponse)
+                for (i in 0 until departures.length()) {
+                    val entity = JSONObject(departures.get(i).toString())
+                    val flightTime: Date = Dates.parseTime(entity.getString("plan"))
+                    when (FlightManager.getPeriod()) {
+                        TimeRange.NOW -> {
+                            if (Date().addHours(-1) < flightTime && flightTime < Date().addHours(2)) {
+                                setFlight(entity)
+                            }
+                        }
+                        TimeRange.YESTERDAY -> {
+                            if (flightTime.isYesterday()) {
+                                setFlight(entity)
+                            }
+                        }
+                        TimeRange.TODAY -> {
+                            if (flightTime.isToday()) {
+                                setFlight(entity)
+                            }
+                        }
+                        TimeRange.TOMORROW -> {
+                            if (flightTime.isTomorrow()) {
+                                setFlight(entity)
+                            }
                         }
                     }
                 }
