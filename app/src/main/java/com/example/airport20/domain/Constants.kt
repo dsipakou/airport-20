@@ -27,7 +27,7 @@ enum class Status(val item: Int) {
                     "CHECK-IN" -> return CHECKIN
                     "BOARDING FINISHED" -> return BOARDING_FINISHED
                     "CHECK-IN CLOSED" -> return CHECKINCLOSED
-                    else -> return valueOf(type)
+                    else -> return valueOf(type.toUpperCase())
                 }
             }
             catch (e: Exception) {

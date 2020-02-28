@@ -47,6 +47,11 @@ object Dates {
         return AirportTime(date.format(datetime), time.format(datetime))
     }
 
+    fun getCurrentDate(): String {
+        val date = SimpleDateFormat("dd-MM")
+        return date.format(Date())
+    }
+
     fun today(timeZone: TimeZone? = null): Date =
         Date().midnight(timeZone = timeZone)
 
