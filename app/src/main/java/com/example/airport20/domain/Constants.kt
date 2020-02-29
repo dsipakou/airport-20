@@ -3,6 +3,20 @@ package com.example.airport20.domain
 import android.util.Log
 import com.example.airport20.R
 
+enum class JSONField(val item: String) {
+    STATUS("status"),
+    ID("id"),
+    PLANNED_TIME("plan"),
+    ACTUAL_TIME("fact"),
+    COMPANY_OBJ("airline"),
+    COMPANY_NAME("title"),
+    CODE("flight"),
+    GATE("gate"),
+    CITY_OBJ("airport"),
+    CITY_NAME("title"),
+    DEPARTURE_GATE("numbers_gate"),
+    REGISTRATION_DESK("numbers_reg"),
+}
 enum class Status(val item: Int) {
     AIRBORNE(R.string.airborne),
     ARRIVED(R.string.arrived),
