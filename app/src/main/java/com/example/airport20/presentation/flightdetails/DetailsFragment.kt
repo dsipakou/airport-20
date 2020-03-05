@@ -8,6 +8,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -48,6 +49,7 @@ class DetailsFragment : Fragment() {
         viewModel.observableFlight.observe(this, Observer { flight ->
             flight?.let { render(flight) } ?: renderNoteNotFound()
         })
+        addListener()
     }
 
     fun render(flight: Flight) {
@@ -117,5 +119,15 @@ class DetailsFragment : Fragment() {
 
     private fun renderNoteNotFound() {
         cityTextView.text = "Not found"
+    }
+
+    private fun addListener() {
+        swipeRefreshDetailsLayout.setOnRefreshListener {
+            refresh()
+        }
+    }
+
+    private fun refresh() {
+        Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
     }
 }
