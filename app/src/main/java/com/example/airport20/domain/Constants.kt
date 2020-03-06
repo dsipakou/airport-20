@@ -37,7 +37,7 @@ enum class Status(val item: Int) {
             try {
                 when (type.toUpperCase()) {
                     "" -> return EMPTY
-                    "EN ROUTE" -> return ENROUTE
+                    "EN-ROUTE" -> return ENROUTE
                     "CHECK-IN" -> return CHECKIN
                     "BOARDING FINISHED" -> return BOARDING_FINISHED
                     "CHECK-IN CLOSED" -> return CHECKINCLOSED

@@ -1,17 +1,71 @@
 package com.example.airport20.utils
 
 import android.util.Log
+import com.beust.klaxon.*
 import com.example.airport20.domain.*
+import com.example.airport20.domain.Status
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.jsoup.Jsoup
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
+
+
+@Target(AnnotationTarget.FIELD)
+annotation class JsonTime
+
+@Target(AnnotationTarget.FIELD)
+annotation class JsonStatus
+
+val timeConverter = object: Converter {
+    override fun canConvert(cls: Class<*>) = cls == AirportTime::class.java
+
+    override fun fromJson(jv: JsonValue) =
+        if (jv.string != null && jv.string != "null") {
+            Dates.getAirportTime(jv.string!!)
+        } else {
+            Log.w("Parse time", "Time is null")
+            null
+        }
+
+    override fun toJson(value: Any) = TODO("not implemented")
+}
+
+val statusConverter = object: Converter {
+    override fun canConvert(cls: Class<*>) = cls == Status::class.java
+
+    override fun fromJson(jv: JsonValue) =
+        if (jv?.obj?.get("id") != null) {
+            Status.fromString((jv?.obj?.get("id")!! as String))
+        } else {
+            Log.e("Parse status", "Can't parse status")
+            null
+        }
+
+    override fun toJson(value: Any) = TODO("not implemented")
+}
+
+class TestClass @JvmOverloads constructor(
+    @Json(name = "flight_id") val id: String,
+    @Json(path = "$.airline.title") var company: String,
+    @Json(path = "$.airline.title") var companyCode: String,
+    @Json(ignored = true) var companyUrl: String? = null,
+    @Json(ignored = true) var airport: String? = null,
+    @Json(name = "flight") val code: String,
+    @Json(name = "numbers_gate") val gate: Any,
+    @JsonTime @Json(name = "plan") val expectedTime: AirportTime,
+    @JsonTime @Json(name = "fact") val actualTime: AirportTime?,
+    @Json(name = "numbers_reg") val registrationDesk: Any,
+    @Json(path = "$.airport.title") var city: String,
+    @Json(path = "$.airport.title") var cityCode: String,
+    @JsonStatus @Json(name = "status") val status: Status
+//    @Json(ignored = true)
+//    var imageUrl: String = ""
+)
 
 class ParseTimetable {
     suspend fun getArrivals() = withContext(Dispatchers.IO) {
@@ -58,6 +112,7 @@ class ParseTimetable {
                         Log.e("Parse flight", "Can't parse flight: " + e.stackTrace)
                     }
                 }
+
                 val url = getUrl(FlightType.ARRIVAL)
                 val okHttpClient = OkHttpClient()
                 val parsedResponse = parseResponse(okHttpClient.newCall(createRequest(url)).execute())
@@ -98,8 +153,12 @@ class ParseTimetable {
     suspend fun getDepartures() = withContext(Dispatchers.IO) {
         launch {
             try {
-                fun setFlight(entity: JSONObject) {
+                fun setFlight(entity: JSONObject, raw_entity: String) {
                     try {
+                        val result = Klaxon()
+                            .fieldConverter(JsonTime::class, timeConverter)
+                            .fieldConverter(JsonStatus::class, statusConverter)
+                            .parse<TestClass>(raw_entity)
                         val id = UUID.randomUUID().toString()
 
                         val statusObject = JSONObject(entity.getString("status"))
@@ -143,32 +202,34 @@ class ParseTimetable {
                         Log.e("Parse flight", "Can't parse flight: " + e.stackTrace)
                     }
                 }
+
                 val url = getUrl(FlightType.DEPARTURE)
                 val okHttpClient = OkHttpClient()
                 val parsedResponse = parseResponse(okHttpClient.newCall(createRequest(url)).execute())
                 val departures = JSONArray(parsedResponse)
                 for (i in 0 until departures.length()) {
                     val entity = JSONObject(departures.get(i).toString())
+                    val raw_entity = departures.get(i).toString()
                     val flightTime: Date = Dates.parseTime(entity.getString("plan"))
                     when (FlightManager.getPeriod()) {
                         TimeRange.NOW -> {
                             if (Date().addHours(-1) < flightTime && flightTime < Date().addHours(2)) {
-                                setFlight(entity)
+                                setFlight(entity, raw_entity)
                             }
                         }
                         TimeRange.YESTERDAY -> {
                             if (flightTime.isYesterday()) {
-                                setFlight(entity)
+                                setFlight(entity, raw_entity)
                             }
                         }
                         TimeRange.TODAY -> {
                             if (flightTime.isToday()) {
-                                setFlight(entity)
+                                setFlight(entity, raw_entity)
                             }
                         }
                         TimeRange.TOMORROW -> {
                             if (flightTime.isTomorrow()) {
-                                setFlight(entity)
+                                setFlight(entity, raw_entity)
                             }
                         }
                     }

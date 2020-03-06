@@ -125,9 +125,9 @@ class DetailsFragment : Fragment() {
         swipeRefreshDetailsLayout.setOnRefreshListener {
             refresh()
         }
+
     }
 
     private fun refresh() {
-        Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
     }
 }
