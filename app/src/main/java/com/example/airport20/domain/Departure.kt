@@ -20,6 +20,7 @@ data class Departure (
     override val actualTime: AirportTime,
 //    @Json(name = "numbers_reg")
     override val registrationDesk: String,
+    override val aircraft: String,
 //    @Json(path = "$.airport.title")
     override var city: String,
 //    @Json(path = "$.airport.title")
