@@ -6,240 +6,269 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:id="@+id/swipeRefreshDetailsLayout">
+
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".presentation.flightdetails.DetailsFragment">
 
         <ImageView
+                android:id="@+id/coverImageView"
                 android:layout_width="0dp"
                 android:layout_height="250dp"
-                tools:src="@tools:sample/backgrounds/scenic[0]"
-                android:id="@+id/coverImageView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
                 android:cropToPadding="true"
-                android:adjustViewBounds="true"/>
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic[0]" />
+
         <TextView
+                android:id="@+id/codeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/codeTextView"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/coverImageView"
-                tools:text="B3657"
-                android:textSize="18sp"
                 android:layout_marginEnd="24dp"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/coverImageView"
+                tools:text="B3657" />
+
         <ImageView
+                android:id="@+id/aircompanyLogoImageView"
                 android:layout_width="0dp"
                 android:layout_height="25dp"
-                android:scaleType="fitStart"
-                android:cropToPadding="true"
-                android:id="@+id/aircompanyLogoImageView"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="24dp"
-                android:maxHeight="20dp"
-                app:layout_constraintVertical_chainStyle="spread"
-                tools:src="@mipmap/ic_launcher"
                 android:layout_marginTop="8dp"
+                android:cropToPadding="true"
+                android:maxHeight="20dp"
+                android:scaleType="fitStart"
                 app:layout_constraintBottom_toBottomOf="@+id/codeTextView"
-                app:layout_constraintTop_toTopOf="@+id/codeTextView"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/codeTextView"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:src="@mipmap/ic_launcher" />
+
         <TextView
+                android:id="@+id/gateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/gateTextView"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                tools:text="Gate 4"
+                android:layout_marginBottom="8dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/statusTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="4dp"
-                app:layout_constraintTop_toBottomOf="@+id/gateLabelTextView"/>
+                app:layout_constraintTop_toBottomOf="@+id/gateLabelTextView"
+                tools:text="Gate 4" />
+
         <TextView
+                android:id="@+id/statusTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/statusTextView"
-                tools:text="Arrived"
-                android:textSize="24sp"
-                android:textStyle="bold|italic"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
                 android:textAllCaps="false"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:layout_marginEnd="8dp"
+                android:textSize="24sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintBottom_toTopOf="@+id/expTimeHeaderTextView"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/gateTextView"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/expTimeHeaderTextView"/>
+                tools:text="Arrived" />
+
         <TextView
-                android:text="@string/expected_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/expTimeHeaderTextView"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/actTimeHeaderTextView"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintBottom_toTopOf="@+id/expTimeTextView"
+                android:layout_marginBottom="8dp"
+                android:text="@string/expected_label"
                 android:textSize="18sp"
-                android:layout_marginBottom="8dp"/>
+                app:layout_constraintBottom_toTopOf="@+id/expTimeTextView"
+                app:layout_constraintEnd_toStartOf="@+id/actTimeHeaderTextView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/expTimeTextView"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                tools:text="12:45"
-                app:layout_constraintEnd_toEndOf="@+id/expTimeHeaderTextView"
-                android:layout_marginBottom="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/expDateTextView"
-                app:layout_constraintHorizontal_bias="0.5"
-                android:layout_marginEnd="8dp"/>
-        <TextView
-                android:text="@string/actual_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/actTimeHeaderTextView"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toEndOf="@+id/expTimeHeaderTextView"
-                android:layout_marginStart="16dp"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintBaseline_toBaselineOf="@+id/expTimeHeaderTextView"
-                android:textSize="18sp"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/actTimeTextView"
+                android:layout_marginBottom="8dp"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                tools:text="12:50"
-                app:layout_constraintBaseline_toBaselineOf="@+id/expTimeTextView"
-                app:layout_constraintStart_toEndOf="@+id/actDateTextView"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/expTimeHeaderTextView"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintEnd_toEndOf="@+id/actTimeHeaderTextView"/>
+                app:layout_constraintStart_toEndOf="@+id/expDateTextView"
+                tools:text="12:45" />
+
         <TextView
-                android:text="TextView"
+                android:id="@+id/actTimeHeaderTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/actual_label"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/expTimeHeaderTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/expTimeHeaderTextView" />
+
+        <TextView
+                android:id="@+id/actTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/expTimeTextView"
+                app:layout_constraintEnd_toEndOf="@+id/actTimeHeaderTextView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/actDateTextView"
+                tools:text="12:50" />
+
+        <TextView
+                android:id="@+id/cityTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/cityTextView"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                app:fontFamily="@font/roboto"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="32dp"
                 android:background="#829F"
+                android:paddingStart="16dp"
                 android:shadowColor="#000"
                 android:shadowRadius="5"
-                android:paddingStart="16dp"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Frankfurt"
+                android:text="TextView"
+                android:textColor="#FFFFFF"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="32dp"/>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Frankfurt" />
+
         <TextView
+                android:id="@+id/airportTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/airportTextView"
-                android:textStyle="bold"
-                android:textAlignment="viewEnd"
-                android:textSize="30sp"
-                app:fontFamily="@font/roboto"
-                android:textColor="#FFFFFF"
-                android:shadowColor="#000000"
-                android:shadowRadius="15"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:background="#629F"
                 android:paddingStart="100dp"
                 android:paddingEnd="16dp"
-                android:background="#629F"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="16dp"
+                android:shadowColor="#000000"
+                android:shadowRadius="15"
+                android:textAlignment="viewEnd"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/roboto"
                 app:layout_constraintBottom_toBottomOf="@+id/coverImageView"
-                tools:text="Fraport"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Fraport" />
+
         <TextView
-                android:text=""
+                android:id="@+id/aircompanyTextView"
                 android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:id="@+id/aircompanyTextView"
-                tools:text="BELAVIA"
-                app:layout_constraintStart_toStartOf="parent"
-                android:textSize="16sp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/codeTextView"
-                app:layout_constraintTop_toTopOf="@+id/codeTextView"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/gateLabelTextView"
+                android:text=""
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/aircraftTextView"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/codeTextView"
+                tools:text="BELAVIA" />
+
+        <TextView
+                android:id="@+id/gateLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                tools:text="@string/boarding_gate"
                 android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/aircompanyLogoImageView"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/expTimeHeaderTextView"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/expDateTextView"
-                app:layout_constraintEnd_toStartOf="@+id/expTimeTextView"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/expTimeTextView"
-                app:layout_constraintStart_toStartOf="@+id/expTimeHeaderTextView"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/gateTextView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                tools:text="(10.03)"
-                android:textSize="18sp"
-                android:textStyle="italic"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/registrationDeskTextView"
+                tools:text="@string/boarding_gate" />
+
         <TextView
+                android:id="@+id/expDateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textSize="18sp"
+                android:textStyle="italic"
+                app:layout_constraintBaseline_toBaselineOf="@+id/expTimeTextView"
+                app:layout_constraintEnd_toStartOf="@+id/expTimeTextView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/expTimeHeaderTextView"
+                tools:text="(10.03)" />
+
+        <TextView
                 android:id="@+id/actDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textSize="18sp"
+                android:textStyle="italic"
                 app:layout_constraintBaseline_toBaselineOf="@+id/actTimeTextView"
                 app:layout_constraintEnd_toStartOf="@+id/actTimeTextView"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="@+id/actTimeHeaderTextView"
                 app:layout_constraintHorizontal_bias="0.5"
-                android:textSize="18sp"
-                tools:text="(11.03)"
-                android:textStyle="italic"/>
+                app:layout_constraintStart_toStartOf="@+id/actTimeHeaderTextView"
+                tools:text="(11.03)" />
+
         <TextView
-                android:text="@string/registration_desk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/registrationDeskLabelTextView"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintHorizontal_bias="0.498"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/codeTextView"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/gateLabelTextView"/>
-        <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/registrationDeskTextView"
-                tools:text="21 22 23"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
+                android:text="@string/registration_desk"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/registrationDeskTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aircraftTextView"
+                app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+                android:id="@+id/registrationDeskTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginTop="4dp"
-                app:layout_constraintTop_toBottomOf="@+id/registrationDeskLabelTextView"/>
+                app:layout_constraintBottom_toTopOf="@+id/gateLabelTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/registrationDeskLabelTextView"
+                tools:text="21 22 23" />
+
+        <TextView
+                android:id="@+id/aircraftTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/codeTextView"
+                app:layout_constraintTop_toBottomOf="@+id/codeTextView"
+                tools:text="Boeing 737" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

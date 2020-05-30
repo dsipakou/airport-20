@@ -11,6 +11,7 @@ data class Arrival(
     override val expectedTime: AirportTime,
     override val actualTime: AirportTime,
     override val registrationDesk: String,
+    override val aircraft: String,
     override var city: String,
     override var cityCode: String,
     override val status: Status,

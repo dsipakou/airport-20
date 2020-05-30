@@ -60,6 +60,7 @@ class TestClass @JvmOverloads constructor(
     @JsonTime @Json(name = "plan") val expectedTime: AirportTime,
     @JsonTime @Json(name = "fact") val actualTime: AirportTime?,
     @Json(name = "numbers_reg") val registrationDesk: Any,
+    @Json(path = "$.aircraft.title") var aircraft: String,
     @Json(path = "$.airport.title") var city: String,
     @Json(path = "$.airport.title") var cityCode: String,
     @JsonStatus @Json(name = "status") val status: Status
@@ -83,6 +84,8 @@ class ParseTimetable {
                         val gate = entity.getString("gate")
                         val cityObject = JSONObject(entity.getString("airport"))
                         val city = cityObject.getString("title")
+                        val aircraftObject = JSONObject(entity.getString("aircraft"))
+                        val aircraft = aircraftObject.getString("title")
                         var actualTime = AirportTime(null, null)
                         if (entity.getString("fact") != "null") {
                             actualTime = Dates.getAirportTime(entity.getString("fact"))
@@ -101,6 +104,7 @@ class ParseTimetable {
                                     expectedTime = expectedTime,
                                     actualTime = actualTime,
                                     registrationDesk = "",
+                                    aircraft = aircraft,
                                     city = city,
                                     cityCode = cityCode,
                                     status = Status.fromString(status),
@@ -171,6 +175,8 @@ class ParseTimetable {
                         val gate = gateObject.join(", ").replace("\"", "")
                         val cityObject = JSONObject(entity.getString("airport"))
                         val city = cityObject.getString("title")
+                        val aircraftObject = JSONObject(entity.getString("aircraft"))
+                        val aircraft = aircraftObject.getString("title")
                         var actualTime = AirportTime(null, null)
                         if (entity.getString("fact") != "null") {
                             actualTime = Dates.getAirportTime(entity.getString("fact"))
@@ -181,7 +187,7 @@ class ParseTimetable {
                         if (cityCode.isNotEmpty()) {
                             FlightManager.addDeparture(
                                 Departure(
-                                    id = id,
+                                    id = result!!.id,
                                     company = company,
                                     companyCode = company,
                                     companyUrl = "",
@@ -191,6 +197,7 @@ class ParseTimetable {
                                     expectedTime = expectedTime,
                                     actualTime = actualTime,
                                     registrationDesk = registrationDesk,
+                                    aircraft = aircraft,
                                     city = city,
                                     cityCode = cityCode,
                                     status = Status.fromString(status),

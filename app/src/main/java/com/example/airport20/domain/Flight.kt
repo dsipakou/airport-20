@@ -11,6 +11,7 @@ interface Flight {
     val expectedTime: AirportTime
     val actualTime: AirportTime
     val registrationDesk: String
+    val aircraft: String
     var city: String
     var cityCode: String
     val status: Status
