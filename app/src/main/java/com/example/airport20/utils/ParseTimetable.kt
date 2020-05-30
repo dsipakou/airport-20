@@ -49,25 +49,6 @@ val statusConverter = object: Converter {
     override fun toJson(value: Any) = TODO("not implemented")
 }
 
-class TestClass @JvmOverloads constructor(
-    @Json(name = "flight_id") val id: String,
-    @Json(path = "$.airline.title") var company: String,
-    @Json(path = "$.airline.title") var companyCode: String,
-    @Json(ignored = true) var companyUrl: String? = null,
-    @Json(ignored = true) var airport: String? = null,
-    @Json(name = "flight") val code: String,
-    @Json(name = "numbers_gate") val gate: Any,
-    @JsonTime @Json(name = "plan") val expectedTime: AirportTime,
-    @JsonTime @Json(name = "fact") val actualTime: AirportTime?,
-    @Json(name = "numbers_reg") val registrationDesk: Any,
-    @Json(path = "$.aircraft.title") var aircraft: String,
-    @Json(path = "$.airport.title") var city: String,
-    @Json(path = "$.airport.title") var cityCode: String,
-    @JsonStatus @Json(name = "status") val status: Status
-//    @Json(ignored = true)
-//    var imageUrl: String = ""
-)
-
 class ParseTimetable {
     suspend fun getArrivals() = withContext(Dispatchers.IO) {
         launch {
@@ -157,14 +138,9 @@ class ParseTimetable {
     suspend fun getDepartures() = withContext(Dispatchers.IO) {
         launch {
             try {
-                fun setFlight(entity: JSONObject, raw_entity: String) {
+                fun setFlight(entity: JSONObject) {
                     try {
-                        val result = Klaxon()
-                            .fieldConverter(JsonTime::class, timeConverter)
-                            .fieldConverter(JsonStatus::class, statusConverter)
-                            .parse<TestClass>(raw_entity)
                         val id = UUID.randomUUID().toString()
-
                         val statusObject = JSONObject(entity.getString("status"))
                         val status = statusObject.getString("id")
                         val expectedTime: AirportTime = Dates.getAirportTime(entity.getString("plan"))
@@ -187,7 +163,7 @@ class ParseTimetable {
                         if (cityCode.isNotEmpty()) {
                             FlightManager.addDeparture(
                                 Departure(
-                                    id = result!!.id,
+                                    id = id,
                                     company = company,
                                     companyCode = company,
                                     companyUrl = "",
@@ -216,27 +192,26 @@ class ParseTimetable {
                 val departures = JSONArray(parsedResponse)
                 for (i in 0 until departures.length()) {
                     val entity = JSONObject(departures.get(i).toString())
-                    val raw_entity = departures.get(i).toString()
                     val flightTime: Date = Dates.parseTime(entity.getString("plan"))
                     when (FlightManager.getPeriod()) {
                         TimeRange.NOW -> {
                             if (Date().addHours(-1) < flightTime && flightTime < Date().addHours(2)) {
-                                setFlight(entity, raw_entity)
+                                setFlight(entity)
                             }
                         }
                         TimeRange.YESTERDAY -> {
                             if (flightTime.isYesterday()) {
-                                setFlight(entity, raw_entity)
+                                setFlight(entity)
                             }
                         }
                         TimeRange.TODAY -> {
                             if (flightTime.isToday()) {
-                                setFlight(entity, raw_entity)
+                                setFlight(entity)
                             }
                         }
                         TimeRange.TOMORROW -> {
                             if (flightTime.isTomorrow()) {
-                                setFlight(entity, raw_entity)
+                                setFlight(entity)
                             }
                         }
                     }
