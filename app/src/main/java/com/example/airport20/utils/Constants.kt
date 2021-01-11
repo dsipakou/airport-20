@@ -1,7 +1,7 @@
 package com.example.airport20.utils
 
 
-const val SCHEME: String = "https"
+const val SCHEME: String = "http"
 const val DOMAIN = "airport.by"
 const val ROOT_URL = "$SCHEME://$DOMAIN"
 
