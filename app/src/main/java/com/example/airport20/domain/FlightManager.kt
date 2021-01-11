@@ -5,7 +5,7 @@ import kotlin.collections.ArrayList
 object FlightManager {
     private val arrivalFlights: MutableList<Arrival> = ArrayList()
     private val departureFlights: MutableList<Departure> = ArrayList()
-    private var period: TimeRange = TimeRange.NOW
+    private var period: TimeRange = TimeRange.TODAY
 
     init {}
 
